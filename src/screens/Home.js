@@ -1,10 +1,13 @@
 import React from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { Layout, Text } from "react-native-rapi-ui";
+import { useTheme } from "../components/navigation/ThemeContext";
 
-export default function () {
+export default function Home() {
+    const { isDarkMode } = useTheme();
+
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
             <Text style={styles.sectionTitle}>Home</Text>
         </SafeAreaView>
     );
@@ -23,6 +26,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginBottom: 7,
         textAlign: "left",
-      },
-  });
+        color: "black", // Default text color
+    },
+});
   
