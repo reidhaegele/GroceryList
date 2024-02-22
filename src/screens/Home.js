@@ -13,11 +13,15 @@ export default function () {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-      },
-      sectionTitle: {
-        fontSize: 30, 
-        fontWeight: "bold", 
-        marginBottom: 7, 
+        backgroundColor: "white", // Default light background color
+    },
+    darkContainer: {
+        backgroundColor: "grey", // Dark background color
+    },
+    sectionTitle: {
+        fontSize: 30,
+        fontWeight: "bold",
+        marginBottom: 7,
         textAlign: "left",
       },
   });

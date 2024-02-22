@@ -8,7 +8,9 @@ import TabBarIcon from "../utils/TabBarIcon";
 import Home from "../../screens/Home";
 import Lists from "../../screens/Lists";
 import Profile from "../../screens/Profile";
+import Settings from "../../screens/Settings"
 
+const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 const MainTabs = () => {
     return (
@@ -60,10 +62,25 @@ const MainTabs = () => {
     );
 };
 
-export default () => {
+const AppNavigator = () => {
     return (
-     <NavigationContainer>
-        <MainTabs />
-     </NavigationContainer>   
-    )
+        <ThemeProvider>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="Profile">
+                    <Stack.Screen
+                        name="Profile"
+                        component={MainTabs}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Settings"
+                        component={Settings}
+                        options={{ title: "Settings" }}
+                    />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </ThemeProvider>
+    );
 };
+
+export default AppNavigator;
