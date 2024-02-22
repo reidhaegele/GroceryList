@@ -27,7 +27,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
       },
-      sectionTitle: {
+    darkContainer: {
+        backgroundColor: "grey", // Dark background color
+    },
+    sectionTitle: {
         fontSize: 30, 
         fontWeight: "bold", 
         marginBottom: 7, 
