@@ -1,6 +1,5 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
-import { Text } from "react-native-rapi-ui";
+import { SafeAreaView, StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { useTheme } from "../components/navigation/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,18 +14,18 @@ export default function Profile() {
     return (
         <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
             <View style={styles.header}>
-                <Text style={styles.sectionTitle}>Profile</Text>
+                <Text style={[styles.sectionTitle, isDarkMode && styles.darkText]}>Profile</Text>
                 <TouchableOpacity onPress={goToSettings} style={styles.settingsButton}>
                     <Ionicons name="settings-outline" size={24} color="black" />
                 </TouchableOpacity>
             </View>
             <View style={styles.iconContainer}>
                 <FontAwesome name="user-circle" size={100} color="grey" />
-                <Text style={styles.iconText}>Joe Miner</Text>
+                <Text style={[styles.iconText, isDarkMode && styles.darkText]}>Joe Miner</Text>
             </View>
             <View style={styles.mailIconContainer}>
                 <FontAwesome name="envelope" size={24} color="grey" />
-                <Text style={styles.mailIconText}>joeminer@mst.edu</Text>
+                <Text style={[styles.mailIconText, isDarkMode && styles.darkText]}>joeminer@mst.edu</Text>
             </View>
         </SafeAreaView>
     );
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white", // Default light background color
     },
     darkContainer: {
-        backgroundColor: "grey", // Dark background color
+        backgroundColor: "#353535", // Dark background color
     },
     sectionTitle: {
         fontSize: 30,
@@ -46,6 +45,9 @@ const styles = StyleSheet.create({
         marginBottom: 7,
         textAlign: "left",
         color: "black", // Default text color
+    },
+    darkText: {
+        color: "white", // Dark text color
     },
     header: {
         flexDirection: "row",

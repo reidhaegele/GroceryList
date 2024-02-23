@@ -1,6 +1,5 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Switch, View, Dimensions } from "react-native";
-import { Layout, Text } from "react-native-rapi-ui";
+import { SafeAreaView, StyleSheet, Switch, View, Text } from "react-native";
 import { useTheme } from "../components/navigation/ThemeContext";
 
 export default function Settings() {
@@ -9,7 +8,7 @@ export default function Settings() {
     return (
         <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
             <View style={styles.switchContainer}>
-                <Text style={styles.label}>Dark Mode</Text>
+                <Text style={[styles.label, isDarkMode && styles.darkText]}>Dark Mode</Text>
                 <Switch
                     value={isDarkMode}
                     onValueChange={toggleDarkMode}
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white", // Default light background color
     },
     darkContainer: {
-        backgroundColor: "grey", // Dark background color
+        backgroundColor: "#353535", // Dark background color
     },
     sectionTitle: {
         fontSize: 30,
@@ -48,5 +47,8 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 20,
+    },
+    darkText: {
+        color: "white", // Dark text color
     },
 });
