@@ -9,7 +9,8 @@ import { ThemeProvider } from "./ThemeContext";
 import Home from "../../screens/Home";
 import Lists from "../../screens/Lists";
 import Profile from "../../screens/Profile";
-import Settings from "../../screens/Settings"
+import Settings from "../../screens/Settings";
+import Stores from "../../screens/Stores";
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -77,6 +78,11 @@ const AppNavigator = () => {
                         name="Settings"
                         component={Settings}
                         options={{ title: "Settings" }}
+                    />
+                    <Stack.Screen
+                        name="Stores"
+                        component={Stores}
+                        options={{ title: "My Stores" }}
                     />
                 </Stack.Navigator>
             </NavigationContainer>

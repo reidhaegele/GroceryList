@@ -16,7 +16,7 @@ export default function Profile() {
             <View style={styles.header}>
                 <Text style={[styles.sectionTitle, isDarkMode && styles.darkText]}>Profile</Text>
                 <TouchableOpacity onPress={goToSettings} style={styles.settingsButton}>
-                    <Ionicons name="settings-outline" size={24} color="black" />
+                    <Ionicons name="settings-outline" size={24} color="grey" />
                 </TouchableOpacity>
             </View>
             <View style={styles.iconContainer}>
