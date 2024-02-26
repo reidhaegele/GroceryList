@@ -1,11 +1,61 @@
-import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import { Text } from "react-native-rapi-ui";
+import React, { useState } from "react";
+import { SafeAreaView, FlatList, StyleSheet} from "react-native";
+import ListCard from "../components/listcard/ListCard";
+import { AntDesign } from "@expo/vector-icons";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HeaderButtons from "../components/header_buttons/HeaderButtons";
 
-export default function () {
+const Stack = createNativeStackNavigator();
+
+const List = ({navigation}) => {
+
+        const [lists, setlists] = useState([
+            {
+                list_id: '1',
+                title: 'List A',
+                color: '#0085FF',
+            },
+            {
+                list_id: '2',
+                title: 'List B',
+                color: '#00FFD1',
+            },
+            {
+                list_id: '3',
+                title: 'List C',
+                color: '#0085FF',
+            },
+            {
+                list_id: '4',
+                title: 'List D',
+                color: '#00FFD1',
+            },
+        ])
+
+        React.useEffect(() => {
+            navigation.setOptions({
+              headerRight: () => (
+                <HeaderButtons 
+                    buttons={[
+                        {
+                            icon: <AntDesign name="pluscircleo" size={35} color="gray" />,
+                            onpress: () => navigation.navigate('Add List'),
+                        },
+                    ]}
+                />
+                ),
+            });
+        }, [navigation]);
+
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.sectionTitle}>List</Text>
+            <FlatList
+                data={lists}
+                renderItem={({item}) => (
+                    <ListCard title={item.title} color={item.color}/>
+                )}
+                style={styles.list}
+            />
         </SafeAreaView>
     );
 }
@@ -13,11 +63,10 @@ export default function () {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-      },
-      sectionTitle: {
-        fontSize: 30, 
-        fontWeight: "bold", 
-        marginBottom: 7, 
-        textAlign: "left",
+        width: "100%",
+        marginLeft: "auto",
+        marginRight: "auto",
       },
   });
+
+export default List;

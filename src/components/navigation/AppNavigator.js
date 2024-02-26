@@ -1,6 +1,4 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TabBarIcon from "../utils/TabBarIcon";
 
@@ -8,13 +6,15 @@ import TabBarIcon from "../utils/TabBarIcon";
 import Home from "../../screens/Home";
 import Lists from "../../screens/Lists";
 import Profile from "../../screens/Profile";
+import { Button } from "react-native-rapi-ui";
+import { TouchableOpacity } from "react-native";
 
 const Tabs = createBottomTabNavigator();
-const MainTabs = () => {
+const HomeTabs = () => {
     return (
         <Tabs.Navigator
             screenOptions={{
-                headerShown: false,
+                headerShown: true,
                 tabBarStyle: {
                 shadowColor: "gray",
                 shadowOffset: {
@@ -24,6 +24,22 @@ const MainTabs = () => {
                 shadowOpacity: 1,
                 shadowRadius: 10,
                 },
+                headerTitleStyle: {
+                    fontSize: 40,
+                    fontWeight: "normal",
+                    marginLeft: "3%",
+                },
+                headerStyle: {
+                    backgroundColor: "#f2f2f2",
+                    shadowColor: "#f2f2f2",
+                    shadowOffset: {
+                        width: 0,
+                        height: 15,
+                    },
+                    shadowOpacity: 100,
+                    shadowRadius: 10,
+                },
+                headerTitleAlign: "left",
             }}
         >
         <Tabs.Screen
@@ -37,7 +53,7 @@ const MainTabs = () => {
             }}
         />
         <Tabs.Screen
-            name="List"
+            name="My Lists"
             component={Lists}
             options={{
                 tabBarShowLabel: false,
@@ -62,8 +78,6 @@ const MainTabs = () => {
 
 export default () => {
     return (
-     <NavigationContainer>
-        <MainTabs />
-     </NavigationContainer>   
+        <HomeTabs />
     )
 };

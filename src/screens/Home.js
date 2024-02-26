@@ -20,6 +20,7 @@ export default function () {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#fff",
       },
       sectionTitle: {
         fontSize: 30, 
