@@ -31,10 +31,16 @@ export default function Page() {
                     source={require('@/assets/images/adaptive-icon.png')}
                     />
                 <Text style={styles.title}>Log In</Text>
+<<<<<<< HEAD
                 <NameInputField />
                 <NameInputField />
                 <EmailField />
                 <PasswordField />
+=======
+                <NameInputField>Text</NameInputField>
+                <EmailField>Text</EmailField>
+                <PasswordField>Text</PasswordField>
+>>>>>>> c02ef6b (splat of registration from other branch. add integration to tabs next)
                 <BlueButton title="Sign Up" onPress={() => register}></BlueButton>
                 <Separator text="Or"/>
                 <GrayButton title="Log In" onPress={() => login}></GrayButton>

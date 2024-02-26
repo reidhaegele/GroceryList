@@ -24,6 +24,10 @@ export const PasswordIcon = (props) => {
 
 export const EmailIcon = (props) => {
   return (
+<<<<<<< HEAD
+=======
+    
+>>>>>>> c02ef6b (splat of registration from other branch. add integration to tabs next)
       <Svg
         width={24}
         height={24}
@@ -37,6 +41,7 @@ export const EmailIcon = (props) => {
   )
 }
 
+<<<<<<< HEAD
 export const NameIcon = (props) => {
   return (
     <Svg
@@ -52,6 +57,8 @@ export const NameIcon = (props) => {
 }
 
 
+=======
+>>>>>>> c02ef6b (splat of registration from other branch. add integration to tabs next)
 const styles = StyleSheet.create({
   // container: {
   //   flex:1, 
