@@ -7,7 +7,7 @@ export default (props) => {
     return (
         <Ionicons
             name={props.icon}
-            size="30"
+            size={30}
             style={{marginBottom: -10}}
             color={
                 props.focused
