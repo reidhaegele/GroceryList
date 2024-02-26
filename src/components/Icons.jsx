@@ -24,7 +24,6 @@ export const PasswordIcon = (props) => {
 
 export const EmailIcon = (props) => {
   return (
-    
       <Svg
         width={24}
         height={24}
@@ -37,6 +36,21 @@ export const EmailIcon = (props) => {
     
   )
 }
+
+export const NameIcon = (props) => {
+  return (
+    <Svg
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <Path d="M0 0h24v24H0z" fill="none" />
+
+    </Svg>
+  )
+}
+
 
 const styles = StyleSheet.create({
   // container: {

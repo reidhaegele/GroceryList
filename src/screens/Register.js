@@ -31,9 +31,10 @@ export default function Page() {
                     source={require('@/assets/images/adaptive-icon.png')}
                     />
                 <Text style={styles.title}>Log In</Text>
-                <NameInputField>Text</NameInputField>
-                <EmailField>Text</EmailField>
-                <PasswordField>Text</PasswordField>
+                <NameInputField />
+                <NameInputField />
+                <EmailField />
+                <PasswordField />
                 <BlueButton title="Sign Up" onPress={() => register}></BlueButton>
                 <Separator text="Or"/>
                 <GrayButton title="Log In" onPress={() => login}></GrayButton>
