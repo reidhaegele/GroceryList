@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, Icon } from 'react-native';
 import { EmailIcon, NameIcon, PasswordIcon } from './Icons';
 
 
@@ -40,14 +40,14 @@ export function PasswordField (props) {
     )
 }
 
-export function NameInputField ({icon, ...props}) {
+export function InputField ({icon, label, placeholder, ...props}) {
     const [text, onChangeText] = React.useState('');
     return (
         <View style={styles.view}>
             <NameIcon style={styles.icon}/>
             <TextInput
-                label={"email"}
-                placeholder={"Email"}
+                label={label}
+                placeholder={placeholder}
                 placeholderTextColor="#bfbfbf"
                 style={styles.input}
                 onChangeText={onChangeText}
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         width: 40,
         display: 'inline-flex',
         fill: '#cccccc',
-    
+
     },
 
     input: {

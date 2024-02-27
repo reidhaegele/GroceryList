@@ -1,12 +1,12 @@
 import { View, Text, Button, Image} from 'react-native';
 import React from 'react';
-import { EmailField, PasswordField, NameInputField } from '@/components/InputField';
+import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
 import { StyleSheet } from 'react-native';
 import Container from '@/components/Container';
 import Separator from '@/components/Separator';
 import { Link, router } from 'expo-router';
-
+import { NameIcon } from '@/components/Icons';
 
 // TODO: add functionality to buttons
 
@@ -31,8 +31,8 @@ export default function Page() {
                     source={require('@/assets/images/adaptive-icon.png')}
                     />
                 <Text style={styles.title}>Log In</Text>
-                <NameInputField />
-                <NameInputField />
+                <InputField label={"firstname"} placeholder={"First Name"}/>
+                <InputField label={"lastname"} placeholder={"Last Name"}/>
                 <EmailField />
                 <PasswordField />
                 <BlueButton title="Sign Up" onPress={() => register}></BlueButton>
