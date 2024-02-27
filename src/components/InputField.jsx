@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
-import { EmailIcon, PasswordIcon } from './Icons';
+import { EmailIcon, NameIcon, PasswordIcon } from './Icons';
 
 
 
@@ -44,6 +44,7 @@ export function NameInputField ({icon, ...props}) {
     const [text, onChangeText] = React.useState('');
     return (
         <View style={styles.view}>
+            <NameIcon style={styles.icon}/>
             <TextInput
                 label={"email"}
                 placeholder={"Email"}

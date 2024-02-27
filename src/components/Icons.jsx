@@ -53,39 +53,8 @@ export const NameIcon = (props) => {
 }
 
 
-export const NameIcon = (props) => {
-  return (
-    <Svg
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <Path d="M0 0h24v24H0z" fill="none" />
-
-    </Svg>
-  )
-}
 
 
-<<<<<<< HEAD
-export const NameIcon = (props) => {
-  return (
-    <Svg
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <Path d="M0 0h24v24H0z" fill="none" />
-
-    </Svg>
-  )
-}
-
-
-=======
->>>>>>> c02ef6b (splat of registration from other branch. add integration to tabs next)
 const styles = StyleSheet.create({
   // container: {
   //   flex:1, 
