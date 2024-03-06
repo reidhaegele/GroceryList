@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { SafeAreaView, FlatList, StyleSheet} from "react-native";
-import ListCard from "../components/listcard/ListCard";
+import ListCard from "../../components/listcard/ListCard";
 import { AntDesign } from "@expo/vector-icons";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HeaderButtons from "../components/header_buttons/HeaderButtons";
+import HeaderButtons from "../../components/header_buttons/HeaderButtons";
 
 const Stack = createNativeStackNavigator();
 
@@ -48,7 +48,8 @@ const List = ({navigation}) => {
         }, [navigation]);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
+            <Text style={[styles.sectionTitle, isDarkMode && styles.darkText]}>Lists</Text>
             <FlatList
                 data={lists}
                 renderItem={({item}) => (
@@ -66,7 +67,20 @@ const styles = StyleSheet.create({
         width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
-      },
+    },
+    darkContainer: {
+        backgroundColor: "#353535", // Dark background color
+    },
+    sectionTitle: {
+        fontSize: 30,
+        fontWeight: "bold",
+        marginBottom: 7,
+        textAlign: "left",
+        color: "black", // Default text color
+    },
+    darkText: {
+        color: "white", // Dark text color
+    },
   });
 
 export default List;

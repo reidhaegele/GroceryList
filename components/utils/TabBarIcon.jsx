@@ -15,6 +15,7 @@ export default (props) => {
                     ? themeColor.white100
                     : "black"
                 : "rgb(143, 155, 179)"
+                
             }
         />
     )
