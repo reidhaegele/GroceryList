@@ -32,20 +32,7 @@ export const List = ({navigation}) => {
             },
         ])
 
-        React.useEffect(() => {
-            navigation.setOptions({
-              headerRight: () => (
-                <HeaderButtons 
-                    buttons={[
-                        {
-                            icon: <AntDesign name="pluscircleo" size={35} color="gray" />,
-                            onpress: () => navigation.navigate('Add List'),
-                        },
-                    ]}
-                />
-                ),
-            });
-        }, [navigation]);
+
 
     return (
         <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
@@ -83,3 +70,4 @@ const styles = StyleSheet.create({
     },
   });
 
+export default List;

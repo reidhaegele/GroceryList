@@ -1,24 +1,28 @@
 import { StyleSheet } from 'react-native';
-
+import { ScrollView, SafeAreaView } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
 
-export default function TabOneScreen() {
+export default function Home() {
+
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+      <SafeAreaView style={styles.container}>
+        <View style={[styles.container, isDarkMode && styles.darkContinaer]}>
+            <Text style={styles.sectionTitle}>Home</Text>
+            <ScrollView contentContainerStyle={styles.notificationsContainer}>
+            </ScrollView>
+        </View>
+      </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  // container: {
+  //   flex: 1,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -27,5 +31,27 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  sectionTitle: {
+    fontSize: 30, 
+    fontWeight: "bold", 
+    marginBottom: 10,
+    paddingLeft: 15, 
+    textAlign: "left",
+    borderBottomColor: 'black'
+  },
+  notificationsContainer: {
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  }, 
+  darkText: {
+    color: "white", // Dark text color
+  },
+  darkContinaer: {
+    backgroundColor: "#353535",
   },
 });
