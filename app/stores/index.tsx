@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
 import { useTheme } from "@/components/navigation/ThemeContext";
 
-export default function () {
+export default function Page() {
     const { isDarkMode } = useTheme();
 
     return (
