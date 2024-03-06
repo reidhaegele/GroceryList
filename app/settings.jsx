@@ -5,13 +5,11 @@ import { router } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-isDarkMode = false; 
+
 export default function Settings() {
     const { isDarkMode, toggleDarkMode } = useTheme();
-    const navigation = useNavigation();
-
     const goToStores = () => {
-        navigation.navigate("Stores");
+        router.navigate("Stores");
     };
 
     return (

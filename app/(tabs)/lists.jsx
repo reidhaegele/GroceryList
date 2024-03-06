@@ -4,11 +4,14 @@ import ListCard from "@/components/listcard/ListCard";
 import { AntDesign } from "@expo/vector-icons";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HeaderButtons from "@/components/header_buttons/HeaderButtons";
+import { useTheme } from "@/components/navigation/ThemeContext";
+
+
 
 const Stack = createNativeStackNavigator();
 
 export const List = ({navigation}) => {
-
+        const { isDarkMode } = useTheme();
         const [lists, setlists] = useState([
             {
                 list_id: '1',

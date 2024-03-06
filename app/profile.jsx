@@ -7,9 +7,8 @@ import { FontAwesome } from "@expo/vector-icons";
 
 export default function Profile() {
     const { isDarkMode } = useTheme();
-    const navigation = useNavigation(); 
     const goToSettings = () => {
-        navigation.navigate("Settings");
+        router.navigate("Settings");
         // router.navigate("Settings");
     };
     return (

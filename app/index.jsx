@@ -11,7 +11,8 @@ export default function Home() {
 
     return (
         <SafeAreaView style={[styles.container, isDarkMode && styles.darkContinaer]}>
-            <Text style={[styles.sectionTitle, isDarkMode && styles.darkText]}>Home</Text>
+            {/* Removed dark mode styling from here, react-native-rapi-ui Text doesn't allow for a list of styles*/}
+            <Text style={styles.sectionTitle}>Home</Text>
             <ScrollView contentContainerStyle={styles.notificationsContainer}>
             </ScrollView>
         </SafeAreaView>

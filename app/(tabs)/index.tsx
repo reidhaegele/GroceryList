@@ -2,9 +2,10 @@ import { StyleSheet } from 'react-native';
 import { ScrollView, SafeAreaView } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
+import { useTheme } from '@/components/navigation/ThemeContext';
 
 export default function Home() {
-
+  const { isDarkMode } = useTheme();
 
   return (
       <SafeAreaView style={styles.container}>
