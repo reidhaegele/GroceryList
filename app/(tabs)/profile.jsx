@@ -8,8 +8,7 @@ import { FontAwesome } from "@expo/vector-icons";
 export default function Profile() {
     const { isDarkMode } = useTheme();
     const goToSettings = () => {
-        router.navigate("Settings");
-        // router.navigate("Settings");
+        router.navigate("settings");
     };
     return (
         <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
