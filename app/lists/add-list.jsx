@@ -4,17 +4,6 @@ import { AntDesign } from '@expo/vector-icons';
 import { ExpoRequest, ExpoResponse } from 'expo-router/server'
 
 export default function AddList ({navigation}) {
-
-    // React.useEffect(() => {
-    //     navigation.setOptions({
-    //       headerLeft: () => (
-    //         <TouchableOpacity onPress={() => navigation.goBack()} style={{height: 40,}}>
-    //             <AntDesign name="left" size={30} color="gray" />
-    //         </TouchableOpacity>
-    //         ),
-    //     });
-    // }, [navigation]);
-
     return (
         <SafeAreaView style={styles.container}>
         </SafeAreaView>
@@ -31,5 +20,6 @@ const styles = StyleSheet.create({
         marginBottom: 7, 
         textAlign: "left",
       },
+    
   });
   

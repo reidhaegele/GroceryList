@@ -8,12 +8,12 @@ import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 import TabBarIcon from '@/components/utils/TabBarIcon';
 import { HeaderButtons } from '@/components/header_buttons/HeaderButtons';
 import { Ionicons } from '@expo/vector-icons';
-import { ThemeProvider } from '@/components/navigation/ThemeContext';
+import { ThemeProvider, useTheme } from '@/components/navigation/ThemeContext';
 
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  
+
   return (
     <ThemeProvider>
       <Tabs
@@ -69,6 +69,7 @@ export default function TabLayout() {
                 </Pressable>
               </Link>
             ),
+          
           }}
         />
 
@@ -106,6 +107,17 @@ export default function TabLayout() {
             }}
         />
 
+        <Tabs.Screen
+            name="add-list"
+            options={{
+                href: null,
+                title: 'Add List',
+                tabBarShowLabel: false,
+                tabBarIcon: ({ focused }) => (
+                    <TabBarIcon focused={focused} icon="add" />
+                  ),
+            }}
+        />
       </Tabs>
     </ThemeProvider>
   );
