@@ -13,12 +13,6 @@ export default function Profile() {
     };
     return (
         <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
-            <View style={styles.header}>
-                <Text style={[styles.sectionTitle, isDarkMode && styles.darkText]}>Profile</Text>
-                <TouchableOpacity onPress={goToSettings} style={styles.settingsButton}>
-                    <Ionicons name="settings-outline" size={24} color="grey" />
-                </TouchableOpacity>
-            </View>
             <View style={styles.iconContainer}>
                 <FontAwesome name="user-circle" size={100} color="grey" />
                 <Text style={[styles.iconText, isDarkMode && styles.darkText]}>Joe Miner</Text>

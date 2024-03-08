@@ -10,7 +10,6 @@ export default function Home() {
   return (
       <SafeAreaView style={styles.container}>
         <View style={[styles.container, isDarkMode && styles.darkContinaer]}>
-            <Text style={styles.sectionTitle}>Home</Text>
             <ScrollView contentContainerStyle={styles.notificationsContainer}>
             </ScrollView>
         </View>

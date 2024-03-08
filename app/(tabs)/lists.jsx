@@ -39,7 +39,6 @@ export const List = ({navigation}) => {
 
     return (
         <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
-            <Text style={styles.sectionTitle}>Lists</Text>
             <FlatList
                 data={lists}
                 renderItem={({item}) => (
