@@ -94,7 +94,7 @@ export default function TabLayout() {
                     buttons={[
                         {
                             icon: <Ionicons name="add-circle-outline" size={40}  />,
-                            onpress: () => router.navigate('lists/AddList'),
+                            onpress: () => router.navigate('lists/add-list'),
                         },
                     ]}
                 />
