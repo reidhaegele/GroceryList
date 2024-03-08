@@ -8,7 +8,8 @@ import Separator from '@/components/Separator';
 import { Link, router } from 'expo-router';
 import { NameIcon } from '@/components/Icons';
 
-// TODO: add functionality to buttons
+// TODO: add functionality to buttons and input fields
+// TODO: Autosized containers
 
 
 

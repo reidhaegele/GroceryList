@@ -1,6 +1,9 @@
 import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
 
+// Component for a thin line with text in the middle
+
+
 export default function Separator({text}) {
     return (
         <View style={styles.container}>

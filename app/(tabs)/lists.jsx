@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { SafeAreaView, FlatList, StyleSheet} from "react-native";
-import ListCard from "../components/listcard/ListCard";
-import { AntDesign } from "@expo/vector-icons";
+import { SafeAreaView, FlatList, StyleSheet, Text} from "react-native";
+import ListCard from "@/components/listcard/ListCard";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HeaderButtons from "../components/header_buttons/HeaderButtons";
+import HeaderButtons from "@/components/header_buttons/HeaderButtons";
+import { useTheme } from "@/components/navigation/ThemeContext";
+
+
 
 const Stack = createNativeStackNavigator();
 
-const List = ({navigation}) => {
-
+export const List = ({navigation}) => {
+        const { isDarkMode } = useTheme();
         const [lists, setlists] = useState([
             {
                 list_id: '1',
@@ -32,23 +34,10 @@ const List = ({navigation}) => {
             },
         ])
 
-        React.useEffect(() => {
-            navigation.setOptions({
-              headerRight: () => (
-                <HeaderButtons 
-                    buttons={[
-                        {
-                            icon: <AntDesign name="pluscircleo" size={35} color="gray" />,
-                            onpress: () => navigation.navigate('Add List'),
-                        },
-                    ]}
-                />
-                ),
-            });
-        }, [navigation]);
+
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
             <FlatList
                 data={lists}
                 renderItem={({item}) => (
@@ -66,7 +55,20 @@ const styles = StyleSheet.create({
         width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
-      },
+    },
+    darkContainer: {
+        backgroundColor: "#353535", // Dark background color
+    },
+    sectionTitle: {
+        fontSize: 30,
+        fontWeight: "bold",
+        marginBottom: 7,
+        textAlign: "left",
+        color: "black", // Default text color
+    },
+    darkText: {
+        color: "white", // Dark text color
+    },
   });
 
 export default List;

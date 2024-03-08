@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { themeColor, useTheme } from "react-native-rapi-ui";
 
 export default (props) => {
-    const { isDarkmode } = useTheme();
+    const { isDarkMode } = useTheme();
 
     return (
-        <TouchableOpacity style={styles.container} >
+        <TouchableOpacity style={[styles.container, isDarkMode && styles.darkContianer]} >
                 <Text style={styles.title}>{props.title}</Text>
         </TouchableOpacity>
     )
@@ -29,12 +29,18 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
         elevation: 6,
-      },
-      title: {
+    },
+    title: {
         fontSize: 30, 
         textAlign: "left",
         marginTop: "auto",
         marginBottom: "auto",
         marginLeft: "5%",
-      },
+    },
+    darkContainer: {
+        backgroundColor: "#353535",
+    },
+    darkText: {
+        color: "white",
+    },
   });
