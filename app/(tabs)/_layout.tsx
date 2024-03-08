@@ -5,19 +5,11 @@ import { Pressable } from 'react-native';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-import TabBarIconTest from '@/components/utils/TabBarIcon';
+import TabBarIcon from '@/components/utils/TabBarIcon';
 import { HeaderButtons } from '@/components/header_buttons/HeaderButtons';
 import { Ionicons } from '@expo/vector-icons';
 import { ThemeProvider } from '@/components/navigation/ThemeContext';
 
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -62,7 +54,7 @@ export default function TabLayout() {
           name="index"
           options={{
             title: 'Home',
-            tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+            tabBarIcon: ({ focused }) => <TabBarIcon icon="home" focused={focused} />,
             headerRight: () => (
               <Link href="/modal" asChild>
                 <Pressable>
@@ -88,7 +80,7 @@ export default function TabLayout() {
                 fontSize: 30,
                 fontWeight: "normal",              
               },
-              tabBarIcon: ({ focused }) => <TabBarIconTest focused={focused} icon="list" />,
+              tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon="list"/>,
               headerRight: () => (
                 <HeaderButtons 
                     buttons={[
@@ -108,7 +100,7 @@ export default function TabLayout() {
                 title: 'Profile',
                 tabBarShowLabel: false,
                 tabBarIcon: ({ focused }) => (
-                    <TabBarIconTest focused={focused} icon="person" />
+                    <TabBarIcon focused={focused} icon="person" />
                   ),
                 headerRight: () => ( <HeaderButtons buttons={[{icon: <Ionicons name="settings-outline" size={40} color="gray" />, onpress: () => router.navigate('/settings'), }, ]} /> ),
             }}
