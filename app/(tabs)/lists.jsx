@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView, FlatList, StyleSheet, Text} from "react-native";
 import ListCard from "@/components/listcard/ListCard";
-import { AntDesign } from "@expo/vector-icons";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HeaderButtons from "@/components/header_buttons/HeaderButtons";
 import { useTheme } from "@/components/navigation/ThemeContext";
