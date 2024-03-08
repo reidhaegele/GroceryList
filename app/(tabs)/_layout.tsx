@@ -9,7 +9,7 @@ import TabBarIconTest from '@/components/utils/TabBarIcon';
 import { HeaderButtons } from '@/components/header_buttons/HeaderButtons';
 import { Ionicons } from '@expo/vector-icons';
 import { ThemeProvider } from '@/components/navigation/ThemeContext';
-import { AntDesign } from '@expo/vector-icons';
+
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
