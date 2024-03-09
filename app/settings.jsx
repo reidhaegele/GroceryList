@@ -3,13 +3,12 @@ import { SafeAreaView, StyleSheet, Switch, View, Text, TouchableOpacity } from "
 import { useTheme } from "@/components/navigation/ThemeContext";
 import { router } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
 
 export default function Settings() {
     const { isDarkMode, toggleDarkMode } = useTheme();
     const goToStores = () => {
-        router.navigate("Stores");
+        router.navigate("stores");
     };
 
     return (
