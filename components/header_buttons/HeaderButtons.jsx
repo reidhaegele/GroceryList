@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { themeColor, useTheme } from "react-native-rapi-ui";
 import { AntDesign } from '@expo/vector-icons';
 
-export default (props, {navigation}) => {
+export const HeaderButtons = (props, {navigation}) => {
     const { isDarkmode } = useTheme();
     
     return (
