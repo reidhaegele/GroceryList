@@ -8,14 +8,14 @@ import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 import TabBarIcon from '@/components/utils/TabBarIcon';
 import { HeaderButtons } from '@/components/header_buttons/HeaderButtons';
 import { Ionicons } from '@expo/vector-icons';
-import { ThemeProvider } from '@/components/navigation/ThemeContext';
+import {ThemeProvider,DefaultTheme,} from "@react-navigation/native";
 
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   
   return (
-    <ThemeProvider>
+    <ThemeProvider value={DefaultTheme}>
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
