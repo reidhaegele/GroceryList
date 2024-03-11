@@ -63,46 +63,29 @@ export function InputField ({icon, label, placeholder, ...props}) {
 
 const styles = StyleSheet.create({
     icon: {
-        height: 20,
-        width: 40,
-        display: 'inline-flex',
+        // height: 20,
+        // width: 40,
+        // display: 'flex',
         fill: '#cccccc',
 
     },
 
     input: {
-        height: 40,
-        // width: 273,
-        display: 'inline-flex',
+        width: '50%',
+        display: 'flex',
         borderColor: 'white',
-        selectionColor: 'white',
-        outlineStyle: 'none',
+        // selectionColor: 'white',
+        // outlineStyle: 'none',
         fontSize: 16,
     },
     view: {
-        height: 40,
-        width: 273, 
+        width: "auto" , 
         flexDirection: 'row',
         borderBottomColor: '#cccccc',
         borderBottomWidth: 2,
         marginBottom: 10,
         alignItems: 'center',
     }
-    // view: {
-    //     height: 40, 
-    //     width: 273,
-    //     // display: 'flex',
-    //     flexDirection: 'row',
-    //     alignItems: 'center',
-    //     fontFamily: 'sans-serif',
-    //     // justifyContent: '',
-    //     backgroundColor: 'white',
-    //     borderBottomColor: '#cccccc',
-    //     borderBottomWidth: 2,
-    //     marginBottom: 10,
-    //     // borderWidth: 1,
-    //     // borderRadius: 10,
-    // },
 
 });
 

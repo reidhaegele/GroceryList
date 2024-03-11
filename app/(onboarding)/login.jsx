@@ -1,8 +1,7 @@
-import { View, Text, Button, Image} from 'react-native';
+import { View, Text, Button, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import { EmailField, PasswordField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
-import { StyleSheet } from 'react-native';
 import Container from '@/components/Container';
 import Separator from '@/components/Separator';
 import { Link, router } from 'expo-router';
@@ -24,19 +23,13 @@ export default function Page() {
 
     return (
         
-        <View style={styles.container}>
-            <Container>
-                <Image 
-                    style={styles.circleLogo}
-                    source={require('@/assets/images/adaptive-icon.png')}
-                    />
-                <Text style={styles.title}>Log In</Text>
-                <EmailField>Text</EmailField>
-                <PasswordField>Text</PasswordField>
-                <BlueButton title="Log In" onPress={() => login}></BlueButton>
-                <Separator text="Or"/>
-                <GrayButton title="Sign Up" onPress={() => register}></GrayButton>
-            </Container>
+        <View>
+            <Text style={styles.title}>Log In</Text>
+            <EmailField>Text</EmailField>
+            <PasswordField>Text</PasswordField>
+            <BlueButton title="Log In" onPress={() => login}></BlueButton>
+            <Separator text="Or"/>
+            <GrayButton title="Sign Up" onPress={() => register}></GrayButton>
         </View>
         
     )
@@ -47,6 +40,7 @@ export default function Page() {
 const styles = StyleSheet.create ({
     container: {
         flex: 1,
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#dddddd',

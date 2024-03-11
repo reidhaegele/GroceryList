@@ -23,10 +23,9 @@ const styles = StyleSheet.create ({
         alignItems: 'center',
     }, 
     thinLine: {
-        flex: 1,
         borderBottomColor: '#bfbfbf',
         borderBottomWidth: 1,
-        width: 140,
+        width: '33%',
         height: 1,
     },
     text: {

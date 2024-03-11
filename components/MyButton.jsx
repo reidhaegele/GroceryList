@@ -28,8 +28,8 @@ const styles = StyleSheet.create ({
         borderRadius: 10,
         elevation: 3,
         backgroundColor: '#0085ff',
-        height: 50, 
-        width: 300,
+        height: '11%', 
+        width: '79%',
         margin: 10,
     },
     graybutton: {
@@ -38,8 +38,8 @@ const styles = StyleSheet.create ({
         borderRadius: 10,
         elevation: 3,
         backgroundColor: '#f5f4f4',
-        height: 50, 
-        width: 300,
+        height: '11%', 
+        width: '79%',
         margin: 10, 
     },
     text: {
