@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Icon } from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 import { EmailIcon, NameIcon, PasswordIcon } from './Icons';
 
 
@@ -79,11 +79,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     view: {
-        width: "auto" , 
+        width: 'auto',
         flexDirection: 'row',
         borderBottomColor: '#cccccc',
         borderBottomWidth: 2,
-        marginBottom: 10,
+        marginBottom: 20,
         alignItems: 'center',
     }
 

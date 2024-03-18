@@ -38,17 +38,21 @@ export default function Page() {
 
 
 const styles = StyleSheet.create ({
+
     container: {
-        flex: 1,
+        width: '100%',
+        height: '56%',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#dddddd',
+        backgroundColor: '#ffffff',
     }, 
     title: {
         fontSize: 36,
         fontWeight: 'bold',
         marginBottom: 20,
+        alignSelf: 'flex-start',
+        marginLeft: 20,
     },
     circleLogo: {
         height: 273,
@@ -56,6 +60,13 @@ const styles = StyleSheet.create ({
         borderRadius: 50,
         backgroundColor: 'black',
         marginBottom: 20,
-    }
+    }, 
+    background: {
+        flex: 1, 
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        height: '100%',
+        width: '100%',
+    },
     
 });

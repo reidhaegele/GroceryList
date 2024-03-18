@@ -1,4 +1,4 @@
-import { View, Text, Button, ImageBackground} from 'react-native';
+import { View, Text, Button, ImageBackground } from 'react-native';
 import React from 'react';
 import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
@@ -24,25 +24,23 @@ export default function Page() {
     }
 
     return (
-        
         <View style={styles.container}>
-
-                <Text style={styles.title}>Register</Text>
-                <InputField label={"firstname"} placeholder={"First Name"}/>
-                <InputField label={"lastname"} placeholder={"Last Name"}/>
-                <EmailField />
-                <PasswordField />
-                <BlueButton title="Sign Up" onPress={() => register}></BlueButton>
-                <Separator text="Or"/>
-                <GrayButton title="Log In" onPress={() => login}></GrayButton>           
+            <Text style={styles.title}>Register</Text>
+            <InputField label={"firstname"} placeholder={"First Name"}/>
+            <InputField label={"lastname"} placeholder={"Last Name"}/>
+            <EmailField />
+            <PasswordField />
+            <BlueButton title="Sign Up" onPress={() => register}></BlueButton>
+            <Separator text="Or"/>
+            <GrayButton title="Log In" onPress={() => login}></GrayButton>           
         </View>
-        
     )
 }
 
 
 
 const styles = StyleSheet.create ({
+
     container: {
         width: '100%',
         height: '56%',
