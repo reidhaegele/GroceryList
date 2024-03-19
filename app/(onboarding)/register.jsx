@@ -9,6 +9,10 @@ import { Link, router, Stack } from 'expo-router';
 import { NameIcon } from '@/components/Icons';
 import axios from 'axios';
 
+
+// TODO: Import correct base_url
+// TODO: Add pop up for successful registration
+// TODO: Direct user to home with authentication context
 BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
 
 export default function Register() {
@@ -36,6 +40,7 @@ export default function Register() {
             .catch(e => {
                 console.log(`register failed ${e}`);
             });
+        router.replace('/')
     }
 
     

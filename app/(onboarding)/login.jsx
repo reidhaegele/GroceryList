@@ -7,7 +7,9 @@ import Separator from '@/components/Separator';
 import { Link, router } from 'expo-router';
 import axios from 'axios';
 
-
+// TODO: Import correct base_url
+// TODO: Add pop up for successful registration
+// TODO: Direct user to home with authentication context
 BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
 
 export default function Login() {
@@ -32,6 +34,7 @@ export default function Login() {
             .catch(e => {
                 console.log(`login failed ${e}`);
             });
+        
     };
 
     return (
