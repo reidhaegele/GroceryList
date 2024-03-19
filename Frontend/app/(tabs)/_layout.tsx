@@ -106,7 +106,7 @@ export default function TabLayout() {
                 headerRight: () => ( <HeaderButtons buttons={[{icon: <Ionicons name="settings-outline" size={40} color="gray" />, onpress: () => router.navigate('/settings'), }, ]} /> ),
             }}
         />
-
+        
       </Tabs>
     </ThemeProvider>
   );

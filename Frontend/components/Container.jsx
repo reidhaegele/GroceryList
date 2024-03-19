@@ -11,17 +11,18 @@ export default function Container({ children }) {
 
 const styles = StyleSheet.create({
     container: {
-        height: '86%',
-        width: '43%',
+        flex: 1,
+        height: '46%',
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#ffffff',
         borderRadius: 10, 
     },
     boxShadow: {
-        shadowColor: '#171717', 
-        shadowOffset: { width: -2, height: 4},
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
+        boxShadowColor: '#171717', 
+        boxShadowOffset: { width: -2, height: 4},
+        boxShadowOpacity: 0.2,
+        boxShadowRadius: 3,
     }
 });
