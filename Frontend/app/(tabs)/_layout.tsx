@@ -39,13 +39,6 @@ export default function TabLayout() {
             },
             headerStyle: {
                 backgroundColor: "#f2f2f2",
-                shadowColor: "#f2f2f2",
-                shadowOffset: {
-                    width: 0,
-                    height: 15,
-                },
-                shadowOpacity: 100,
-                shadowRadius: 10,
             },
             headerTitleAlign: "left",
         }}>
@@ -54,6 +47,10 @@ export default function TabLayout() {
           name="index"
           options={{
             title: 'Home',
+            headerTitleStyle: {
+              fontSize: 30,
+              fontWeight: "normal",              
+            },
             tabBarIcon: ({ focused }) => <TabBarIcon icon="home" focused={focused} />,
             headerRight: () => (
               <Link href="/modal" asChild>
@@ -98,6 +95,10 @@ export default function TabLayout() {
             name="profile"
             options={{
                 title: 'Profile',
+                headerTitleStyle: {
+                  fontSize: 30,
+                  fontWeight: "normal",              
+                },
                 tabBarShowLabel: false,
                 tabBarIcon: ({ focused }) => (
                     <TabBarIcon focused={focused} icon="person" />
