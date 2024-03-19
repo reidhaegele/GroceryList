@@ -4,13 +4,12 @@ import { View, Text, Button, Image, StyleSheet, Dimensions, ImageBackground, Key
 import React from 'react';
 import { Slot, Stack } from 'expo-router';
 
-// FIXME: Container is not aligned correctly at bottom of screen, also needs to be rounded
-// FIXME: Keyboard pop-up screws everything up
+
 
 export default function Layout() {
     return (
         
-        <KeyboardAvoidingView 
+        <View 
             style={styles.container}>
             <ImageBackground
                 source={require('@/assets/images/grocery.jpg')}
@@ -18,7 +17,7 @@ export default function Layout() {
             >
                 <Slot></Slot>
             </ImageBackground>                                                                                    
-        </KeyboardAvoidingView>
+        </View>
 
 
         

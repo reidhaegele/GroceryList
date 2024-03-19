@@ -7,32 +7,54 @@ import Container from '@/components/Container';
 import Separator from '@/components/Separator';
 import { Link, router, Stack } from 'expo-router';
 import { NameIcon } from '@/components/Icons';
+import axios from 'axios';
 
-// TODO: add functionality to buttons and input fields
-// TODO: Autosized containers
+BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
+
+export default function Register() {
+    const [firstName, setFirstName] = React.useState('');
+    const [lastName, setLastName] = React.useState('');
+    const [userName, setUserName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    
 
 
-
-export default function Page() {
-    const register = () => {
-        console.log('register');
-        
+    const register = async () => {
+        console.log('register')
+        axios.post(`${BASE_URL}/register/api`, {
+                email,
+                password,
+                userName,
+                firstName,
+                lastName
+            })
+            .then(res => {
+                let response = res.data;
+                console.log(response);
+            })
+            .catch(e => {
+                console.log(`register failed ${e}`);
+            });
     }
+
     
     const login = () => {
-        console.log('login');
+        console.log('login')
+        router.replace('/login')
     }
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Register</Text>
-            <InputField label={"firstname"} placeholder={"First Name"}/>
-            <InputField label={"lastname"} placeholder={"Last Name"}/>
-            <EmailField />
-            <PasswordField />
-            <BlueButton title="Sign Up" onPress={() => register}></BlueButton>
+            <InputField label={"firstname"} placeholder={"First Name"} value={firstName} onChangeText={(text) => setFirstName(text)}/>
+            <InputField label={"lastname"} placeholder={"Last Name"} value={lastName} onChangeText={(text) => setLastName(text)}/>
+            <InputField label={"username"} placeholder={"Username"} value={userName} onChangeText={(text) => setUserName(text)}/>
+            <EmailField name={"email"} value={email} onChangeText={(text) => setEmail(text)}/>
+            <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
+            <BlueButton title="Sign Up" onPress={register}></BlueButton>
             <Separator text="Or"/>
-            <GrayButton title="Log In" onPress={() => login}></GrayButton>           
+            <GrayButton title="Log In" onPress={login}></GrayButton>           
         </View>
     )
 }
@@ -43,16 +65,21 @@ const styles = StyleSheet.create ({
 
     container: {
         width: '100%',
-        height: '56%',
+        height: '65%',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: '#ffffff',
+        borderTopStartRadius: 10,
+        borderTopEndRadius: 10,
+        bottom: 0,
+        position: 'absolute',
     }, 
     title: {
         fontSize: 36,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginTop: 20,
+        marginBottom: 30,
         alignSelf: 'flex-start',
         marginLeft: 20,
     },

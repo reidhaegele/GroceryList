@@ -16,7 +16,7 @@ export default function Separator({text}) {
     )
 }
 
-{ /* TODO: remove hardcoded width values */ }
+
 const styles = StyleSheet.create ({
     container: {
         flexDirection: 'row',

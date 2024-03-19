@@ -5,7 +5,7 @@ import { EmailIcon, NameIcon, PasswordIcon } from './Icons';
 
 
 export function EmailField (props) {
-    const [text, onChangeText] = React.useState('');
+    // const [text, setText] = React.useState('');
     return (
         <View style={styles.view}>
             <EmailIcon style={styles.icon}/>
@@ -14,15 +14,16 @@ export function EmailField (props) {
                 placeholder={"Email"}
                 placeholderTextColor="#bfbfbf"
                 style={styles.input}
-                onChangeText={onChangeText}
-                value={text}
+                // onChangeText={text => setText()}
+                // value={email}
+                {...props}
             />
         </View>
     )
 }
 
 export function PasswordField (props) {
-    const [text, onChangeText] = React.useState('');
+    // const [text, setText] = React.useState('');
     return (
         <View style={styles.view}>
             <PasswordIcon style={styles.icon}/>
@@ -32,16 +33,19 @@ export function PasswordField (props) {
                 placeholder={"Password"}
                 placeholderTextColor="#bfbfbf"
                 style={styles.input}
-                onChangeText={onChangeText}
-                value={text}
-                
+                // onChangeText={text => setText(text)}
+                // value={text}
+                {...props}
             />
         </View>
     )
 }
 
+
+
+
 export function InputField ({icon, label, placeholder, ...props}) {
-    const [text, onChangeText] = React.useState('');
+    const [text, setText] = React.useState('');
     return (
         <View style={styles.view}>
             <NameIcon style={styles.icon}/>
@@ -50,8 +54,7 @@ export function InputField ({icon, label, placeholder, ...props}) {
                 placeholder={placeholder}
                 placeholderTextColor="#bfbfbf"
                 style={styles.input}
-                onChangeText={onChangeText}
-                value={text}
+                {...props}
             />
         </View>
     )
@@ -59,23 +62,17 @@ export function InputField ({icon, label, placeholder, ...props}) {
 }
 
 
-{ /* TODO: Remove manual height & width */ }
+
 
 const styles = StyleSheet.create({
     icon: {
-        // height: 20,
-        // width: 40,
-        // display: 'flex',
         fill: '#cccccc',
-
     },
 
     input: {
-        width: '50%',
+        width: '66%',
         display: 'flex',
         borderColor: 'white',
-        // selectionColor: 'white',
-        // outlineStyle: 'none',
         fontSize: 16,
     },
     view: {

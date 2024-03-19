@@ -5,31 +5,44 @@ import { GrayButton, BlueButton} from '@/components/MyButton';
 import Container from '@/components/Container';
 import Separator from '@/components/Separator';
 import { Link, router } from 'expo-router';
+import axios from 'axios';
 
 
-// TODO: add functionality to buttons and input fields
-// TODO: Autosized containers
+BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
 
+export default function Login() {
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
 
-export default function Page() {
     const register = () => {
         console.log('register');
-        router.replace('/register')
+        router.replace('/register');
     }
     
-    const login = () => {
+    const login = async () => {
         console.log('login');
-    }
+        axios.post(`${BASE_URL}/login/api`, {
+                email,
+                password
+            })
+            .then(res => {
+                let userInfo = res.data;
+                console.log(userInfo);
+            })
+            .catch(e => {
+                console.log(`login failed ${e}`);
+            });
+    };
 
     return (
         
-        <View>
+        <View style={styles.container}>
             <Text style={styles.title}>Log In</Text>
-            <EmailField>Text</EmailField>
-            <PasswordField>Text</PasswordField>
-            <BlueButton title="Log In" onPress={() => login}></BlueButton>
+            <EmailField name={"email"} value={email} onChangeText={(text) => setEmail(text)}/>
+            <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
+            <BlueButton title="Log In" onPress={login} ></BlueButton>
             <Separator text="Or"/>
-            <GrayButton title="Sign Up" onPress={() => register}></GrayButton>
+            <GrayButton title="Sign Up" onPress={register}></GrayButton>
         </View>
         
     )
@@ -41,16 +54,21 @@ const styles = StyleSheet.create ({
 
     container: {
         width: '100%',
-        height: '56%',
+        height: '65%',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: '#ffffff',
+        borderTopStartRadius: 10,
+        borderTopEndRadius: 10,
+        bottom: 0,
+        position: 'absolute',
     }, 
     title: {
         fontSize: 36,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginTop: 20,
+        marginBottom: 30,
         alignSelf: 'flex-start',
         marginLeft: 20,
     },
