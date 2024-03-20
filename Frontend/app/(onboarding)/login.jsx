@@ -14,7 +14,7 @@ import axios from 'axios';
 BASE_URL = "http://127.0.0.1:8000"
 
 export default function Login() {
-    const [user, setUser] = React.useState('');
+    const [username, setUser] = React.useState('');
     const [password, setPassword] = React.useState('');
 
     const register = () => {
@@ -25,7 +25,7 @@ export default function Login() {
     const login = async () => {
         console.log('login');
         axios.post(`${BASE_URL}/api/login/`, {
-                user,
+                username,
                 password
             })
             .then(res => {
@@ -42,7 +42,7 @@ export default function Login() {
         
         <View style={styles.container}>
             <Text style={styles.title}>Log In</Text>
-            <InputField name={"user"} value={user} placeholder={"Username"} onChangeText={(text) => setUser(text)}/>
+            <InputField name={"user"} value={username} placeholder={"Username"} onChangeText={(text) => setUser(text)}/>
             <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
             <BlueButton title="Log In" onPress={login} ></BlueButton>
             <Separator text="Or"/>
