@@ -1,4 +1,5 @@
 import { View, Text, Button, Image, StyleSheet} from 'react-native';
+import { View, Text, Button, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
@@ -20,8 +21,10 @@ export default function Login() {
     const register = () => {
         console.log('register');
         router.replace('/register');
+        router.replace('/register');
     }
     
+    const login = async () => {
     const login = async () => {
         console.log('login');
         axios.post(`${BASE_URL}/api/login/`, {
@@ -52,11 +55,16 @@ export default function Login() {
     )
 }
 
-
+}
 
 const styles = StyleSheet.create ({
 
+
     container: {
+        width: '100%',
+        height: '65%',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
         width: '100%',
         height: '65%',
         flexDirection: 'column',
@@ -67,10 +75,19 @@ const styles = StyleSheet.create ({
         borderTopEndRadius: 10,
         bottom: 0,
         position: 'absolute',
+        backgroundColor: '#ffffff',
+        borderTopStartRadius: 10,
+        borderTopEndRadius: 10,
+        bottom: 0,
+        position: 'absolute',
     }, 
     title: {
         fontSize: 36,
         fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 30,
+        alignSelf: 'flex-start',
+        marginLeft: 20,
         marginTop: 20,
         marginBottom: 30,
         alignSelf: 'flex-start',

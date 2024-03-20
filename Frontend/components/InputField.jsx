@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 import { EmailIcon, NameIcon, PasswordIcon } from './Icons';
 
 
 
 export function EmailField (props) {
+    // const [text, setText] = React.useState('');
     // const [text, setText] = React.useState('');
     return (
         <View style={styles.view}>
@@ -17,12 +19,16 @@ export function EmailField (props) {
                 // onChangeText={text => setText()}
                 // value={email}
                 {...props}
+                // onChangeText={text => setText()}
+                // value={email}
+                {...props}
             />
         </View>
     )
 }
 
 export function PasswordField (props) {
+    // const [text, setText] = React.useState('');
     // const [text, setText] = React.useState('');
     return (
         <View style={styles.view}>
@@ -36,10 +42,16 @@ export function PasswordField (props) {
                 // onChangeText={text => setText(text)}
                 // value={text}
                 {...props}
+                // onChangeText={text => setText(text)}
+                // value={text}
+                {...props}
             />
         </View>
     )
 }
+
+
+
 
 
 
@@ -55,11 +67,13 @@ export function InputField ({icon, label, placeholder, ...props}) {
                 placeholderTextColor="#bfbfbf"
                 style={styles.input}
                 {...props}
+                {...props}
             />
         </View>
     )
 
 }
+
 
 
 
@@ -72,14 +86,18 @@ const styles = StyleSheet.create({
     input: {
         width: '66%',
         display: 'flex',
+        width: '66%',
+        display: 'flex',
         borderColor: 'white',
         fontSize: 16,
     },
     view: {
         width: 'auto',
+        width: 'auto',
         flexDirection: 'row',
         borderBottomColor: '#cccccc',
         borderBottomWidth: 2,
+        marginBottom: 20,
         marginBottom: 20,
         alignItems: 'center',
     }
