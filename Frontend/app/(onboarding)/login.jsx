@@ -11,7 +11,7 @@ import axios from 'axios';
 // TODO: Add pop up for successful registration
 // TODO: Direct user to home with authentication context
 // BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://127.0.0.1:8000"
 
 export default function Login() {
     const [user, setUser] = React.useState('');
@@ -24,7 +24,7 @@ export default function Login() {
     
     const login = async () => {
         console.log('login');
-        axios.post(`${BASE_URL}/api/login`, {
+        axios.post(`${BASE_URL}/api/login/`, {
                 user,
                 password
             })
@@ -35,14 +35,14 @@ export default function Login() {
             .catch(e => {
                 console.log(`login failed ${e}`);
             });
-        
+        router.navigate('/');
     };
 
     return (
         
         <View style={styles.container}>
             <Text style={styles.title}>Log In</Text>
-            <InputField name={"user"} value={user} onChangeText={(text) => setUser(text)}/>
+            <InputField name={"user"} value={user} placeholder={"Username"} onChangeText={(text) => setUser(text)}/>
             <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
             <BlueButton title="Log In" onPress={login} ></BlueButton>
             <Separator text="Or"/>

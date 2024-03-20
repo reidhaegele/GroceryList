@@ -14,12 +14,12 @@ import axios from 'axios';
 // TODO: Add pop up for successful registration
 // TODO: Direct user to home with authentication context
 // BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://127.0.0.1:8000"
 
 export default function Register() {
-    const [firstName, setFirstName] = React.useState('');
-    const [lastName, setLastName] = React.useState('');
-    const [userName, setUserName] = React.useState('');
+    const [firstname, setFirstname] = React.useState('');
+    const [lastname, setLastname] = React.useState('');
+    const [username, setUsername] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     
@@ -27,12 +27,12 @@ export default function Register() {
 
     const register = async () => {
         console.log('register')
-        axios.post(`${BASE_URL}/api/register`, {
+        axios.post("http://127.0.0.1:8000/api/register/", {
                 email,
                 password,
-                userName,
-                firstName,
-                lastName
+                username,
+                firstname,
+                lastname
             })
             .then(res => {
                 let response = res.data;
@@ -41,6 +41,7 @@ export default function Register() {
             .catch(e => {
                 console.log(`register failed ${e}`);
             });
+        router.replace('/login');
     }
 
     
@@ -52,9 +53,9 @@ export default function Register() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Register</Text>
-            <InputField label={"firstname"} placeholder={"First Name"} value={firstName} onChangeText={(text) => setFirstName(text)}/>
-            <InputField label={"lastname"} placeholder={"Last Name"} value={lastName} onChangeText={(text) => setLastName(text)}/>
-            <InputField label={"username"} placeholder={"Username"} value={userName} onChangeText={(text) => setUserName(text)}/>
+            <InputField label={"firstname"} placeholder={"First Name"} value={firstname} onChangeText={(text) => setFirstname(text)}/>
+            <InputField label={"lastname"} placeholder={"Last Name"} value={lastname} onChangeText={(text) => setLastname(text)}/>
+            <InputField label={"username"} placeholder={"username"} value={username} onChangeText={(text) => setUsername(text)}/>
             <EmailField name={"email"} value={email} onChangeText={(text) => setEmail(text)}/>
             <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
             <BlueButton title="Sign Up" onPress={register}></BlueButton>
