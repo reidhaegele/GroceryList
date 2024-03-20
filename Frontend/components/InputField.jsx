@@ -45,7 +45,7 @@ export function PasswordField (props) {
 
 
 export function InputField ({icon, label, placeholder, ...props}) {
-    const [text, setText] = React.useState('');
+
     return (
         <View style={styles.view}>
             <NameIcon style={styles.icon}/>

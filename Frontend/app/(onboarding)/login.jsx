@@ -1,6 +1,6 @@
 import { View, Text, Button, Image, StyleSheet} from 'react-native';
 import React from 'react';
-import { EmailField, PasswordField } from '@/components/InputField';
+import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
 import Container from '@/components/Container';
 import Separator from '@/components/Separator';
@@ -10,10 +10,11 @@ import axios from 'axios';
 // TODO: Import correct base_url
 // TODO: Add pop up for successful registration
 // TODO: Direct user to home with authentication context
-BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
+// BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
+BASE_URL = "http://localhost:8000"
 
 export default function Login() {
-    const [email, setEmail] = React.useState('');
+    const [user, setUser] = React.useState('');
     const [password, setPassword] = React.useState('');
 
     const register = () => {
@@ -23,8 +24,8 @@ export default function Login() {
     
     const login = async () => {
         console.log('login');
-        axios.post(`${BASE_URL}/login/api`, {
-                email,
+        axios.post(`${BASE_URL}/api/login`, {
+                user,
                 password
             })
             .then(res => {
@@ -41,7 +42,7 @@ export default function Login() {
         
         <View style={styles.container}>
             <Text style={styles.title}>Log In</Text>
-            <EmailField name={"email"} value={email} onChangeText={(text) => setEmail(text)}/>
+            <InputField name={"user"} value={user} onChangeText={(text) => setUser(text)}/>
             <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
             <BlueButton title="Log In" onPress={login} ></BlueButton>
             <Separator text="Or"/>
