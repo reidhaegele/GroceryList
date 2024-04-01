@@ -12,6 +12,9 @@ class GroceryListView(generics.ListCreateAPIView):
     queryset = GroceryList.objects.all()
     serializer_class = GroceryListSerializer
 
+class CreateGroup():
+    #TODO
+
 
 @api_view(['POST'])
 def login(request):
