@@ -25,3 +25,13 @@ class UserGroup(models.Model):
 
     def __str__(self):
         return f"User: {self.user}, Group ID: {self.group_id}"
+    #Need to check how to make a new groupID based on the table 
+    def createGroup(self,User,GroupID):
+        usergroup = self.model(User,GroupID)
+        usergroup.save(using=self._db)
+        return usergroup
+
+    def addToGroup(self,User,GroupID):
+        usergroup = self.model(User,GroupID)
+        usergroup.save(using=self._db)
+        return usergroup

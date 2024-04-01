@@ -1,5 +1,5 @@
 from rest_framework import generics
-from .models import GroceryList
+from .models import GroceryList, UserGroup
 from .serializers import GroceryListSerializer
 from rest_framework import status
 from rest_framework.response import Response
@@ -42,5 +42,37 @@ def register(request):
             return Response({'success': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
         else:
             return Response({'error': 'Failed to register user.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    else:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@api_view(['POST'])
+def makeUserGroup(request):
+    if request.method == 'POST':
+        user = request.data.get('user')
+        group_id = request.data.get('user_id')
+        if not user or not group_id:
+            return Response({'error': 'User and GroupID are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if UserGroup.objects.filter(group_id).exists():
+            return Response({'error': 'GroupID already exists.'}, status=status.HTTP_400_BAD_REQUEST)
+        userGroup = UserGroup.createGroup(user,group_id)
+        if userGroup:
+            return Response({'success': 'New Group made registered successfully.'}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'error': 'Failed to create new group.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    else:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+@api_view(['POST'])
+def AddUserToGroup(request):
+    if request.method == 'POST':
+        user = request.data.get('user')
+        group_id = request.data.get('user_id')
+        if not user or not group_id:
+            return Response({'error': 'User and GroupID are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        userGroup = UserGroup.addToGroup(user,group_id)
+        if userGroup:
+            return Response({'success': 'New Group made registered successfully.'}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'error': 'Failed to create new group.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)

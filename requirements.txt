@@ -1,0 +1,10 @@
+#Use this script with PIP (either directly or on a vitual env) to install current nessary pip packages 
+#Please make sure to update this file with new ones.
+django 
+# Django framework
+
+djangorestframework
+# CORS (Cross-Origin Resource Sharing) handling
+django-cors-headers
+
+#use pip install -r requirments.txt to install these packages. 
