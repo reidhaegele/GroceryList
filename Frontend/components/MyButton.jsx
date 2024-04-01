@@ -14,12 +14,29 @@ export const BlueButton = ({ title, onPress, ...props}) => {
 
 export const GrayButton = ({ title, onPress, ...props}) => {
     return (
-            <Pressable style={[styles.graybutton, styles.boxShadow]} onPress={onPress}>
+            <Pressable 
+                style={[styles.graybutton, styles.boxShadow]} 
+                onPress={onPress}
+                
+                >
+
                 <Text style={styles.blacktext}>{title}</Text>
             </Pressable>
     )
 }
 
+// <Pressable 
+// style={({pressed}) => [
+//     {
+//       backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
+//     },
+//     styles.boxShadow,
+//     styles.graybutton,
+//   ]}>
+//   {({pressed}) => (
+//     <Text style={styles.text}>{pressed ? 'Pressed!' : 'Press Me'}</Text>
+//   )}
+// </Pressable>
 
 const styles = StyleSheet.create ({
     bluebutton: {
@@ -28,8 +45,8 @@ const styles = StyleSheet.create ({
         borderRadius: 10,
         elevation: 3,
         backgroundColor: '#0085ff',
-        height: 50, 
-        width: 300,
+        height: '11%', 
+        width: '79%',
         margin: 10,
     },
     graybutton: {
@@ -38,8 +55,8 @@ const styles = StyleSheet.create ({
         borderRadius: 10,
         elevation: 3,
         backgroundColor: '#f5f4f4',
-        height: 50, 
-        width: 300,
+        height: '11%', 
+        width: '79%',
         margin: 10, 
     },
     text: {
