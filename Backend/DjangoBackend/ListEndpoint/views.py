@@ -12,9 +12,10 @@ from django.contrib.auth.models import User
 @api_view(['GET'])
 def createList(request):
     if request.method == 'GET':
-        user = request.user
+        username = request.data.get('user')
         #Used for Testing 
         #user = User.objects.create_user(username="name", email="email@mail.com", password="Pass12345")
+        user = User.objects.get(username=username)
         listName = request.data.get('listName')
         print(user,listName)
         if not user or not listName:
