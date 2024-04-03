@@ -44,9 +44,10 @@ Once you have pushed your changes to the remote branch, it is now time to comple
 
 Congratulations, you have now contributed to the project. Once the branch has been merged in, you can move the issue to the "Done" section of the Kanban board.
 
-### Backend Running and Developing
+### Backend
 The backend uses django framework. We are going to be using restframework for user authentication and corsheaders for domain authentication. Corsheaders will ensure that we only accept requests from ceartain domain names so tons of extra requests won't be sent to the backend api. 
 
+### Installing Django
 You will need to install Django
 > pip install django
 
@@ -56,10 +57,12 @@ Then you can install rest framework
 Finally install corsheaders
 > pip install django-cors-headers
 
+### Running Server
 To run the server you will cd into the Django backend file and then use the command:
 > python3 mangage.py runserver
 * This will run the server on localhost port 8000
 
+### Making changes to database
 After editing the model folder you need to run two commands to make sure the database is updated:
 > python3 manage.py makemigrations
 then 
