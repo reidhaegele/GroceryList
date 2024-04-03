@@ -43,3 +43,15 @@ Now you can begin coding to resolve the issue. You should now move the issue to 
 Once you have pushed your changes to the remote branch, it is now time to complete a pull request. Navigate to the [remote repo](https://github.com/reidhaegele/GroceryList). Hit "Pull Requests". Hit the green "New Pull Request" button. Select the branch you were working on to compare. Make sure your changes look correct. Hit the green "Create Pull Request" button. The title by default is the branch name. Feel free to name it whatever you like. A template should appear with before and after sections. At the top, change the "[number]" to the issue number to link it to the project board issue. In the before section, explain what the projects behavior was before this branch was created. In the after section, explain the behavior of the project in this new branch. Finally, hit the green "Create Pull Request" button. Move the issue to the "In Review" section of the Kanban board.
 
 Congratulations, you have now contributed to the project. Once the branch has been merged in, you can move the issue to the "Done" section of the Kanban board.
+
+### Backend Running and Developing
+The backend uses django framework. We are going to be using restframework for user authentication and corsheaders for domain authentication. Corsheaders will ensure that we only accept requests from ceartain domain names so tons of extra requests won't be sent to the backend api. 
+
+You will need to install Django
+> pip install django
+
+Then you can install rest framework 
+> pip install djangorestframework
+
+Finally install corsheaders
+> pip install django-cors-headers
