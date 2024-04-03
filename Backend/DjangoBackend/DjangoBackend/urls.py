@@ -16,8 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from ListEndpoint.views import createList
+from authentication.views import register, login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('authentication.urls'))
+    path('api/', include('authentication.urls')),
+    path('createList/',createList,name='createList'),
+    path('register/', register, name='register'),
+    path('login/', login, name='login'),
 ]
