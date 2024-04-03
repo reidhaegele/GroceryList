@@ -58,6 +58,13 @@ Finally install corsheaders
 > pip install django-cors-headers
 
 ### Running Server
+We started develping Django in a virtual enviorment so to run it you will need to be in a virtual envioronment. To do this you will need to install python **venv**. 
+> python3 -m venv environment_name
+
+
+If you don't have venv installed it will prompt you with how to install it. AFter installing it and running the command above, then you will run the following. 
+> source environment_name/bin/activate
+
 To run the server you will cd into the Django backend file and then use the command:
 > python3 mangage.py runserver
 * This will run the server on localhost port 8000
