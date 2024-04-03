@@ -55,3 +55,14 @@ Then you can install rest framework
 
 Finally install corsheaders
 > pip install django-cors-headers
+
+To run the server you will cd into the Django backend file and then use the command:
+> python3 mangage.py runserver
+* This will run the server on localhost port 8000
+
+After editing the model folder you need to run two commands to make sure the database is updated:
+> python3 manage.py makemigrations
+then 
+> python3 manage.py migrate
+
+
