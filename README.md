@@ -65,9 +65,10 @@ We started develping Django in a virtual enviorment so to run it you will need t
 If you don't have venv installed it will prompt you with how to install it. AFter installing it and running the command above, then you will run the following. 
 > source environment_name/bin/activate
 
-To run the server you will cd into the Django backend file and then use the command:
+After getting into the virtual environment you will clone the repo as described above. Then, to run the server you will cd into the Django backend file and then use the command:
 > python3 mangage.py runserver
-* This will run the server on localhost port 8000
+
+This will run the server on localhost with the url" **127.0.0.1:8000/**
 
 ### Making changes to database
 After editing the model folder you need to run two commands to make sure the database is updated:
