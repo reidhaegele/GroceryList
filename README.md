@@ -43,3 +43,37 @@ Now you can begin coding to resolve the issue. You should now move the issue to 
 Once you have pushed your changes to the remote branch, it is now time to complete a pull request. Navigate to the [remote repo](https://github.com/reidhaegele/GroceryList). Hit "Pull Requests". Hit the green "New Pull Request" button. Select the branch you were working on to compare. Make sure your changes look correct. Hit the green "Create Pull Request" button. The title by default is the branch name. Feel free to name it whatever you like. A template should appear with before and after sections. At the top, change the "[number]" to the issue number to link it to the project board issue. In the before section, explain what the projects behavior was before this branch was created. In the after section, explain the behavior of the project in this new branch. Finally, hit the green "Create Pull Request" button. Move the issue to the "In Review" section of the Kanban board.
 
 Congratulations, you have now contributed to the project. Once the branch has been merged in, you can move the issue to the "Done" section of the Kanban board.
+
+### Backend
+The backend uses django framework. We are going to be using restframework for user authentication and corsheaders for domain authentication. Corsheaders will ensure that we only accept requests from ceartain domain names so tons of extra requests won't be sent to the backend api. 
+
+### Installing Django
+You will need to install Django
+> pip install django
+
+Then you can install rest framework 
+> pip install djangorestframework
+
+Finally install corsheaders
+> pip install django-cors-headers
+
+### Running Server
+We started develping Django in a virtual enviorment so to run it you will need to be in a virtual envioronment. To do this you will need to install python **venv**. 
+> python3 -m venv environment_name
+
+
+If you don't have venv installed it will prompt you with how to install it. AFter installing it and running the command above, then you will run the following. 
+> source environment_name/bin/activate
+
+After getting into the virtual environment you will clone the repo as described above. Then, to run the server you will cd into the Django backend file and then use the command:
+> python3 mangage.py runserver
+
+This will run the server on localhost with the url" **127.0.0.1:8000/**
+
+### Making changes to database
+After editing the model folder you need to run two commands to make sure the database is updated:
+> python3 manage.py makemigrations
+then 
+> python3 manage.py migrate
+
+
