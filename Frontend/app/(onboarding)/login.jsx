@@ -1,5 +1,4 @@
 import { View, Text, Button, Image, StyleSheet} from 'react-native';
-import { View, Text, Button, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
