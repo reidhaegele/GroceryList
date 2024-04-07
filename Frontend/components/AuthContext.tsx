@@ -22,16 +22,11 @@ export const useAuth = () => {
 }
 
 
-interface tokenType {
-  email: string;
-  username: string;
-  firstname: string;
-  lastname: string;
-}
+
 
 export const AuthProvider = ({children} : any) => {
   const [authState, setAuthState] = React.useState<{
-    token: tokenType | null;
+    token: string | null;
     authenticated: boolean | null;
   }>({
     token: null,
@@ -62,7 +57,6 @@ export const AuthProvider = ({children} : any) => {
         .then(res => {
             let response = res.data;
             console.log(response);
-            console.log(result);
             setAuthState({
               token: response.token,
               authenticated: true
@@ -125,5 +119,6 @@ export const AuthProvider = ({children} : any) => {
     </AuthContext.Provider>
   )
 }
+
 
 
