@@ -8,7 +8,7 @@ import { useEffect, useContext } from 'react';
 import { useColorScheme } from '@/components/useColorScheme';
 import { ThemeProvider } from '@/components/navigation/ThemeContext';
 // import { DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native';
-import { AuthProvider, useAuth, AuthContextType } from '@/components/AuthContext';
+import { AuthProvider, AuthContext, AuthContextType } from '@/components/AuthContext';
 import { View, ActivityIndicator } from 'react-native';
 
 export {
@@ -53,19 +53,20 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const {authState, onLogout} = useAuth();
+  const {isLoading, userToken } = useContext(AuthContext) as AuthContextType;
+
+  if ( isLoading ) {
+    <View style={{flex:1, justifyContent: 'center', alignItems:'center'}}>
+      <ActivityIndicator size={'large'} />
+    </View>
+  }
 
   return (
     <AuthProvider>
       <ThemeProvider>
         <Stack>
-          {/* FIXME: If user is not logged in display the onboarding screens, otherwise show the tabs layout */}
-          {authState?.authenticated ? (
-            <Stack.Screen name='(onboarding)' options={{ headerShown: false }} /> 
-          ):(
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> 
-          )
-          }
+          {/* If user is not logged in display the onboarding screens, otherwise show the tabs layout */}
+          {userToken !== null ? <Stack.Screen name='(onboarding)' options={{ headerShown: false }} /> : <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> }
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack>
       </ThemeProvider>

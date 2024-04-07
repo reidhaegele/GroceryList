@@ -21,8 +21,7 @@ export default function TabLayout() {
             tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
             // Disable the static render of the header on web
             // to prevent a hydration error in React Navigation v6.
-
-            // headerShown: useClientOnlyValue(false, true),
+            headerShown: useClientOnlyValue(false, true),
             tabBarShowLabel: false,
             tabBarStyle: {
               shadowColor: "gray",
@@ -73,7 +72,7 @@ export default function TabLayout() {
           <Tabs.Screen
               name="lists"
               options={{
-                title: 'My Lists',
+                title: 'Lists',
                 headerTitleStyle: {
                   fontSize: 30,
                   fontWeight: "normal",              
