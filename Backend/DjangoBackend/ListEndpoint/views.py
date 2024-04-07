@@ -36,3 +36,26 @@ def createList(request):
             )
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+def getUserLists(request):
+    if request.method == "GET":
+        username = request.data.get("user")
+        user = User.objects.get(username=username)
+        print(user)
+        if not user:
+            return Response(
+                {"error": "User is are required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        Userlist = List(user=user, listName=listName, items=[])
+        if Userlist:
+            return Response(
+                {"success": "List successfully made."}, status=status.HTTP_201_CREATED
+            )
+        else:
+            return Response(
+                {"error": "Failed to make List."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+    else:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
