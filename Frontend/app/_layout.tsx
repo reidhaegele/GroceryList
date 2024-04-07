@@ -4,10 +4,11 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useContext } from 'react';
+
 import { useColorScheme } from '@/components/useColorScheme';
 import { ThemeProvider } from '@/components/navigation/ThemeContext';
 // import { DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native';
-import { AuthProvider, useAuth, AuthContextType } from '@/components/AuthContext';
+import { AuthProvider, AuthContext, AuthContextType } from '@/components/AuthContext';
 import { View, ActivityIndicator } from 'react-native';
 
 export {
