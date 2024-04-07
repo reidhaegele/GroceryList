@@ -3,12 +3,12 @@ import { Slot } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useColorScheme } from '@/components/useColorScheme';
 import { ThemeProvider } from '@/components/navigation/ThemeContext';
 // import { DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native';
-
-
+import { AuthProvider, AuthContext, AuthContextType } from '@/components/AuthContext';
+import { View, ActivityIndicator } from 'react-native';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -52,16 +52,24 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const {isLoading, userToken } = useContext(AuthContext) as AuthContextType;
+
+  if ( isLoading ) {
+    <View style={{flex:1, justifyContent: 'center', alignItems:'center'}}>
+      <ActivityIndicator size={'large'} />
+    </View>
+  }
 
   return (
-    <ThemeProvider>
-      <Stack>
-        <Stack.Screen name='(onboarding)' options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name='(onboarding)' options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <Stack>
+          {/* If user is not logged in display the onboarding screens, otherwise show the tabs layout */}
+          {userToken !== null ? <Stack.Screen name='(onboarding)' options={{ headerShown: false }} /> : <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> }
+          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        </Stack>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 
