@@ -36,3 +36,20 @@ def createList(request):
             )
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@api_view(["GET"])
+def getUserLists(request):
+    if request.method == "GET":
+        username = request.data.get("user")
+        user = User.objects.get(username=username)
+        print(user)
+        if not user:
+            return Response(
+                {"error": "User is are required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        user_lists = list(List.objects.filter(user=user).values())
+        return user_lists
+    
+    else:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
