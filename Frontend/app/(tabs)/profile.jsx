@@ -4,21 +4,25 @@ import { useTheme } from "@/components/navigation/ThemeContext";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { useAuth } from '@/components/AuthContext';
 
 export default function Profile() {
     const { isDarkMode } = useTheme();
     const goToSettings = () => {
         router.navigate("settings");
     };
+    const [authState] = useAuth();
     return (
+
+        
         <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
             <View style={styles.iconContainer}>
                 <FontAwesome name="user-circle" size={100} color="grey" />
-                <Text style={[styles.iconText, isDarkMode && styles.darkText]}>Joe Miner</Text>
+                <Text style={[styles.iconText, isDarkMode && styles.darkText]}>{`${authState.token.firstname} ${authState.token.lastname}`}</Text>
             </View>
             <View style={styles.mailIconContainer}>
                 <FontAwesome name="envelope" size={24} color="grey" />
-                <Text style={[styles.mailIconText, isDarkMode && styles.darkText]}>joeminer@mst.edu</Text>
+                <Text style={[styles.mailIconText, isDarkMode && styles.darkText]}>{`${authState.token.email}`}</Text>
             </View>
         </SafeAreaView>
     );

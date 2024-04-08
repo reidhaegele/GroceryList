@@ -54,13 +54,6 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
   const {authState, onLogout} = useAuth();
-  // if ( isLoading ) {
-  //   return (
-  //     <View style={{flex:1, justifyContent: 'center', alignItems:'center'}}>
-  //       <ActivityIndicator size={'large'} />
-  //     </View>
-  //   );
-  // }
 
   return (
     <AuthProvider>
