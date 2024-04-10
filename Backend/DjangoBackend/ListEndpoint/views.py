@@ -10,9 +10,9 @@ from django.contrib.auth.models import User
 
 
 # Create your views here.
-@api_view(["GET"])
+@api_view(["POST"])
 def createList(request):
-    if request.method == "GET":
+    if request.method == "POST":
         username = request.data.get("user")
         # Used for Testing
         # user = User.objects.create_user(username="name", email="email@mail.com", password="Pass12345")
