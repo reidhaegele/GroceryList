@@ -12,7 +12,6 @@ class List(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, to_field='id')
     listId = models.AutoField(primary_key=True)
     listName = models.CharField(max_length=50)
-    items = models.JSONField(default=list)
     
 
 
