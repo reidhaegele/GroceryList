@@ -45,12 +45,4 @@ const styles = StyleSheet.create({
   inline: {
     display: "inline",
   },
-  hr: {
-  borderTop: 3,
-  color: "black",
-  overflow: "visible",
-  alignSelf: "start",
-  height: 1,
-  width: "100%",
-  }
 });
