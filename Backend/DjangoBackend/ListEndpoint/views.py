@@ -25,6 +25,7 @@ def createList(request):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         Userlist = List(user=user, listName=listName, items=[])
+        Userlist.save()
         if Userlist:
             return Response(
                 {"success": "List successfully made."}, status=status.HTTP_201_CREATED
