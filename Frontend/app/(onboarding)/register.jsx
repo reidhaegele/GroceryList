@@ -7,7 +7,7 @@ import Container from '@/components/Container';
 import Separator from '@/components/Separator';
 import { Link, router, Stack } from 'expo-router';
 import { NameIcon } from '@/components/Icons';
-import axios from 'axios';
+//import axios from 'axios';
 
 
 // TODO: Import correct base_url
