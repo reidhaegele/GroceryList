@@ -134,8 +134,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: "center",
         marginBottom: 20,
-        color: "white",
-        fontWeight: "bold"
+        color: "black",
     },
     background: {
         flex: 1, 
@@ -152,7 +151,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        backgroundColor: "#e0e0e0",
     },
     modalImage: {
         width: 350,
