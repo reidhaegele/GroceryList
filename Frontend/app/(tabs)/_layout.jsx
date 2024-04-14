@@ -73,7 +73,7 @@ export default function TabLayout() {
           <Tabs.Screen
               name="lists"
               options={{
-                title: 'Lists',
+                title: 'My Lists',
                 headerTitleStyle: {
                   fontSize: 30,
                   fontWeight: "normal",              
