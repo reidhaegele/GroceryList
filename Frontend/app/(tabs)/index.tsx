@@ -7,12 +7,14 @@ import PriceChangeNotification from "@/components/home/PriceChangeNotification";
 import ItemAddedNotification from "@/components/home/ItemAddedNotification";
 import { Link, router } from 'expo-router';
 import { BlueButton } from '@/components/MyButton';
+import Colors from '@/constants/Colors';
+
 export default function Home() {
   const { isDarkMode } = useTheme();
 
   return (
       <SafeAreaView style={styles.container}>
-        <View style={[styles.container, isDarkMode && styles.darkContinaer]}>
+        <View style={[styles.container, {backgroundColor: Colors[isDarkMode?"dark":"light"].background}]}>
             <BlueButton title="Go to onboarding" onPress={() => router.push('/register')} />
             <ScrollView contentContainerStyle={styles.notificationsContainer}>
             </ScrollView>

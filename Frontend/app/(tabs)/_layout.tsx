@@ -9,22 +9,39 @@ import TabBarIcon from '@/components/utils/TabBarIcon';
 import { HeaderButtons } from '@/components/header_buttons/HeaderButtons';
 import { Ionicons } from '@expo/vector-icons';
 import {ThemeProvider,DefaultTheme,} from "@react-navigation/native";
-
+import { useTheme } from "@/components/navigation/ThemeContext";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  
+  const { isDarkMode } = useTheme();
+
   return (
     <ThemeProvider value={DefaultTheme}>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-          // Disable the static render of the header on web
-          // to prevent a hydration error in React Navigation v6.
+          tabBarActiveTintColor: "red",
           headerShown: useClientOnlyValue(false, true),
+          headerTitleStyle: {
+            fontSize: 30,
+            fontWeight: "normal",
+            marginLeft: "3%",
+            color: Colors[isDarkMode?'dark':'light'].text,
+          },
+          headerStyle: {
+            backgroundColor: Colors[isDarkMode?'dark':'light'].background,
+            shadowColor: Colors[isDarkMode?'dark':'light'].background,
+            shadowOffset: {
+                width: 0,
+                height: 0,
+            },
+            shadowOpacity: 1,
+            shadowRadius: 10,
+          },
+          headerTitleAlign: "left",
           tabBarShowLabel: false,
           tabBarStyle: {
-            shadowColor: "gray",
+            backgroundColor: Colors[isDarkMode?'dark':'light'].background,
+            shadowColor: Colors[isDarkMode?'dark':'light'].shadow,
             shadowOffset: {
                 width: 10,
                 height: 10,
@@ -32,25 +49,12 @@ export default function TabLayout() {
             shadowOpacity: 1,
             shadowRadius: 10,
             },
-            headerTitleStyle: {
-                fontSize: 40,
-                fontWeight: "normal",
-                marginLeft: "3%",
-            },
-            headerStyle: {
-                backgroundColor: "#f2f2f2",
-            },
-            headerTitleAlign: "left",
-        }}>
-
+          }}
+        >
         <Tabs.Screen
           name="index"
           options={{
             title: 'Home',
-            headerTitleStyle: {
-              fontSize: 30,
-              fontWeight: "normal",              
-            },
             tabBarIcon: ({ focused }) => <TabBarIcon icon="home" focused={focused} />,
             headerRight: () => (
               <Link href="/modal" asChild>
@@ -73,16 +77,12 @@ export default function TabLayout() {
             name="lists"
             options={{
               title: 'Lists',
-              headerTitleStyle: {
-                fontSize: 30,
-                fontWeight: "normal",              
-              },
               tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon="list"/>,
               headerRight: () => (
                 <HeaderButtons 
                     buttons={[
                         {
-                            icon: <Ionicons name="add-circle-outline" size={40}  />,
+                            icon: <Ionicons name="add-circle-outline" size={40} color={Colors[isDarkMode?'dark':'light'].tint} />,
                             onpress: () => router.navigate('lists/add-list'),
                         },
                     ]}
@@ -95,15 +95,19 @@ export default function TabLayout() {
             name="profile"
             options={{
                 title: 'Profile',
-                headerTitleStyle: {
-                  fontSize: 30,
-                  fontWeight: "normal",              
-                },
-                tabBarShowLabel: false,
                 tabBarIcon: ({ focused }) => (
                     <TabBarIcon focused={focused} icon="person" />
                   ),
-                headerRight: () => ( <HeaderButtons buttons={[{icon: <Ionicons name="settings-outline" size={40} color="gray" />, onpress: () => router.navigate('/settings'), }, ]} /> ),
+                headerRight: () => ( 
+                  <HeaderButtons
+                    buttons={[
+                      {
+                        icon: <Ionicons name="settings-outline" size={40} color={Colors[isDarkMode?'dark':'light'].tint} />,
+                        onpress: () => router.navigate('/settings'),
+                      },
+                    ]}
+                  />
+                ),
             }}
         />
         

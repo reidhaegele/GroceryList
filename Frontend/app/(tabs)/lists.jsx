@@ -4,7 +4,7 @@ import ListCard from "@/components/listcard/ListCard";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HeaderButtons from "@/components/header_buttons/HeaderButtons";
 import { useTheme } from "@/components/navigation/ThemeContext";
-
+import Colors from '@/constants/Colors';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,10 +34,9 @@ export const List = ({navigation}) => {
             },
         ])
 
-
-
+    
     return (
-        <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
+        <SafeAreaView style={[styles.container, {backgroundColor: Colors[isDarkMode?"dark":"light"].background}]}>
             <FlatList
                 data={lists}
                 renderItem={({item}) => (

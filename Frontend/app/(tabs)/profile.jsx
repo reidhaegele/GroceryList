@@ -4,6 +4,7 @@ import { useTheme } from "@/components/navigation/ThemeContext";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import Colors from '@/constants/Colors';
 
 export default function Profile() {
     const { isDarkMode } = useTheme();
@@ -11,7 +12,7 @@ export default function Profile() {
         router.navigate("settings");
     };
     return (
-        <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
+        <SafeAreaView style={[styles.container, {backgroundColor: Colors[isDarkMode?"dark":"light"].background}]}>
             <View style={styles.iconContainer}>
                 <FontAwesome name="user-circle" size={100} color="grey" />
                 <Text style={[styles.iconText, isDarkMode && styles.darkText]}>Joe Miner</Text>

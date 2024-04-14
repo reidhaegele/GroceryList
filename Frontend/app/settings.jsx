@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Switch, View, Text, TouchableOpacity } from "
 import { useTheme } from "@/components/navigation/ThemeContext";
 import { router } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
-
+import Colors from '@/constants/Colors';
 
 export default function Settings() {
     const { isDarkMode, toggleDarkMode } = useTheme();
@@ -12,7 +12,7 @@ export default function Settings() {
     };
 
     return (
-        <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
+        <SafeAreaView style={[styles.container, {backgroundColor: Colors[isDarkMode?"dark":"light"].background}]}>
             <View style={styles.boxContainer}>
                 <View style={styles.switchContainer}>
                     <Text style={styles.label}>Dark Mode</Text>
