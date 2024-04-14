@@ -7,8 +7,11 @@ import { useEffect } from 'react';
 import { useColorScheme } from '@/components/useColorScheme';
 import { ThemeProvider } from '@/components/navigation/ThemeContext';
 // import { DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native';
-
-
+import { HeaderButtons } from '@/components/header_buttons/HeaderButtons';
+import { useTheme } from "@/components/navigation/ThemeContext";
+import Colors from '@/constants/Colors';
+import { Ionicons } from '@expo/vector-icons';
+import { Text } from '@/components/Themed';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -44,21 +47,35 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return <ThemeProvider><RootLayoutNav /></ThemeProvider>;
 }
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-
+  const isDarkMode = useTheme();
   return (
-    <ThemeProvider>
-      <Stack>
-        <Stack.Screen name='(onboarding)' options={{ headerShown: false }} />
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors[isDarkMode["isDarkMode"]?'dark':'light'].background,
+          },
+          headerTitleStyle: {
+            color: Colors[isDarkMode["isDarkMode"]?'dark':'light'].text,
+          },
+          headerShadowVisible: false,
+        }}
+      >
+        {/* <Stack.Screen name='(onboarding)' options={{ headerShown: false }} /> */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name='(onboarding)' options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        <Stack.Screen
+          name="lists/add-list"
+          options={{
+            title: 'Add List',
+            presentation: 'modal',
+          }}
+        />
       </Stack>
-    </ThemeProvider>
   );
 }
 
