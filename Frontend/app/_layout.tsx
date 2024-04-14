@@ -3,8 +3,7 @@ import { Slot } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useContext } from 'react';
-
+import { useEffect } from 'react';
 import { useColorScheme } from '@/components/useColorScheme';
 import { ThemeProvider } from '@/components/navigation/ThemeContext';
 // import { DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native';
@@ -56,20 +55,13 @@ function RootLayoutNav() {
   const {authState, onLogout} = useAuth();
 
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <Stack>
-          {/* FIXME: If user is not logged in display the onboarding screens, otherwise show the tabs layout */}
-          {authState?.authenticated ? (
-            <Stack.Screen name='(onboarding)' options={{ headerShown: false }} /> 
-          ):(
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> 
-          )
-          }
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-        </Stack>
-      </ThemeProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <Stack>
+        <Stack.Screen name='(onboarding)' options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+      </Stack>
+    </ThemeProvider>
   );
 }
 
