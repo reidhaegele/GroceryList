@@ -18,12 +18,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from ListEndpoint.views import createList
-from authentication.views import register, login
+from authentication.views import register, login, accountInfo
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("api/", include("authentication.urls")),
-    path("createList/", createList, name="createList"),
-    path("register/", register, name="register"),
-    path("login/", login, name="login"),
+    path('admin/', admin.site.urls),
+    path('api/', include('authentication.urls')),
+    path('createList/',createList,name='createList'),
+    path('viewList/',viewList, name='viewList'),
+    path('register/', register, name='register'),
+    path('login/', login, name='login'),
+    path('accountInfo/',accountInfo,name='accountInfo')
 ]
