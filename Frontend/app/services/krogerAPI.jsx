@@ -9,7 +9,6 @@ export const requestAccessToken = async () => {
   const authorization = "Basic " + btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
 
   try {
-    console.log(authorization)
     const response = await axios.post(`${BASE_URL}/connect/oauth2/token`,'grant_type=client_credentials&scope=product.compact',{headers: {'Content-Type': 'application/x-www-form-urlencoded','Authorization': authorization}});
     return response.data.access_token;
   } catch (error) {
