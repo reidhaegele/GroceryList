@@ -1,17 +1,13 @@
 from rest_framework import generics
-from .models import GroceryList
-from .serializers import GroceryListSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
+from .models import UserProfile
+from .serializers import UserSerializer, UserProfileSerializer
 
-
-class GroceryListView(generics.ListCreateAPIView):
-    queryset = GroceryList.objects.all()
-    serializer_class = GroceryListSerializer
     
 @api_view(['GET'])
 def login(request):
@@ -45,34 +41,19 @@ def login(request):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-
-
 @api_view(['POST'])
 def register(request):
     if request.method == 'POST':
-        # Retrieve data from URL parameters
-        username = request.GET.get('username')
-        password = request.GET.get('password')
-        first_name = request.GET.get('first_name')
-        last_name = request.GET.get('last_name')
-        email = request.GET.get('email')
-
-        # If data not found in URL parameters, try retrieving from request body
-        if username is None:
-            data = request.data
-            username = data.get('username')
-            password = data.get('password')
-            first_name = data.get('first_name')
-            last_name = data.get('last_name')
-            email = data.get('email')
-
-        # Check if required data is provided
-        if username is None or password is None:
-            return Response({'error': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Proceed with registration logic...
-        # (Here you can implement the user registration logic using the retrieved data)
-
-        return Response({'success': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
-    else:
-        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        user_serializer = UserSerializer(data=request.data)
+        profile_serializer = UserProfileSerializer(data=request.data)
+        if user_serializer.is_valid() and profile_serializer.is_valid():
+            user_instance = user_serializer.save()
+            profile_instance = profile_serializer.save(user=user_instance)
+            return Response({
+                "user": user_serializer.data,
+                "profile": profile_serializer.data
+            }, status=status.HTTP_201_CREATED)
+        return Response({
+            "user_errors": user_serializer.errors,
+            "profile_errors": profile_serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
