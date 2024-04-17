@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 @api_view(['POST'])
-def createList(request):
+def createList(request):    
     if request.method == 'POST':
         username = request.data.get('user')
         #Used for Testing 
