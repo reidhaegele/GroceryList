@@ -8,6 +8,7 @@ import Separator from '@/components/Separator';
 import { Link, router, Stack } from 'expo-router';
 import { NameIcon } from '@/components/Icons';
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 
 // TODO: Import correct base_url
@@ -37,11 +38,11 @@ export default function Register() {
             .then(res => {
                 let response = res.data;
                 console.log(response);
+                router.replace('/');
             })
             .catch(e => {
-                console.log(`register failed ${e}`);
+                console.log(`register failed ${e.response.data.error}`);
             });
-        router.replace('/login');
     }
 
     

@@ -7,6 +7,9 @@ import { useTheme } from "@/components/navigation/ThemeContext";
 import { Text } from "react-native";
 import { TextInput, Button } from "react-native";
 import { InputField } from "../../components/InputField";
+import axios from 'axios';
+
+BASE_URL = "http://127.0.0.1:8000"
 
 export default function AddList ({navigation}) {
     const [joiningList, setJoiningList] = useState(false);
@@ -23,10 +26,20 @@ export default function AddList ({navigation}) {
             } catch(err) {
                 console.log("Error", err)
             }
-
+            
         } else {
             // Creating List
             console.log("Creating List")
+            axios.post(`${BASE_URL}/createList/`, {
+                "user": "carter",
+                "listName": "Test List",
+            })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         }
     }
 

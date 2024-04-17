@@ -20,24 +20,23 @@ export default function Login() {
     const register = () => {
         console.log('register');
         router.replace('/register');
-        router.replace('/register');
     }
     
     const login = async () => {
-    const login = async () => {
         console.log('login');
-        axios.post(`${BASE_URL}/api/login/`, {
+        axios.get(`${BASE_URL}/api/login/`, {
                 username,
                 password
             })
             .then(res => {
                 let userInfo = res.data;
                 console.log(userInfo);
+                router.navigate('/');
             })
             .catch(e => {
-                console.log(`login failed ${e}`);
+                console.log(`login failed ${e.response.data.error}`);
             });
-        router.navigate('/');
+        
     };
 
     return (
@@ -52,7 +51,6 @@ export default function Login() {
         </View>
         
     )
-}
 
 }
 
