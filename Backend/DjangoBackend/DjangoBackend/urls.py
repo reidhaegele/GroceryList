@@ -27,5 +27,6 @@ urlpatterns = [
     path('viewList/',viewList, name='viewList'),
     path('register/', register, name='register'),
     path('login/', login, name='login'),
-    path('accountInfo/',accountInfo,name='accountInfo')
+    path('accountInfo/',accountInfo,name='accountInfo'),
+    path('updateUser/',updateUser,name='updateUser')
 ]

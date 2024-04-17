@@ -8,7 +8,7 @@ from .serializers import UserUpdateSerializer
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication]) # Uses the token authentication to verify the user's identity
 @permission_classes([IsAuthenticated]) # Requires the user to be authenticated using a token 
-def update_user(request):
+def updateUser(request):
     if request.method == 'POST':
         serializer = UserUpdateSerializer(data=request.data)
         if serializer.is_valid():
