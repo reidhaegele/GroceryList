@@ -17,7 +17,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from ListEndpoint.views import createList
+from ListEndpoint.views import createList, viewList
+from EditAccEndpoint.views import updateUser
 from authentication.views import register, login, accountInfo
 
 urlpatterns = [

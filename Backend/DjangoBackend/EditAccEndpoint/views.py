@@ -19,6 +19,7 @@ def updateUser(request):
             user.username = serializer.validated_data.get('username')
             user.set_password(serializer.validated_data.get('password'))
             user.email = serializer.validated_data.get('email')
+            user.zipcode = serializer.validated_data.get('zipcode')
             user.save()
             
             return Response({'message': 'User information updated successfully'})
