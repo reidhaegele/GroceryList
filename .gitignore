@@ -39,3 +39,8 @@ yarn-error.*
 
 expo-env.d.ts
 # @end expo-cli
+Backend/DjangoBackend/authentication/__pycache__/*
+Backend/DjangoBackend/authentication/migrations/__pycache__/*
+Backend/DjangoBackend/ListEndpoint/migrations/__pycache__/*
+Backend/DjangoBackend/DjangoBackend/__pycache__/*
+Backend/DjangoBackend/ListEndpoint/__pycache__/*
