@@ -33,7 +33,7 @@ def login(request):
         # Authenticate user
         user = authenticate(username=username, password=password)
         if user:
-            # User authenticated, return success message or token
+            # User authenticated, return success message and token
             token, created = Token.objects.get_or_create(user=user)
             return Response({'message': 'Login successful', 'token': token.key}, status=status.HTTP_200_OK)
         else:
