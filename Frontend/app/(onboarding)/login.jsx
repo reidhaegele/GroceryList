@@ -17,16 +17,16 @@ export default function Login() {
     const [username, setUser] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [error, setError] = React.useState(' ');
-
     const register = () => {
         console.log('register');
-        router.replace('/register');
         router.replace('/register');
     }
 
     const login = async () => {
         console.log('login');
-        axios.post(`${BASE_URL}/api/login/`, {
+        console.log(username)
+        console.log(password)
+        axios.get(`${BASE_URL}/api/login/`, {
                 username,
                 password
             })
@@ -36,8 +36,8 @@ export default function Login() {
                 router.navigate('/');
             })
             .catch(e => {
-                console.log(`login failed ${e}`);
-                setError(e)
+                console.log(`login failed ${e.response.data.error}`);
+                setError(e.response.data.error)
             });
     };
 

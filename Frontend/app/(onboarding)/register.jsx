@@ -41,8 +41,8 @@ export default function Register() {
                 router.replace('/');
             })
             .catch(e => {
-                console.log(`register failed ${e}`);
-                console.log(JSON.stringify(e))
+                console.log(`register failed ${e.response.data.error}`);
+                setError(e.response.data.error)
             });
     }
 
