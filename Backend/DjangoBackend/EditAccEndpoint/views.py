@@ -14,11 +14,15 @@ def updateUser(request):
             # Get the authenticated user
             user = request.user
             
-            # Update user's information
-            user.username = serializer.validated_data.get('username')
-            user.set_password(serializer.validated_data.get('password'))
-            user.email = serializer.validated_data.get('email')
-            user.zipcode = serializer.validated_data.get('zipcode')
+            # Update user's information if present in request data
+            if 'username' in serializer.validated_data:
+                user.username = serializer.validated_data.get('username')
+            if 'password' in serializer.validated_data:
+                user.set_password(serializer.validated_data.get('password'))
+            if 'email' in serializer.validated_data:
+                user.email = serializer.validated_data.get('email')
+            if 'zipcode' in serializer.validated_data:
+                user.zipcode = serializer.validated_data.get('zipcode')
             user.save()
             
             return Response({'message': 'User information updated successfully'})
