@@ -30,7 +30,7 @@ def login(request):
             except AttributeError:
                 pass
 
-        if username is None or password is None:
+        if username is None or password is None or username == '' or password == '':
             return Response({'error': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Authenticate user

@@ -1,4 +1,4 @@
-import { View, Text, Button, Image, StyleSheet, Modal} from 'react-native';
+import { View, Text, Button, Image, StyleSheet, Modal, KeyboardAvoidingView, Platform} from 'react-native';
 import React from 'react';
 import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
@@ -27,8 +27,10 @@ export default function Login() {
         console.log(username)
         console.log(password)
         axios.get(`${BASE_URL}/api/login/`, {
-                username,
-                password
+                params: {
+                    username,
+                    password
+                }
             })
             .then(res => {
                 let userInfo = res.data;
@@ -46,15 +48,24 @@ export default function Login() {
             animationType='slide'
             transparent={true}
             visible={true}
-        > 
+        >
             <View style={styles.container}>
-                <Text style={styles.title}>Log In</Text>
-                <Text style={styles.error}>{error}</Text>
-                <InputField name={"user"} value={username} placeholder={"Username"} onChangeText={(text) => setUser(text)}/>
-                <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
-                <BlueButton title="Log In" onPress={login} ></BlueButton>
-                <Separator text="Or"/>
-                <GrayButton title="Sign Up" onPress={register}></GrayButton>
+                <KeyboardAvoidingView
+                behavior={Platform.OS === "ios"?"padding" : "height"}
+                style={styles.keycontainer}
+                >
+                    <View style={styles.innercontainer}>
+                        <Text style={styles.title}>Log In</Text>
+                        <Text style={styles.error}>{error}</Text>
+                        <InputField label={"username"} placeholder={"Username"} value={username} onChangeText={(text) => setUser(text)}/>
+                        <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
+                    </View>
+                </KeyboardAvoidingView>
+                <View style={{backgroundColor: 'white', alignItems: 'center', paddingBottom: '10%', width: '100%'}}>
+                    <BlueButton title="Log In" onPress={login} ></BlueButton>
+                    <Separator text="Or"/>
+                    <GrayButton title="Sign Up" onPress={register}></GrayButton>
+                </View>
             </View>
         </Modal>
     )
@@ -62,18 +73,32 @@ export default function Login() {
 
 const styles = StyleSheet.create ({
     container: {
-        marginTop: 'auto',
-        backgroundColor: 'white',
-        alignItems: 'center',
+        flex: 1,
         height: "auto",
-        width: "100%",
-        borderRadius: 50,
-        shadowColor: 'black',
-        shadowOffset: 0,
-        shadowOpacity: .3,
-        shadowRadius: 10,
-        paddingBottom: "10%",
+        justifyContent: 'flex-end',
+        alignItems: "center",
     }, 
+    innercontainer: {
+        backgroundColor: 'white',
+        alignItems: "center",
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        shadowColor: 'gray',
+        shadowOffset: {
+            width: 0,
+            height: -20,
+        },
+        shadowOpacity: .2,
+        shadowRadius: 10,
+    },
+    keycontainer: {
+        justifyContent: 'flex-end',
+        backgroundColor: 'white',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        width: "100%",
+        zIndex: 1,
+    },
     title: {
         fontSize: 36,
         color: '#447F86',

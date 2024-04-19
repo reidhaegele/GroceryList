@@ -1,4 +1,4 @@
-import { View, Text, Button, Modal } from 'react-native';
+import { View, Text, Button, Modal, KeyboardAvoidingView, Platform} from 'react-native';
 import React from 'react';
 import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
@@ -59,17 +59,26 @@ export default function Register() {
             visible={true}
         >
             <View style={styles.container}>
-                <Text style={styles.title}>Register</Text>
-                <Text style={styles.error}>{error}</Text>
-                <InputField label={"firstname"} placeholder={"First Name"} value={firstname} onChangeText={(text) => setFirstname(text)}/>
-                <InputField label={"lastname"} placeholder={"Last Name"} value={lastname} onChangeText={(text) => setLastname(text)}/>
-                <InputField label={"username"} placeholder={"username"} value={username} onChangeText={(text) => setUsername(text)}/>
-                <EmailField name={"email"} value={email} onChangeText={(text) => setEmail(text)}/>
-                <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
-                <BlueButton title="Sign Up" onPress={register}></BlueButton>
-                <Separator text="Or"/>
-                <GrayButton title="Log In" onPress={login}></GrayButton>           
-            </View>
+                <KeyboardAvoidingView
+                behavior={Platform.OS === "ios"?"padding" : "height"}
+                style={styles.keycontainer}
+                >
+                    <View style={styles.innercontainer}>
+                    <Text style={styles.title}>Register</Text>
+                    <Text style={styles.error}>{error}</Text>
+                    <InputField label={"firstname"} placeholder={"First Name"} value={firstname} onChangeText={(text) => setFirstname(text)} />
+                    <InputField label={"lastname"} placeholder={"Last Name"} value={lastname} onChangeText={(text) => setLastname(text)}/>
+                    <InputField label={"username"} placeholder={"Username"} value={username} onChangeText={(text) => setUsername(text)}/>
+                    <EmailField name={"email"} value={email} onChangeText={(text) => setEmail(text)}/>
+                    <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
+                    </View>
+                </KeyboardAvoidingView>
+                <View style={{backgroundColor: 'white', alignItems: 'center', paddingBottom: '10%', width: '100%'}}>
+                    <BlueButton title="Sign Up" onPress={register}></BlueButton>
+                    <Separator text="Or"/>
+                    <GrayButton title="Log In" onPress={login}></GrayButton>
+                </View>
+            </View> 
         </Modal>
     )
 }
@@ -78,18 +87,32 @@ export default function Register() {
 
 const styles = StyleSheet.create ({
     container: {
-        marginTop: 'auto',
-        backgroundColor: 'white',
-        alignItems: 'center',
+        flex: 1,
         height: "auto",
-        width: "100%",
-        borderRadius: 50,
-        shadowColor: 'black',
-        shadowOffset: 0,
-        shadowOpacity: .3,
-        shadowRadius: 10,
-        paddingBottom: "10%",
+        justifyContent: 'flex-end',
+        alignItems: "center",
     }, 
+    innercontainer: {
+        backgroundColor: 'white',
+        alignItems: "center",
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        shadowColor: 'gray',
+        shadowOffset: {
+            width: 0,
+            height: -20,
+        },
+        shadowOpacity: .2,
+        shadowRadius: 10,
+    },
+    keycontainer: {
+        justifyContent: 'flex-end',
+        backgroundColor: 'white',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        width: "100%",
+        zIndex: 1,
+    },
     title: {
         fontSize: 36,
         color: '#447F86',
