@@ -12,7 +12,7 @@ export default function Layout() {
         <View 
             style={styles.container}>
             <ImageBackground
-                source={require('@/assets/images/grocery.jpg')}
+                source={require('@/assets/images/food_background.jpg')}
                 style={styles.background}
             >
                 <Slot></Slot>
@@ -35,26 +35,6 @@ const styles = StyleSheet.create ({
         fontWeight: 'bold',
         marginBottom: 20,
     },
-    // circleLogo: {
-    //     height: Dimensions.get('window').width * 0.3,
-    //     width: Dimensions.get('window').width * 0.3,
-    //     borderRadius: Dimensions.get('window').width * 0.3 / 2,
-    //     backgroundColor: 'black',
-    // },
-    // containerShadow: {
-    //     height: Dimensions.get('window').width * 0.86,
-    //     width: Dimensions.get('window').width * 0.43,
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     backgroundColor: '#ffffff',
-    //     borderRadius: 10, 
-    // },
-    // boxShadow: {
-    //     shadowColor: '#171717', 
-    //     shadowOffset: { width: -2, height: 4},
-    //     shadowOpacity: 0.2,
-    //     shadowRadius: 3,
-    // }, 
     background: {
         flex: 1, 
         justifyContent: 'center',

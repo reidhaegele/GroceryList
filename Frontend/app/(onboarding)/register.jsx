@@ -1,4 +1,4 @@
-import { View, Text, Button, ImageBackground } from 'react-native';
+import { View, Text, Button, Modal } from 'react-native';
 import React from 'react';
 import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
@@ -22,6 +22,7 @@ export default function Register() {
     const [username, setUsername] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [error, setError] = React.useState(' ');
     
 
 
@@ -37,11 +38,12 @@ export default function Register() {
             .then(res => {
                 let response = res.data;
                 console.log(response);
+                router.replace('/');
             })
             .catch(e => {
                 console.log(`register failed ${e}`);
+                console.log(JSON.stringify(e))
             });
-        router.replace('/login');
     }
 
     
@@ -51,57 +53,53 @@ export default function Register() {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Register</Text>
-            <InputField label={"firstname"} placeholder={"First Name"} value={firstname} onChangeText={(text) => setFirstname(text)}/>
-            <InputField label={"lastname"} placeholder={"Last Name"} value={lastname} onChangeText={(text) => setLastname(text)}/>
-            <InputField label={"username"} placeholder={"username"} value={username} onChangeText={(text) => setUsername(text)}/>
-            <EmailField name={"email"} value={email} onChangeText={(text) => setEmail(text)}/>
-            <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
-            <BlueButton title="Sign Up" onPress={register}></BlueButton>
-            <Separator text="Or"/>
-            <GrayButton title="Log In" onPress={login}></GrayButton>           
-        </View>
+        <Modal
+            animationType='slide'
+            transparent={true}
+            visible={true}
+        >
+            <View style={styles.container}>
+                <Text style={styles.title}>Register</Text>
+                <Text style={styles.error}>{error}</Text>
+                <InputField label={"firstname"} placeholder={"First Name"} value={firstname} onChangeText={(text) => setFirstname(text)}/>
+                <InputField label={"lastname"} placeholder={"Last Name"} value={lastname} onChangeText={(text) => setLastname(text)}/>
+                <InputField label={"username"} placeholder={"username"} value={username} onChangeText={(text) => setUsername(text)}/>
+                <EmailField name={"email"} value={email} onChangeText={(text) => setEmail(text)}/>
+                <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
+                <BlueButton title="Sign Up" onPress={register}></BlueButton>
+                <Separator text="Or"/>
+                <GrayButton title="Log In" onPress={login}></GrayButton>           
+            </View>
+        </Modal>
     )
 }
 
 
 
 const styles = StyleSheet.create ({
-
     container: {
-        width: '100%',
-        height: '65%',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
+        marginTop: 'auto',
+        backgroundColor: 'white',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
-        borderTopStartRadius: 10,
-        borderTopEndRadius: 10,
-        bottom: 0,
-        position: 'absolute',
+        height: "auto",
+        width: "100%",
+        borderRadius: 50,
+        shadowColor: 'black',
+        shadowOffset: 0,
+        shadowOpacity: .3,
+        shadowRadius: 10,
+        paddingBottom: "10%",
     }, 
     title: {
         fontSize: 36,
+        color: '#447F86',
         fontWeight: 'bold',
         marginTop: 20,
-        marginBottom: 30,
-        alignSelf: 'flex-start',
-        marginLeft: 20,
     },
-    circleLogo: {
-        height: 273,
-        width: 273,
-        borderRadius: 50,
-        backgroundColor: 'black',
-        marginBottom: 20,
-    }, 
-    background: {
-        flex: 1, 
-        resizeMode: 'cover',
-        justifyContent: 'center',
-        height: '100%',
-        width: '100%',
+    error: {
+        color: 'red',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        margin: 10,
     },
-    
 });

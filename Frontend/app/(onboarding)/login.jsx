@@ -1,5 +1,4 @@
-import { View, Text, Button, Image, StyleSheet} from 'react-native';
-import { View, Text, Button, Image, StyleSheet} from 'react-native';
+import { View, Text, Button, Image, StyleSheet, Modal} from 'react-native';
 import React from 'react';
 import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
@@ -17,14 +16,14 @@ BASE_URL = "http://127.0.0.1:8000"
 export default function Login() {
     const [username, setUser] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [error, setError] = React.useState(' ');
 
     const register = () => {
         console.log('register');
         router.replace('/register');
         router.replace('/register');
     }
-    
-    const login = async () => {
+
     const login = async () => {
         console.log('login');
         axios.post(`${BASE_URL}/api/login/`, {
@@ -34,78 +33,57 @@ export default function Login() {
             .then(res => {
                 let userInfo = res.data;
                 console.log(userInfo);
+                router.navigate('/');
             })
             .catch(e => {
                 console.log(`login failed ${e}`);
+                setError(e)
             });
-        router.navigate('/');
     };
 
     return (
-        
-        <View style={styles.container}>
-            <Text style={styles.title}>Log In</Text>
-            <InputField name={"user"} value={username} placeholder={"Username"} onChangeText={(text) => setUser(text)}/>
-            <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
-            <BlueButton title="Log In" onPress={login} ></BlueButton>
-            <Separator text="Or"/>
-            <GrayButton title="Sign Up" onPress={register}></GrayButton>
-        </View>
-        
+        <Modal
+            animationType='slide'
+            transparent={true}
+            visible={true}
+        > 
+            <View style={styles.container}>
+                <Text style={styles.title}>Log In</Text>
+                <Text style={styles.error}>{error}</Text>
+                <InputField name={"user"} value={username} placeholder={"Username"} onChangeText={(text) => setUser(text)}/>
+                <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
+                <BlueButton title="Log In" onPress={login} ></BlueButton>
+                <Separator text="Or"/>
+                <GrayButton title="Sign Up" onPress={register}></GrayButton>
+            </View>
+        </Modal>
     )
 }
 
-}
-
 const styles = StyleSheet.create ({
-
-
     container: {
-        width: '100%',
-        height: '65%',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        width: '100%',
-        height: '65%',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
+        marginTop: 'auto',
+        backgroundColor: 'white',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
-        borderTopStartRadius: 10,
-        borderTopEndRadius: 10,
-        bottom: 0,
-        position: 'absolute',
-        backgroundColor: '#ffffff',
-        borderTopStartRadius: 10,
-        borderTopEndRadius: 10,
-        bottom: 0,
-        position: 'absolute',
+        height: "auto",
+        width: "100%",
+        borderRadius: 50,
+        shadowColor: 'black',
+        shadowOffset: 0,
+        shadowOpacity: .3,
+        shadowRadius: 10,
+        paddingBottom: "10%",
     }, 
     title: {
         fontSize: 36,
+        color: '#447F86',
         fontWeight: 'bold',
         marginTop: 20,
-        marginBottom: 30,
-        alignSelf: 'flex-start',
-        marginLeft: 20,
-        marginTop: 20,
-        marginBottom: 30,
-        alignSelf: 'flex-start',
-        marginLeft: 20,
     },
-    circleLogo: {
-        height: 273,
-        width: 273,
-        borderRadius: 50,
-        backgroundColor: 'black',
-        marginBottom: 20,
-    }, 
-    background: {
-        flex: 1, 
-        resizeMode: 'cover',
-        justifyContent: 'center',
-        height: '100%',
-        width: '100%',
+    error: {
+        color: 'red',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        margin: 10,
     },
-    
 });
