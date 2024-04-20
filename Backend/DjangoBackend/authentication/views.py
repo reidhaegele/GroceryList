@@ -34,8 +34,8 @@ def login(request):
         user = authenticate(username=username, password=password)
         if user:
             # User authenticated, return success message or token
-            userToken = {'username': username, 'firstname': user.first_name, 'lastname': user.last_name, 'email': user.email}
-            return Response({'message': 'Login successful'}, status=status.HTTP_200_OK, data=userToken)
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'message': 'Login successful', 'token': token.key}, status=status.HTTP_200_OK)
         else:
             # Authentication failed
             return Response({'error': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
