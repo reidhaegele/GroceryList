@@ -1,3 +1,4 @@
+
 import { View, Text, Pressable, StyleSheet, FlatList, SectionList } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useLocalSearchParams, Stack, useNavigation } from 'expo-router';
@@ -21,6 +22,7 @@ export default function EditList() {
       price: '0.99',
       category: 'Produce',
       id: 1,
+      quantity: 3,
     },
 
     {
@@ -28,6 +30,7 @@ export default function EditList() {
       price: '0.50',
       category: 'Produce',
       id: 6,
+      quantity: 6,
     },
 
     {
@@ -35,6 +38,7 @@ export default function EditList() {
       price: '2.50',
       category: 'Dairy',
       id: 2,
+      quantity: 1,
     },
 
     {
@@ -42,6 +46,7 @@ export default function EditList() {
       price: '1.99',
       category: 'Dairy',
       id: 5,
+      quantity: 2,
     },
 
     {
@@ -49,6 +54,7 @@ export default function EditList() {
       price: '2.00',
       category: 'Bakery',
       id: 3,
+      quantity: 1,
     },
 
     {
@@ -56,6 +62,7 @@ export default function EditList() {
       price: '3.00',
       category: 'Bakery',
       id: 4,
+      quantity: 2,
     }
   ]);
   const [refreshing, setRefreshing] = useState(false);
@@ -112,10 +119,10 @@ export default function EditList() {
         sections={result}
         keyExtractor={(item, index) => `${item.name}_groceryTable`}
         renderItem={({ item }) => (
-          <ItemCard name={item.name} price={item.price} />
+          <ItemCard name={item.name} price={item.price} quantity={item.quantity}/>
         )}
         renderSectionHeader={({ section: { title } }) => (
-          <Text>{title}</Text>
+          <Text style={styles.header}>{title}</Text>
         )}
       />
     </View>
@@ -130,6 +137,12 @@ styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignContent: 'center',
+    
   },
+
+  header: {
+    fontSize: 30, 
+    fontWeight: 'bold',
+  }
 
 });
