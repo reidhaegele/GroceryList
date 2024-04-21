@@ -4,7 +4,9 @@ import { View, Text, Button, Image, StyleSheet, Dimensions, ImageBackground, Key
 import React from 'react';
 import { Slot, Stack } from 'expo-router';
 
-
+export const unstable_settings = {
+    initialRouteName: 'welcome',
+}
 
 export default function Layout() {
     return (
@@ -15,12 +17,9 @@ export default function Layout() {
                 source={require('@/assets/images/food_background.jpg')}
                 style={styles.background}
             >
-                <Slot></Slot>
+            <Slot></Slot>
             </ImageBackground>                                                                                    
         </View>
-
-
-        
     )
 }
 
@@ -28,7 +27,6 @@ export default function Layout() {
 const styles = StyleSheet.create ({
     container: {
         flex: 1,
-
     }, 
     title: {
         fontSize: 36,
