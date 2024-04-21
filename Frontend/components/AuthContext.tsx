@@ -52,6 +52,7 @@ export const AuthProvider = ({children} : any) => {
       .then(res => {
           setAuthState(true);
           setItemAsync('token', res.data.token)
+          router.navigate('/')
           return result
       })
       .catch(e => {
