@@ -3,8 +3,7 @@ import { useStorageState } from './useStorageState';
 import { router } from 'expo-router';
 import axios from 'axios'
 import { deleteItemAsync, setItemAsync, getItemAsync } from 'expo-secure-store'
-// const BASE_URL = "http://127.0.0.1:8000";
-const BASE_URL = "http://10.0.1.206:16628";
+const BASE_URL = "http://127.0.0.1:8000";
 
 
 
