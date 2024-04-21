@@ -5,9 +5,7 @@ import axios from 'axios'
 import { deleteItemAsync, setItemAsync, getItemAsync } from 'expo-secure-store'
 const BASE_URL = "http://127.0.0.1:8000";
 
-interface userTokenType {
-  token: string;
-}
+
 
 export interface AuthContextType {
   onLogin?: (email: string, password: string) => Promise<any>;
@@ -31,7 +29,7 @@ interface tokenType {
 
 export const AuthProvider = ({children} : any) => {
   const [authState, setAuthState] = React.useState<{
-    token: tokenType | null;
+    token: string | null;
     authenticated: boolean | null;
   }>({
     token: null,
@@ -61,8 +59,6 @@ export const AuthProvider = ({children} : any) => {
         })
         .then(res => {
             let response = res.data;
-            console.log(response);
-            console.log(result);
             setAuthState({
               token: response.token,
               authenticated: true
@@ -90,12 +86,6 @@ export const AuthProvider = ({children} : any) => {
         })
         .then(res => {
             let response = res.data;
-            console.log(response);
-            setAuthState({
-              token: response.token,
-              authenticated: true
-            });
-
             return result
         })
         .catch(e => {
@@ -105,7 +95,7 @@ export const AuthProvider = ({children} : any) => {
   };
 
   const logout = async () => {
-    await deleteItemAsync('test');
+    await deleteItemAsync('token');
     setAuthState({
       token: null,
       authenticated: false
