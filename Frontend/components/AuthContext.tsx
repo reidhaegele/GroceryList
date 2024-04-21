@@ -3,7 +3,8 @@ import { useStorageState } from './useStorageState';
 import { router } from 'expo-router';
 import axios from 'axios'
 import { deleteItemAsync, setItemAsync, getItemAsync } from 'expo-secure-store'
-const BASE_URL = "http://127.0.0.1:8000";
+// const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = "http://10.0.1.206:16628";
 
 
 
@@ -11,7 +12,7 @@ export interface AuthContextType {
   onLogin?: (email: string, password: string) => Promise<any>;
   onLogout?: () => Promise<any>;
   onRegister?: (email: string, password: string, username: string, firstname: string, lastname: string) => Promise<any>;
-  authState?: {token: string | null; authenticated: boolean | null };
+  authState?: boolean;
 }
 const AuthContext = createContext<AuthContextType>({});
 
@@ -28,24 +29,13 @@ interface tokenType {
 }
 
 export const AuthProvider = ({children} : any) => {
-  const [authState, setAuthState] = React.useState<{
-    token: string | null;
-    authenticated: boolean | null;
-  }>({
-    token: null,
-    authenticated: null    
-  });
+  const [authState, setAuthState] = React.useState(false)
   
   useEffect (() => {
     const loadToken = async () => {
-      const token = await getItemAsync('test');
-      console.log("stored:", token);
-
+      const token = await getItemAsync('token');
       if (token) {
-        setAuthState({
-          token: token,
-          authenticated: true,
-        });
+        setAuthState(true);
       }
     }
     loadToken();
@@ -53,53 +43,49 @@ export const AuthProvider = ({children} : any) => {
 
   const login = async (username: string, password: string) => {
     console.log('login');
-    const result: any = await axios.post(`${BASE_URL}/api/login/`, {
-          username,
-          password
-        })
-        .then(res => {
-            let response = res.data;
-            setAuthState({
-              token: response.token,
-              authenticated: true
-            });
-            return result
-        })
-        .catch(e => {
-            console.log(`login failed ${e}`);
-            { /* FIXME: testing shtuff */}
-            return {error: true, msg: (e as any).response.data.msg}
-        });
-      
-    router.replace('/');
+    console.log(`${BASE_URL}/api/login/`)
+
+      const result: any = await axios.post(`${BASE_URL}/api/login/`, {
+        username: username,
+        password: password
+      })
+      .then(res => {
+          setAuthState(true);
+          setItemAsync('token', res.data.token)
+          return result
+      })
+      .catch(e => {
+          console.log(e.response.data.errors)
+      });
+
+    
   };
   
 
   const register = async (email: string, password: string, username: string, firstname: string, lastname: string) => {
-    console.log('register');
-    const result: any = await axios.post(`${BASE_URL}/api/register/`, {
-            email,
-            password,
-            username,
-            firstname,
-            lastname
-        })
+
+    const respone: any = await axios.post(`${BASE_URL}/api/register/`, {  
+            username: username,
+            password: password,
+            first_name: firstname,
+            last_name: lastname,
+            email: email,
+      })
         .then(res => {
-            let response = res.data;
-            return result
+            console.log(res.data.message)
+            return res.data
         })
         .catch(e => {
-            console.log(`register failed ${e}`);
+          console.log(e.response.data.errors)
         });
-    router.replace('/login');
+    router.replace('/login')
+    
+    
   };
 
   const logout = async () => {
     await deleteItemAsync('token');
-    setAuthState({
-      token: null,
-      authenticated: false
-    });
+    setAuthState(false);
   };
 
   const value = {

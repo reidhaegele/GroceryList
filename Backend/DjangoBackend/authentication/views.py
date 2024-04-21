@@ -11,13 +11,16 @@ from django.contrib.auth.hashers import make_password
 import json
 
     
-@api_view(['GET'])
+@api_view(['POST'])
 def login(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         # Retrieve data from URL parameters
         username = request.GET.get('username')
         password = request.GET.get('password')
-
+        print(request)
+        
+        print(request.data)
+        print(username)
         # If data not found in URL parameters, try retrieving from request body
         if username is None:
             try:

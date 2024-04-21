@@ -59,13 +59,8 @@ function RootLayoutNav() {
     <AuthProvider>
       <ThemeProvider>
         <Stack>
-          {/* FIXME: If user is not logged in display the onboarding screens, otherwise show the tabs layout */}
-          {authState?.authenticated ? (
-            <Stack.Screen name='(onboarding)' options={{ headerShown: false }} /> 
-          ):(
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> 
-          )
-          }
+          <Stack.Screen name='(onboarding)' options={{ headerShown: false }} /> 
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack>
       </ThemeProvider>

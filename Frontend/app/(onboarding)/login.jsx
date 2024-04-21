@@ -26,20 +26,6 @@ export default function Login() {
     }
     
     const login = async () => {
-        // console.log('login');
-        // axios.post(`${BASE_URL}/api/login/`, {
-        //         username,
-        //         password
-        //     })
-        //     .then(res => {
-        //         let userInfo = res.data;
-        //         console.log(userInfo);
-        //     })
-        //     .catch(e => {
-        //         console.log(`login failed ${e}`);
-        //     });
-        // login(userInfo);
-        // router.navigate('/');
         onLogin(username, password)
     };
 
@@ -63,19 +49,10 @@ const styles = StyleSheet.create ({
 
     container: {
         width: '100%',
-        height: '65%',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        width: '100%',
-        height: '65%',
+        height: '50%',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
-        borderTopStartRadius: 10,
-        borderTopEndRadius: 10,
-        bottom: 0,
-        position: 'absolute',
         backgroundColor: '#ffffff',
         borderTopStartRadius: 10,
         borderTopEndRadius: 10,
@@ -89,10 +66,7 @@ const styles = StyleSheet.create ({
         marginBottom: 30,
         alignSelf: 'flex-start',
         marginLeft: 20,
-        marginTop: 20,
-        marginBottom: 30,
-        alignSelf: 'flex-start',
-        marginLeft: 20,
+
     },
     circleLogo: {
         height: 273,

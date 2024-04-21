@@ -42,7 +42,7 @@ export default function Register() {
         //         console.log(`register failed ${e}`);
         //     });
         // router.replace('/login');
-        onRegister(username, password, email, firstname, lastname)
+        onRegister(email, password, username, firstname, lastname)
     }
 
     
@@ -56,7 +56,7 @@ export default function Register() {
             <Text style={styles.title}>Register</Text>
             <InputField label={"firstname"} placeholder={"First Name"} value={firstname} onChangeText={(text) => setFirstname(text)}/>
             <InputField label={"lastname"} placeholder={"Last Name"} value={lastname} onChangeText={(text) => setLastname(text)}/>
-            <InputField label={"username"} placeholder={"username"} value={username} onChangeText={(text) => setUsername(text)}/>
+            <InputField label={"username"} placeholder={"Username"} value={username} onChangeText={(text) => setUsername(text)}/>
             <EmailField name={"email"} value={email} onChangeText={(text) => setEmail(text)}/>
             <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
             <BlueButton title="Sign Up" onPress={register}></BlueButton>
