@@ -1,9 +1,9 @@
 import { View, Pressable, Text, StyleSheet } from 'react-native';
 import { useState } from 'react';
 
-export default function Counter ({quantity}) {
+export default function Counter ({quantity, price}) {
     const [counter, setCounter] = useState(quantity)
-
+    const [totalPrice, setTotalPrice] = useState(price * quantity)
     const onIncrement = () => {
         setCounter(counter + 1)
     }
@@ -18,31 +18,43 @@ export default function Counter ({quantity}) {
     }
 
     return (
-        <View style={styles.quantityBox}>
-            <Pressable style={styles.increment} onPress={onIncrement}>
-                <Text style={styles.text}>+</Text>
-            </Pressable>
-            <View style={styles.circle}>
-                <Text style={styles.text}>{counter}</Text>
+        <View style={styles.base}>
+            <Text style={styles.text}>x {quantity}</Text>
+            <Text style={styles.text}>${totalPrice.toFixed(2)}</Text>
+            <View style={styles.quantityBox}>
+                <Pressable style={styles.increment} onPress={onIncrement}>
+                    <Text style={styles.text}>+</Text>
+                </Pressable>
+                {/* <View style={styles.circle}>
+                    <Text style={styles.text}>{counter}</Text>
+                </View> */}
+                <Pressable style={styles.decrement} onPress={onDecrement}>
+                    <Text style={styles.text}>-</Text>
+                </Pressable>
             </View>
-            <Pressable style={styles.decrement} onPress={onDecrement}>
-                <Text style={styles.text}>-</Text>
-            </Pressable>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    
+    base: {
+        flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'space-between',
+    },
+    
     increment: {
         flex: 1,
-        backgroundColor: 'lightgray',
+        backgroundColor: '#F4F5F4',
         borderRadius: 5,
         justifyContent: 'center',
+
 
     },
     decrement: {
         flex: 1,
-        backgroundColor: 'lightgray',
+        backgroundColor: '#F4F5F4',
         borderRadius: 5,
         alignContent: 'center',
 
@@ -50,11 +62,12 @@ const styles = StyleSheet.create({
     
     quantityBox: {
         flexDirection: 'column',
-        width: '15%',
-        backgroundColor: 'lightgrey',
+        width: '22%',
+        backgroundColor: '#F4F5F4',
         borderRadius: 5,
         justifyContent: 'flex-end',
-        
+        borderColor: 'gray',
+        borderWidth: 1,
     },
 
     text: {

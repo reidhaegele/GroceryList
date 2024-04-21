@@ -1,5 +1,5 @@
 import { View, Text, Button, Image, StyleSheet} from 'react-native';
-import React from 'react';
+import React ,{ useEffect} from 'react';
 import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
 import Container from '@/components/Container';
@@ -7,6 +7,7 @@ import Separator from '@/components/Separator';
 import { Link, router } from 'expo-router';
 import axios from 'axios';
 import { useAuth } from '@/components/AuthContext';
+import { getItemAsync, setItemAsync } from 'expo-secure-store';
 // TODO: Import correct base_url
 // TODO: Add pop up for successful registration
 // TODO: Direct user to home with authentication context
@@ -28,7 +29,15 @@ export default function Login() {
     const login = async () => {
         onLogin(username, password)
     };
-
+    const loadToken = async () => {
+        const token = await getItemAsync('token');
+        if (token) {
+          setAuthState(true);
+        }
+    }
+    useEffect (() => {
+        loadToken();
+      }, [])
     return (
         
         <View style={styles.container}>

@@ -66,7 +66,7 @@ export default function EditList() {
     }
   ]);
   const [refreshing, setRefreshing] = useState(false);
-
+  const [total, setTotal] = useState(0);
   const navigation = useNavigation();
   const {id} = useLocalSearchParams();
   useEffect(() => {
@@ -124,6 +124,11 @@ export default function EditList() {
         renderSectionHeader={({ section: { title } }) => (
           <Text style={styles.header}>{title}</Text>
         )}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        ListFooterComponent={
+          <Text style={styles.total}>Total: {total}</Text>
+        }
       />
     </View>
   )
@@ -132,12 +137,17 @@ export default function EditList() {
 
 
 styles = StyleSheet.create({
-
+  total: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'flex-end',
+    padding: 10,
+  },
+  
   container: {
     flex: 1,
     backgroundColor: 'white',
-    alignContent: 'center',
-    
+    justifyContent: 'center',
   },
 
   header: {

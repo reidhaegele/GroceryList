@@ -6,13 +6,12 @@ import Counter from '@/components/Counter';
 
 export default function ItemCard({name, price, quantity}) {
     // const [quantity, setQuantity] = useState(quantity)
-    
     return (
         <View style={styles.container}>
             <Pressable style={styles.container2}>
                 <Text style={styles.name}>{name}</Text><Text style={styles.price}>Price: ${price}</Text>
             </Pressable>
-            <Counter quantity={quantity} />
+            <Counter quantity={quantity} price={price}/>
         </View>
     
     )
@@ -24,9 +23,9 @@ export default function ItemCard({name, price, quantity}) {
 const styles = StyleSheet.create({
     container2: {
         width: '80%',
-        borderRadius: 10,
+        borderRadius: 0,
         flexDirection: 'column',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#F4F5F4',
         flex: 1,
     }, 
     container: {
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
         flexDirection: 'row',
-        backgroundColor: '#F5F4F4'
+        backgroundColor: '#F4F5F4'
     }, 
     
     name: {
