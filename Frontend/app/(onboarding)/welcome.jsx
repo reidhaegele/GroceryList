@@ -1,7 +1,10 @@
-import { View, Text, Modal, Platform, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Modal, Platform, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import imageone from '@/assets/images/shoppers1.png';
+import imagetwo from '@/assets/images/shoppers2.png';
+
 
 export default function Welcome() {
     const [isPageOne, setIsPageOne] = useState(true);
@@ -26,13 +29,16 @@ export default function Welcome() {
         >
             <View style={styles.container}>
             <Text style={styles.title}>{isPageOne?"Effortless Grocery Planning":"Collaborative Shopping"}</Text>
-                
+                <Image
+                    source={isPageOne?imageone:imagetwo}
+                    style={styles.image}
+                />
                 <View style={styles.innercontainer}>
                     {isPageOne?page_one:page_two}
                     <View style={styles.buttoncontainer}>
                     <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                        <TouchableOpacity style={styles.button} onPress={() => setIsPageOne(true)}><FontAwesome name='circle' size={20} /></TouchableOpacity>
-                        <TouchableOpacity style={styles.button} onPress={() => setIsPageOne(false)}><FontAwesome name='circle' size={20} /></TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={() => setIsPageOne(true)}><FontAwesome name='circle' size={20} color={isPageOne?"gray":"#447F86"}/></TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={() => setIsPageOne(false)}><FontAwesome name='circle' size={20} color={isPageOne?"#447F86":"gray"}/></TouchableOpacity>
                     </View>
                     <View>
                         <TouchableOpacity onPress={() => router.replace('/register')}><Text style={{color: 'gray', fontWeight: 'bold', fontSize: 20}}>{isPageOne?'Skip':'Register'}</Text></TouchableOpacity>
@@ -107,5 +113,11 @@ const styles = StyleSheet.create ({
         fontWeight: 'bold',
         textAlign: 'center',
         margin: 10,
+    },
+    image: {
+        width: "85%",
+        height: '39%',
+        marginLeft: "auto",
+        marginRight: "auto",
     },
 });
