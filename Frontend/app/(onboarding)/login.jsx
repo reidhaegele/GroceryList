@@ -26,11 +26,9 @@ export default function Login() {
         console.log('login');
         console.log(username)
         console.log(password)
-        axios.get(`${BASE_URL}/api/login/`, {
-                params: {
+        axios.post(`${BASE_URL}/api/login/`, {
                     username,
                     password
-                }
             })
             .then(res => {
                 let userInfo = res.data;
@@ -109,6 +107,6 @@ const styles = StyleSheet.create ({
         color: 'red',
         fontWeight: 'bold',
         textAlign: 'center',
-        margin: 10,
+        margin: 15,
     },
 });

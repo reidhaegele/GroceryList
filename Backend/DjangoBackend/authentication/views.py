@@ -14,9 +14,9 @@ class GroceryListView(generics.ListCreateAPIView):
     queryset = GroceryList.objects.all()
     serializer_class = GroceryListSerializer
     
-@api_view(['GET'])
+@api_view(['POST'])
 def login(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         # Retrieve data from URL parameters
         username = request.GET.get('username')
         password = request.GET.get('password')
