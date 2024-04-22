@@ -80,7 +80,7 @@ export const AuthProvider = ({children} : any) => {
   
 
   const register = async (email: string, password: string, username: string, firstname: string, lastname: string) => {
-    console.log('register');
+    console.log('registering');
     const result: any = await axios.post(`${BASE_URL}/api/register/`, {
             email,
             password,
@@ -95,13 +95,12 @@ export const AuthProvider = ({children} : any) => {
               token: response.token,
               authenticated: true
             });
-
+            router.replace('/');
             return result
         })
         .catch(e => {
             console.log(`register failed ${e}`);
         });
-    router.replace('/login');
   };
 
   const logout = async () => {

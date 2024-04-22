@@ -1,5 +1,5 @@
 import { View, Text, Button, Image, StyleSheet} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
 import Container from '@/components/Container';
@@ -26,23 +26,17 @@ export default function Login() {
     }
     
     const login = async () => {
-        // console.log('login');
-        // axios.post(`${BASE_URL}/api/login/`, {
-        //         username,
-        //         password
-        //     })
-        //     .then(res => {
-        //         let userInfo = res.data;
-        //         console.log(userInfo);
-        //     })
-        //     .catch(e => {
-        //         console.log(`login failed ${e}`);
-        //     });
-        // login(userInfo);
-        // router.navigate('/');
         onLogin(username, password)
     };
-
+    const loadToken = async () => {
+        const token = await getItemAsync('token');
+        if (token) {
+          setAuthState(true);
+        }
+    }
+    useEffect (() => {
+        loadToken();
+      }, [])
     return (
         
         <View style={styles.container}>

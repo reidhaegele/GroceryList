@@ -24,7 +24,6 @@ export default function Register() {
     const [password, setPassword] = React.useState('');
     const { onRegister } = useAuth(); 
 
-
     const register = async () => {
         // console.log('register')
         // axios.post("http://127.0.0.1:8000/api/register/", {
