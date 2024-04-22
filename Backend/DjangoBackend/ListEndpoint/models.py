@@ -7,9 +7,9 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 
 class Item(models.Model):
-    name = models.CharField(primary_key=True)
-    category = models.CharField()
-    quanity = models.IntegerField()
+    name = models.CharField(primary_key=True, max_length=100)
+    category = models.CharField(max_length=100)
+    quantity = models.IntegerField()
     price = models.FloatField()
     #id need to decide on implmentation 
     #Location need to decide on implmentation 
