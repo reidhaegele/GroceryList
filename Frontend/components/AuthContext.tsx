@@ -3,7 +3,7 @@ import { useStorageState } from './useStorageState';
 import { router } from 'expo-router';
 import axios from 'axios'
 import { deleteItemAsync, setItemAsync, getItemAsync } from 'expo-secure-store'
-const BASE_URL = "http://127.0.0.1:8000";
+import { BASE_URL } from "../constants/Database";
 
 
 
@@ -41,8 +41,7 @@ export const AuthProvider = ({children} : any) => {
   }, [])
 
   const login = async (username: string, password: string) => {
-    console.log('login');
-    console.log(`${BASE_URL}/api/login/`)
+
 
       const result: any = await axios.post(`${BASE_URL}/api/login/`, {
         username: username,
@@ -50,6 +49,7 @@ export const AuthProvider = ({children} : any) => {
       })
       .then(res => {
           setAuthState(true);
+          console.log(res.data.message)
           setItemAsync('token', res.data.token)
           router.navigate('/')
           return result
@@ -93,7 +93,6 @@ export const AuthProvider = ({children} : any) => {
     onLogin: login, 
     onLogout: logout,
     authState: authState,
-
   };
   return (
     <AuthContext.Provider value={value}>
