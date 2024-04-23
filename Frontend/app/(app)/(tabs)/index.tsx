@@ -1,19 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { ScrollView, SafeAreaView } from 'react-native';
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import { View } from '@/components/Themed';
 import { useTheme } from '@/components/navigation/ThemeContext';
 import PriceChangeNotification from "@/components/home/PriceChangeNotification";
 import ItemAddedNotification from "@/components/home/ItemAddedNotification";
-import { Link, router } from 'expo-router';
-import { BlueButton } from '@/components/MyButton';
 export default function Home() {
   const { isDarkMode } = useTheme();
 
   return (
       <SafeAreaView style={styles.container}>
         <View style={[styles.container, isDarkMode && styles.darkContinaer]}>
-            <BlueButton title="Go to onboarding" onPress={() => router.push('/register')} />
             <ScrollView contentContainerStyle={styles.notificationsContainer}>
             </ScrollView>
         </View>

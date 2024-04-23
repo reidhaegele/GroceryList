@@ -11,21 +11,18 @@ from django.contrib.auth.models import User
 
 
 # Create your views here.
-@api_view(["POST"])
+@api_view(['POST'])
 def createList(request):
-    if request.method == "POST":
-        username = request.data.get("user")
-        # Used for Testing
-        # user = User.objects.create_user(username="name", email="email@mail.com", password="Pass12345")
+    if request.method == 'POST':
+        username = request.data.get('user')
+        #Used for Testing 
+        #user = User.objects.create_user(username="name", email="email@mail.com", password="Pass12345")
         user = User.objects.get(username=username)
         listName = request.data.get("listName")
         print(user, listName)
         if not user or not listName:
-            return Response(
-                {"error": "User and listName are required."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-        Userlist = List(user=user, listName=listName, items=[])
+            return Response({'error': 'User and listName are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        Userlist = List(user=user,listName=listName,items=[])
         Userlist.save()
         if Userlist:
             return Response(

@@ -7,8 +7,8 @@ import { useEffect } from 'react';
 import { useColorScheme } from '@/components/useColorScheme';
 import { ThemeProvider } from '@/components/navigation/ThemeContext';
 // import { DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native';
-
-
+import { AuthProvider, useAuth, AuthContextType } from '@/components/AuthContext';
+import { View, ActivityIndicator } from 'react-native';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -49,14 +49,14 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const {authState, onLogout} = useAuth();
 
   return (
-    <ThemeProvider>
-      <Stack>
-        <Stack.Screen name='(onboarding)' options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <Slot />
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 

@@ -37,7 +37,8 @@ def login(request):
         user = authenticate(username=username, password=password)
         if user:
             # User authenticated, return success message or token
-            return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
+            userToken = {'username': username, 'firstname': user.first_name, 'lastname': user.last_name, 'email': user.email}
+            return Response({'message': 'Login successful'}, status=status.HTTP_200_OK, data=userToken)
         else:
             # Authentication failed
             return Response({'error': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -69,8 +70,9 @@ def register(request):
 
         # Check if required data is provided
         if username is None or password is None or username == '' or password == '':
-            print('here')
-            return Response({'error': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+            response = Response({'error': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+            print(response.data)
+            return response
 
         # Proceed with registration logic...
         # (Here you can implement the user registration logic using the retrieved data)
