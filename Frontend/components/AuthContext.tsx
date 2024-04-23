@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext} from 'react';
 import { useStorageState } from './useStorageState';
 import { router } from 'expo-router';
 import axios from 'axios'
-import { deleteItemAsync, setItemAsync, getItemAsync } from 'expo-secure-store'
+import { deleteItemAsync, setItemAsync, getItemAsync, getItem } from 'expo-secure-store'
 import { BASE_URL } from "../constants/Database";
 
 
@@ -28,37 +28,33 @@ interface tokenType {
 }
 
 export const AuthProvider = ({children} : any) => {
-  const [authState, setAuthState] = React.useState(false)
+  const [isToken, setIsToken] = useState(false)
+  const [authState, setAuthState] = useState(false)
   
-  useEffect (() => {
-    const loadToken = async () => {
-      const token = await getItemAsync('token');
-      if (token) {
-        setAuthState(true);
-      }
-    }
-    loadToken();
-  }, [])
+  useEffect (() => { 
+      getItemAsync('token').then(res => {
+        if (res) {
+          setAuthState(true);
+        }
+      })
+  }, [isToken])
 
   const login = async (username: string, password: string) => {
-
-
       const result: any = await axios.post(`${BASE_URL}/api/login/`, {
         username: username,
         password: password
       })
       .then(res => {
-          setAuthState(true);
           console.log(res.data.message)
-          setItemAsync('token', res.data.token)
+          setItemAsync('token', res.data.token).then(res => {
+            setIsToken(true)
+          })
           router.navigate('/')
           return result
       })
       .catch(e => {
-          console.log(e.response.data.errors)
+          console.log(e)
       });
-
-    
   };
   
 
@@ -76,7 +72,7 @@ export const AuthProvider = ({children} : any) => {
             return res.data
         })
         .catch(e => {
-          console.log(e.response.data.errors)
+          console.log(e)
         });
     router.replace('/login')
     

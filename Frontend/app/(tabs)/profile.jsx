@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { SafeAreaView, StyleSheet, TouchableOpacity, View, Text, Pressable } from "react-native";
 import { useTheme } from "@/components/navigation/ThemeContext";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -17,20 +17,7 @@ export default function Profile() {
         router.navigate("settings");
     };
     
-    useEffect(() => {
-        if (!authState) {
-            router.replace('/login');
-        }
 
-        if (userData.firstname === '' && userData.lastname === '' && userData.email === '') {
-            getAccountInfo();
-            setUserData({firstname: data.firstname, lastname: data.lastname, email: data.email, username: data.username});
-        }
-        else {
-            const data = getItem('userInfo');
-            console.log(data);
-        }
-    })
     const getAccountInfo = async () => {
         const token = await getItemAsync('token');
         const result = await axios.get(`${BASE_URL}/api/accountInfo/`, {
@@ -39,7 +26,6 @@ export default function Profile() {
             }
         })
         .then((res) => {
-            console.log("GET ACCOUNT INFO");
             console.log(res.data);
             let data = JSON.parse(res.data)
             setUserData({firstname: data.first_name, lastname: data.last_name, email: data.email, username: data.username});
@@ -48,7 +34,6 @@ export default function Profile() {
 
         })
         .catch((error) => {
-
             console.error(error.response)
             console.error(error.response.data)
         });
@@ -71,6 +56,9 @@ export default function Profile() {
                 <FontAwesome name="user" size={30} color="grey" />
                 <Text style={[styles.mailIconText, isDarkMode && styles.darkText]}>{`${userData.username}`}</Text>
             </View>
+            <Pressable style={styles.button} onPress={getAccountInfo}>
+                <Text style={[styles.sectionTitle, isDarkMode && styles.darkText]}>Update Info</Text>
+            </Pressable>
         </SafeAreaView>
     );
 }
@@ -132,4 +120,12 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         width: "100%",
     },
+    
+    button: {
+        alignItems: 'center',
+        backgroundColor: '#DDDDDD',
+        padding: 10,
+        borderRadius: 5,
+        margin: 10,
+    }
 });

@@ -19,7 +19,7 @@ BASE_URL = "http://127.0.0.1:8000"
 export default function Login() {
     const [username, setUser] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const { onLogin } = useAuth();
+    const { onLogin, authState } = useAuth();
     
     const register = () => {
         console.log('register');
@@ -27,17 +27,11 @@ export default function Login() {
     }
     
     const login = async () => {
+        console.log('login button pressed');
         onLogin(username, password)
     };
-    const loadToken = async () => {
-        const token = await getItemAsync('token');
-        if (token) {
-          setAuthState(true);
-        }
-    }
-    useEffect (() => {
-        loadToken();
-      }, [])
+
+
     return (
         
         <View style={styles.container}>
