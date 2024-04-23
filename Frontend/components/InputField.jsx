@@ -1,35 +1,27 @@
 import React from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
-import { View, TextInput, StyleSheet } from 'react-native';
 import { EmailIcon, NameIcon, PasswordIcon } from './Icons';
 
 
 
-export function EmailField (props) {
-    // const [text, setText] = React.useState('');
-    // const [text, setText] = React.useState('');
+export function EmailField ({...props}) {
+
     return (
         <View style={styles.view}>
-            <EmailIcon style={styles.icon}/>
+            <EmailIcon style={styles.emicon}/>
             <TextInput
                 label={"email"}
                 placeholder={"Email"}
                 placeholderTextColor="#bfbfbf"
                 style={styles.input}
-                // onChangeText={text => setText()}
-                // value={email}
-                {...props}
-                // onChangeText={text => setText()}
-                // value={email}
                 {...props}
             />
         </View>
     )
 }
 
-export function PasswordField (props) {
-    // const [text, setText] = React.useState('');
-    // const [text, setText] = React.useState('');
+export function PasswordField ({...props}) {
+
     return (
         <View style={styles.view}>
             <PasswordIcon style={styles.icon}/>
@@ -39,11 +31,6 @@ export function PasswordField (props) {
                 placeholder={"Password"}
                 placeholderTextColor="#bfbfbf"
                 style={styles.input}
-                // onChangeText={text => setText(text)}
-                // value={text}
-                {...props}
-                // onChangeText={text => setText(text)}
-                // value={text}
                 {...props}
             />
         </View>
@@ -60,13 +47,12 @@ export function InputField ({icon, label, placeholder, ...props}) {
 
     return (
         <View style={styles.view}>
-            <NameIcon style={styles.icon}/>
+            {icon || <NameIcon style={styles.icon}/>}
             <TextInput
                 label={label}
                 placeholder={placeholder}
                 placeholderTextColor="#bfbfbf"
                 style={styles.input}
-                {...props}
                 {...props}
             />
         </View>
@@ -82,6 +68,11 @@ const styles = StyleSheet.create({
     icon: {
         fill: '#cccccc',
     },
+
+    emicon: {
+        fill: '#dddddd',
+        
+    },  
 
     input: {
         width: '66%',

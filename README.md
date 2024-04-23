@@ -66,7 +66,7 @@ If you don't have venv installed it will prompt you with how to install it. AFte
 > source environment_name/bin/activate
 
 After getting into the virtual environment you will clone the repo as described above. Then, to run the server you will cd into the Django backend file and then use the command:
-> python3 mangage.py runserver
+> python3 manage.py runserver
 
 This will run the server on localhost with the url" **127.0.0.1:8000/**
 
