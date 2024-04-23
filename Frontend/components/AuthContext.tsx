@@ -3,17 +3,15 @@ import { useStorageState } from './useStorageState';
 import { router } from 'expo-router';
 import axios from 'axios'
 import { deleteItemAsync, setItemAsync, getItemAsync } from 'expo-secure-store'
-const BASE_URL = "http://127.0.0.1:8000";
+import { BASE_URL } from "../constants/Database";
 
-interface userTokenType {
-  token: string;
-}
+
 
 export interface AuthContextType {
   onLogin?: (email: string, password: string) => Promise<any>;
   onLogout?: () => Promise<any>;
   onRegister?: (email: string, password: string, username: string, firstname: string, lastname: string) => Promise<any>;
-  authState?: {token: string | null; authenticated: boolean | null };
+  authState?: boolean;
 }
 const AuthContext = createContext<AuthContextType>({});
 
@@ -30,87 +28,62 @@ interface tokenType {
 }
 
 export const AuthProvider = ({children} : any) => {
-  const [authState, setAuthState] = React.useState<{
-    token: tokenType | null;
-    authenticated: boolean | null;
-  }>({
-    token: null,
-    authenticated: null    
-  });
+  const [authState, setAuthState] = React.useState(false)
   
   useEffect (() => {
     const loadToken = async () => {
-      const token = await getItemAsync('test');
-      console.log("stored:", token);
-
+      const token = await getItemAsync('token');
       if (token) {
-        setAuthState({
-          token: token,
-          authenticated: true,
-        });
+        setAuthState(true);
       }
     }
     loadToken();
   }, [])
 
   const login = async (username: string, password: string) => {
-    console.log('login');
-    let response
-    const result: any = await axios.post(`${BASE_URL}/api/login/`, {
-          username,
-          password
-        })
-        .then(res => {
-            let response = res.data;
-            console.log(response);
-            console.log(result);
-            setAuthState({
-              token: response.token,
-              authenticated: true
-            });
-            return result
-        })
-        .catch(e => {
-            console.log(`login failed ${e}`);
-            response = e.response.data.error
-        });
-    return response
+      let error
+      const result: any = await axios.post(`${BASE_URL}/api/login/`, {
+        username: username,
+        password: password
+      })
+      .then(res => {
+          setAuthState(true);
+          console.log(res.data.message)
+          setItemAsync('token', res.data.token)
+          router.navigate('/')
+          return result
+      })
+      .catch(e => {
+          error = e.response.data.error
+      });
+      return error
   };
   
 
   const register = async (email: string, password: string, username: string, firstname: string, lastname: string) => {
-    console.log('registering');
-    let response
-    const result: any = await axios.post(`${BASE_URL}/api/register/`, {
-            email,
-            password,
-            username,
-            firstname,
-            lastname
-        })
+    let error
+    const respone: any = await axios.post(`${BASE_URL}/api/register/`, {  
+            username: username,
+            password: password,
+            first_name: firstname,
+            last_name: lastname,
+            email: email,
+      })
         .then(res => {
-            let response = res.data;
-            console.log(response);
-            setAuthState({
-              token: response.token,
-              authenticated: true
-            });
-            router.replace('/');
-            return result
+            console.log(res.data.message)
+            router.replace('/')
+            return res.data
         })
         .catch(e => {
-            console.log(`register failed ${e.response.data.error}`);
-            response = e.response.data.error
+          error = e.response.data.error
+          console.log(error)
         });
-        return response
+    return error
   };
 
   const logout = async () => {
-    await deleteItemAsync('test');
-    setAuthState({
-      token: null,
-      authenticated: false
-    });
+    await deleteItemAsync('token');
+    setAuthState(false);
   };
 
   const value = {
@@ -118,7 +91,6 @@ export const AuthProvider = ({children} : any) => {
     onLogin: login, 
     onLogout: logout,
     authState: authState,
-
   };
   return (
     <AuthContext.Provider value={value}>

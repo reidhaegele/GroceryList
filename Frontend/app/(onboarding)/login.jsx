@@ -7,6 +7,7 @@ import Separator from '@/components/Separator';
 import { Link, router } from 'expo-router';
 import axios from 'axios';
 import { useAuth } from '@/components/AuthContext';
+import { getItemAsync, setItemAsync } from 'expo-secure-store';
 // TODO: Import correct base_url
 // TODO: Add pop up for successful registration
 // TODO: Direct user to home with authentication context
@@ -26,8 +27,8 @@ export default function Login() {
     }
     
     const login = async () => {
-        response = onLogin(username, password)
-        console.log('response: ', response)
+        response = await onLogin(username, password)
+        setError(response)
     };
     const loadToken = async () => {
         const token = await getItemAsync('token');
@@ -35,11 +36,9 @@ export default function Login() {
           setAuthState(true);
         }
     }
-
     useEffect (() => {
         loadToken();
       }, [])
-    
     return (
         <Modal
             animationType='slide'
