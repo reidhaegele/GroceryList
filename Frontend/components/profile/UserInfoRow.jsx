@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
     color: "white", // Dark text color
   },
   inline: {
-    display: "inline",
+    flexDirection: "row",
+    alignItems: "start",
+    width: "100%",
   },
 });

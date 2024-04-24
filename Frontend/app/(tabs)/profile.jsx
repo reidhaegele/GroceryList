@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { SafeAreaView, StyleSheet, TouchableOpacity, View, Text, Pressable } from "react-native";
+import { useState, useCallback } from "react";
+import { SafeAreaView, StyleSheet, View, Text } from "react-native";
 import { useTheme } from "@/components/navigation/ThemeContext";
-import { router } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
-import { useAuth } from '@/components/AuthContext';
 import { BASE_URL } from "../../constants/Database";
-import { getItem, getItemAsync, setItemAsync } from 'expo-secure-store';
+import { getItemAsync, setItemAsync } from 'expo-secure-store';
+import { UserInfoRow } from '@/components/profile/UserInfoRow'
+import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 
 export default function Profile() {
     const { isDarkMode } = useTheme();
-    const { authState } = useAuth(); 
     const [ userData, setUserData] = useState({firstname: '', lastname: '', email: '', username: ''});
-    const goToSettings = () => {
-        router.navigate("settings");
-    };
     
-
     const getAccountInfo = async () => {
         const token = await getItemAsync('token');
         const result = await axios.get(`${BASE_URL}/api/accountInfo/`, {
@@ -27,7 +22,7 @@ export default function Profile() {
         .then((res) => {
             console.log(res.data);
             let data = JSON.parse(res.data)
-            setUserData({firstname: data.first_name, lastname: data.last_name, email: data.email, username: data.username});
+            setUserData({firstname: data.first_name, lastname: data.last_name, email: data.email, username: data.username, id: data.id});
             setItemAsync('userInfo', JSON.stringify(data));
             return res.data
 
@@ -38,26 +33,22 @@ export default function Profile() {
         });
         return result; 
     }
+
+    useFocusEffect(
+        useCallback(() => {
+          getAccountInfo();
+        }, [userData.id])
+      );
     
     return (
-
-        
         <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
             <View style={styles.iconContainer}>
                 <FontAwesome name="user-circle" size={100} color="grey" />
                 <Text style={[styles.iconText, isDarkMode && styles.darkText]}>{`${userData.firstname} ${userData.lastname}`}</Text>
             </View>
-            <View style={styles.mailIconContainer}>
-                <FontAwesome name="envelope" size={24} color="grey" />
-                <Text style={[styles.mailIconText, isDarkMode && styles.darkText]}>{`${userData.email}`}</Text>
-            </View>
-            <View style={styles.userIconContainer}>
-                <FontAwesome name="user" size={30} color="grey" />
-                <Text style={[styles.mailIconText, isDarkMode && styles.darkText]}>{`${userData.username}`}</Text>
-            </View>
-            <Pressable style={styles.button} onPress={getAccountInfo}>
-                <Text style={[styles.sectionTitle, isDarkMode && styles.darkText]}>Update Info</Text>
-            </Pressable>
+                <UserInfoRow iconName="user" infoTypeText="Username" rowText={userData.username} />
+                <UserInfoRow iconName="envelope" infoTypeText="Email" rowText={userData.email} />
+                <UserInfoRow iconName="hashtag" infoTypeText="ID" rowText={userData.id} />
         </SafeAreaView>
     );
 }
