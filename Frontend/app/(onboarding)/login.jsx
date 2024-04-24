@@ -59,7 +59,6 @@ export default function Login() {
             </View>
         </Modal>
     )
-}
 
 
 const styles = StyleSheet.create ({

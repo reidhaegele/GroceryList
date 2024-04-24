@@ -40,7 +40,7 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return <ThemeProvider><RootLayoutNav /></ThemeProvider>;
 }
 
 function RootLayoutNav() {
