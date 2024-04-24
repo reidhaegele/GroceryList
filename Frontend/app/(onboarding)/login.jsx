@@ -5,7 +5,7 @@ import { GrayButton, BlueButton} from '@/components/MyButton';
 import Container from '@/components/Container';
 import Separator from '@/components/Separator';
 import { Link, router } from 'expo-router';
-//import axios from 'axios';
+import axios from 'axios';
 
 // TODO: Import correct base_url
 // TODO: Add pop up for successful registration
