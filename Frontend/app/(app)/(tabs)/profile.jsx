@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { SafeAreaView, StyleSheet, TouchableOpacity, View, Text, Pressable } from "react-native";
 import { useTheme } from "@/components/navigation/ThemeContext";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -13,24 +13,9 @@ export default function Profile() {
     const { isDarkMode } = useTheme();
     const { authState } = useAuth(); 
     const [ userData, setUserData] = useState({firstname: '', lastname: '', email: '', username: ''});
-    const goToSettings = () => {
-        router.navigate("settings");
-    };
     
-    useEffect(() => {
-        if (!authState) {
-            router.replace('/login');
-        }
+    useEffect(() => {getAccountInfo();}, []);
 
-        if (userData.firstname === '' && userData.lastname === '' && userData.email === '') {
-            getAccountInfo();
-            setUserData({firstname: data.firstname, lastname: data.lastname, email: data.email, username: data.username});
-        }
-        else {
-            const data = getItem('userInfo');
-            console.log(data);
-        }
-    })
     const getAccountInfo = async () => {
         const token = await getItemAsync('token');
         const result = await axios.get(`${BASE_URL}/api/accountInfo/`, {
@@ -48,7 +33,6 @@ export default function Profile() {
 
         })
         .catch((error) => {
-
             console.error(error.response)
             console.error(error.response.data)
         });

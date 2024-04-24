@@ -1,8 +1,6 @@
-import Container from '@/components/Container';
-import Separator from '@/components/Separator';
-import { View, Text, Button, Image, StyleSheet, Dimensions, ImageBackground, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 import React from 'react';
-import { Slot, Stack } from 'expo-router';
+import { Slot } from 'expo-router';
 
 export const unstable_settings = {
     initialRouteName: 'welcome',

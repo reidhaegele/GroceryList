@@ -104,7 +104,18 @@ export default function TabLayout() {
                   tabBarIcon: ({ focused }) => (
                       <TabBarIcon focused={focused} icon="person" />
                     ),
-                  headerRight: () => ( <HeaderButtons buttons={[{icon: <Ionicons name="settings-outline" size={40} color="gray" />, onpress: () => router.navigate('/settings'), }, ]} /> ),
+                  headerRight: () => (
+                    <HeaderButtons 
+                      buttons={
+                        [
+                          {
+                            icon: <Ionicons name="settings-outline" size={40} color="gray" />, 
+                            onpress: () => router.navigate('/settings'),
+                          },
+                        ]
+                      }
+                    />
+                  ),
               }}
           />
           

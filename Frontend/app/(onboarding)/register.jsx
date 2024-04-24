@@ -1,13 +1,10 @@
-import { View, Text, Button, Modal, KeyboardAvoidingView, Platform} from 'react-native';
+import { View, Text, Modal, KeyboardAvoidingView, Platform} from 'react-native';
 import React from 'react';
 import { EmailField, PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
 import { StyleSheet } from 'react-native';
-import Container from '@/components/Container';
 import Separator from '@/components/Separator';
-import { Link, router, Stack } from 'expo-router';
-import { NameIcon } from '@/components/Icons';
-import axios from 'axios';
+import { router } from 'expo-router';
 import { useAuth } from '@/components/AuthContext'
 
 // TODO: Import correct base_url
@@ -30,7 +27,6 @@ export default function Register() {
         setError(response)
     }
 
-    
     const login = () => {
         console.log('login')
         router.replace('/login')

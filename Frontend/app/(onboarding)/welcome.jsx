@@ -1,11 +1,12 @@
-import { View, Text, Modal, Platform, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Modal, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import imageone from '@/assets/images/shoppers1.png';
 import imagetwo from '@/assets/images/shoppers2.png';
 
-
+// TODO: Fix image render issues
+// TODO: Fix error handling issue
 export default function Welcome() {
     const [isPageOne, setIsPageOne] = useState(true);
 

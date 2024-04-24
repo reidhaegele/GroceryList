@@ -4,18 +4,8 @@ import { useState, useEffect } from 'react';
 import { useLocalSearchParams, Stack, useNavigation } from 'expo-router';
 import ItemCard from '@/components/ItemCard';
 
-// const header = ({navigation, route, options, back }) => {
-//   const title = getHEaderTitle(options, route.name)
-
-//   return (
-//     <MyHeader title={title} leftButton={back ? }
-//   )
-// }
-
-
 export default function EditList() {
   
-
   const [items, setItems] = useState([
     {
       name: 'Apple',
@@ -90,16 +80,6 @@ export default function EditList() {
     setLists(results)
   }
 
-  
-  
-//   useEffect(() => {
-//     AsyncStorage.getItem('lists').then((data) => {
-//       if (data) {
-//         setlists(JSON.parse(data));
-//       }
-//     });
-//   }, []);
-
   const groupedItems = items.reduce((acc, current) => {
     const { category, ...data} = current;
     if (!acc[category]) {
@@ -133,8 +113,6 @@ export default function EditList() {
     </View>
   )
 }
-
-
 
 styles = StyleSheet.create({
   total: {

@@ -1,13 +1,10 @@
-import { View, Text, Button, Image, StyleSheet, Modal, KeyboardAvoidingView, Platform} from 'react-native';
-import React, { useEffect } from 'react';
-import { EmailField, PasswordField, InputField } from '@/components/InputField';
+import { View, Text, StyleSheet, Modal, KeyboardAvoidingView, Platform} from 'react-native';
+import React from 'react';
+import { PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
-import Container from '@/components/Container';
 import Separator from '@/components/Separator';
-import { Link, router } from 'expo-router';
-import axios from 'axios';
+import { router } from 'expo-router';
 import { useAuth } from '@/components/AuthContext';
-import { getItemAsync, setItemAsync } from 'expo-secure-store';
 // TODO: Import correct base_url
 // TODO: Add pop up for successful registration
 // TODO: Direct user to home with authentication context
@@ -16,10 +13,13 @@ BASE_URL = "http://127.0.0.1:8000"
 
 
 
+
+
 export default function Login() {
     const [username, setUser] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [error, setError] = React.useState(' ');    const { onLogin } = useAuth();
+    const [error, setError] = React.useState(' ');
+    const { onLogin, authState } = useAuth();
     
     const register = () => {
         console.log('register');
@@ -27,18 +27,12 @@ export default function Login() {
     }
     
     const login = async () => {
+        console.log('login button pressed');
         response = await onLogin(username, password)
         setError(response)
     };
-    const loadToken = async () => {
-        const token = await getItemAsync('token');
-        if (token) {
-          setAuthState(true);
-        }
-    }
-    useEffect (() => {
-        loadToken();
-      }, [])
+
+
     return (
         <Modal
             animationType='slide'
