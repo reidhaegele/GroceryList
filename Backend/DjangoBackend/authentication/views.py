@@ -11,13 +11,12 @@ from django.contrib.auth.hashers import make_password
 import json
 
     
-@api_view(['GET'])
+@api_view(['POST'])
 def login(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         # Retrieve data from URL parameters
         username = request.GET.get('username')
         password = request.GET.get('password')
-
         # If data not found in URL parameters, try retrieving from request body
         if username is None:
             try:
@@ -81,12 +80,12 @@ def register(request):
 @api_view(['GET'])
 def accountInfo(request):
     if request.method == 'GET':
-        username = request.data.get('username')
-        if not username:
-            return Response({'error': 'Username are required.'}, status=status.HTTP_400_BAD_REQUEST)
-        if not User.objects.get(username=username):
-            return Response({'error': 'User doesnt exists.'}, status=status.HTTP_400_BAD_REQUEST)
-        
+        token = request.headers.get('Authorization')
+        if token: 
+            token = token.split(' ')[1]
+        else: 
+            return Response({'error': 'Authorization token not found.'}, status=status.HTTP_400_BAD_REQUEST)
+        username = Token.objects.get(key=token).user.username
         user = (
         User.objects.filter(username=username)
         .values(

@@ -8,7 +8,7 @@ import Separator from '@/components/Separator';
 import { Link, router, Stack } from 'expo-router';
 import { NameIcon } from '@/components/Icons';
 import axios from 'axios';
-
+import { useAuth } from '@/components/AuthContext'
 
 // TODO: Import correct base_url
 // TODO: Add pop up for successful registration
@@ -22,26 +22,27 @@ export default function Register() {
     const [username, setUsername] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    
+    const { onRegister } = useAuth(); 
 
 
     const register = async () => {
-        console.log('register')
-        axios.post("http://127.0.0.1:8000/api/register/", {
-                email,
-                password,
-                username,
-                firstname,
-                lastname
-            })
-            .then(res => {
-                let response = res.data;
-                console.log(response);
-            })
-            .catch(e => {
-                console.log(`register failed ${e}`);
-            });
-        router.replace('/login');
+        // console.log('register')
+        // axios.post("http://127.0.0.1:8000/api/register/", {
+        //         email,
+        //         password,
+        //         username,
+        //         firstname,
+        //         lastname
+        //     })
+        //     .then(res => {
+        //         let response = res.data;
+        //         console.log(response);
+        //     })
+        //     .catch(e => {
+        //         console.log(`register failed ${e}`);
+        //     });
+        // router.replace('/login');
+        onRegister(email, password, username, firstname, lastname)
     }
 
     
@@ -55,7 +56,7 @@ export default function Register() {
             <Text style={styles.title}>Register</Text>
             <InputField label={"firstname"} placeholder={"First Name"} value={firstname} onChangeText={(text) => setFirstname(text)}/>
             <InputField label={"lastname"} placeholder={"Last Name"} value={lastname} onChangeText={(text) => setLastname(text)}/>
-            <InputField label={"username"} placeholder={"username"} value={username} onChangeText={(text) => setUsername(text)}/>
+            <InputField label={"username"} placeholder={"Username"} value={username} onChangeText={(text) => setUsername(text)}/>
             <EmailField name={"email"} value={email} onChangeText={(text) => setEmail(text)}/>
             <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
             <BlueButton title="Sign Up" onPress={register}></BlueButton>
