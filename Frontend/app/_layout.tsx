@@ -1,15 +1,10 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Slot } from 'expo-router'; 
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useContext } from 'react';
-
+import { useEffect } from 'react';
 import { useColorScheme } from '@/components/useColorScheme';
 import { ThemeProvider } from '@/components/navigation/ThemeContext';
-// import { DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native';
-import { AuthProvider, useAuth, AuthContextType } from '@/components/AuthContext';
-import { View, ActivityIndicator } from 'react-native';
+import { AuthProvider, useAuth } from '@/components/AuthContext';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -18,7 +13,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+  initialRouteName: '',
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -45,11 +40,8 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return <ThemeProvider><RootLayoutNav /></ThemeProvider>;
 }
-
-
-
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
@@ -58,11 +50,7 @@ function RootLayoutNav() {
   return (
     <AuthProvider>
       <ThemeProvider>
-        <Stack>
-          <Stack.Screen name='(onboarding)' options={{ headerShown: false }} /> 
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-        </Stack>
+        <Slot />
       </ThemeProvider>
     </AuthProvider>
   );

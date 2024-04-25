@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         borderColor: 'white',
         fontSize: 16,
+        marginLeft: 5,
     },
     view: {
         width: 'auto',

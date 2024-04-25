@@ -26,7 +26,7 @@ def login(request):
             except AttributeError:
                 pass
 
-        if username is None or password is None:
+        if username is None or password is None or username == '' or password == '':
             return Response({'error': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Authenticate user
@@ -72,7 +72,7 @@ def register(request):
                 errors['user_errors'] = user_serializer.errors
             if not profile_serializer_is_valid:
                 errors['profile_errors'] = profile_serializer.errors
-            return Response({"message": "User creation failed", "errors": errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": "User creation failed", "error": errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 

@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext} from 'react';
 import { useStorageState } from './useStorageState';
 import { router } from 'expo-router';
 import axios from 'axios'
-import { deleteItemAsync, setItemAsync, getItemAsync, getItem } from 'expo-secure-store'
+import { deleteItemAsync, setItemAsync, getItemAsync } from 'expo-secure-store'
 import { BASE_URL } from "../constants/Database";
 
 
@@ -28,38 +28,41 @@ interface tokenType {
 }
 
 export const AuthProvider = ({children} : any) => {
-  const [isToken, setIsToken] = useState(false)
-  const [authState, setAuthState] = useState(false)
+  const [authState, setAuthState] = React.useState(false)
   
-  useEffect (() => { 
-      getItemAsync('token').then(res => {
-        if (res) {
-          setAuthState(true);
-        }
-      })
-  }, [isToken])
+  useEffect (() => {
+    const loadToken = async () => {
+      const token = await getItemAsync('token');
+      if (token) {
+        setAuthState(true);
+      }
+    }
+    loadToken();
+  }, [])
 
   const login = async (username: string, password: string) => {
+      let error
       const result: any = await axios.post(`${BASE_URL}/api/login/`, {
         username: username,
         password: password
       })
       .then(res => {
+          setAuthState(true);
           console.log(res.data.message)
-          setItemAsync('token', res.data.token).then(res => {
-            setIsToken(true)
-          })
+          setItemAsync('token', res.data.token)
           router.navigate('/')
           return result
       })
       .catch(e => {
-          console.log(e)
+          error = e.response.data.error
       });
+      return error
   };
   
 
-  const register = async (email: string, password: string, username: string, firstname: string, lastname: string) => {
-
+  const register = async (username: string, password: string, email: string, firstname: string, lastname: string) => {
+    let error
+    console.log(email)
     const respone: any = await axios.post(`${BASE_URL}/api/register/`, {  
             username: username,
             password: password,
@@ -69,14 +72,14 @@ export const AuthProvider = ({children} : any) => {
       })
         .then(res => {
             console.log(res.data.message)
+            router.replace('/')
             return res.data
         })
         .catch(e => {
-          console.log(e)
+          error = e.response.data.error
+          console.log(error)
         });
-    router.replace('/login')
-    
-    
+    return error
   };
 
   const logout = async () => {

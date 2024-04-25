@@ -1,24 +1,20 @@
-import { View, Text, Button, Image, StyleSheet} from 'react-native';
-import React ,{ useEffect} from 'react';
-import { EmailField, PasswordField, InputField } from '@/components/InputField';
+import { View, Text, StyleSheet, Modal, KeyboardAvoidingView, Platform} from 'react-native';
+import React from 'react';
+import { PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
-import Container from '@/components/Container';
 import Separator from '@/components/Separator';
-import { Link, router } from 'expo-router';
-import axios from 'axios';
+import { router } from 'expo-router';
 import { useAuth } from '@/components/AuthContext';
-import { getItemAsync, setItemAsync } from 'expo-secure-store';
 // TODO: Import correct base_url
 // TODO: Add pop up for successful registration
 // TODO: Direct user to home with authentication context
 // BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
 BASE_URL = "http://127.0.0.1:8000"
 
-
-
 export default function Login() {
     const [username, setUser] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [error, setError] = React.useState(' ');
     const { onLogin, authState } = useAuth();
     
     const register = () => {
@@ -28,62 +24,77 @@ export default function Login() {
     
     const login = async () => {
         console.log('login button pressed');
-        onLogin(username, password)
+        response = await onLogin(username, password)
+        setError(response)
     };
 
 
     return (
-        
-        <View style={styles.container}>
-            <Text style={styles.title}>Log In</Text>
-            <InputField name={"user"} value={username} placeholder={"Username"} onChangeText={(text) => setUser(text)}/>
-            <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
-            <BlueButton title="Log In" onPress={login} ></BlueButton>
-            <Separator text="Or"/>
-            <GrayButton title="Sign Up" onPress={register}></GrayButton>
-        </View>
-        
+        <Modal
+            animationType='slide'
+            transparent={true}
+            visible={true}
+        >
+            <View style={styles.container}>
+                <KeyboardAvoidingView
+                behavior={Platform.OS === "ios"?"padding" : "height"}
+                style={styles.keycontainer}
+                >
+                    <View style={styles.innercontainer}>
+                        <Text style={styles.title}>Log In</Text>
+                        <Text style={styles.error}>{error}</Text>
+                        <InputField label={"username"} placeholder={"Username"} value={username} onChangeText={(text) => setUser(text)}/>
+                        <PasswordField name={"password"} value={password} onChangeText={(text) => setPassword(text)}/>
+                    </View>
+                </KeyboardAvoidingView>
+                <View style={{backgroundColor: 'white', alignItems: 'center', paddingBottom: '10%', width: '100%'}}>
+                    <BlueButton title="Log In" onPress={login} ></BlueButton>
+                    <Separator text="Or"/>
+                    <GrayButton title="Sign Up" onPress={register}></GrayButton>
+                </View>
+            </View>
+        </Modal>
     )
 }
 
-
 const styles = StyleSheet.create ({
-
-
     container: {
-        width: '100%',
-        height: '50%',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        backgroundColor: '#ffffff',
-        borderTopStartRadius: 10,
-        borderTopEndRadius: 10,
-        bottom: 0,
-        position: 'absolute',
+        flex: 1,
+        height: "auto",
+        justifyContent: 'flex-end',
+        alignItems: "center",
     }, 
+    innercontainer: {
+        backgroundColor: 'white',
+        alignItems: "center",
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        shadowColor: 'gray',
+        shadowOffset: {
+            width: 0,
+            height: -20,
+        },
+        shadowOpacity: .2,
+        shadowRadius: 10,
+    },
+    keycontainer: {
+        justifyContent: 'flex-end',
+        backgroundColor: 'white',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        width: "100%",
+        zIndex: 1,
+    },
     title: {
         fontSize: 36,
+        color: '#447F86',
         fontWeight: 'bold',
         marginTop: 20,
-        marginBottom: 30,
-        alignSelf: 'flex-start',
-        marginLeft: 20,
-
     },
-    circleLogo: {
-        height: 273,
-        width: 273,
-        borderRadius: 50,
-        backgroundColor: 'black',
-        marginBottom: 20,
-    }, 
-    background: {
-        flex: 1, 
-        resizeMode: 'cover',
-        justifyContent: 'center',
-        height: '100%',
-        width: '100%',
+    error: {
+        color: 'red',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        margin: 15,
     },
-    
 });

@@ -1,13 +1,21 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { themeColor, useTheme } from "react-native-rapi-ui";
+import { router } from "expo-router";
 
 export default (props) => {
     const { isDarkMode } = useTheme();
+    const onPress = async () => {
+        console.log("Navigating to list")
+        router.navigate(`lists/${props.listID}`)
+    }
 
     return (
-        <TouchableOpacity style={[styles.container, isDarkMode && styles.darkContianer]} >
-                <Text style={styles.title}>{props.title}</Text>
+        <TouchableOpacity
+            onPress={onPress}
+            style={[styles.container, isDarkMode && styles.darkContianer]}
+        >
+            <Text style={styles.title}>{props.title}</Text>
         </TouchableOpacity>
     )
 }

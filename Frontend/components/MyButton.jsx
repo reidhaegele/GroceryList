@@ -1,27 +1,27 @@
-import { Pressable, Button, Text, View, StyleSheet } from 'react-native';
+import { Pressable, Button, Text, View, StyleSheet, TouchableOpacity, Touchable } from 'react-native';
 import React from 'react';
 
 
 export const BlueButton = ({ title, onPress, ...props}) => {
     return (
         
-            <Pressable style={[styles.bluebutton, styles.boxShadow]} onPress={onPress}>
+            <TouchableOpacity style={[styles.bluebutton, styles.boxShadow]} onPress={onPress}>
                 <Text style={styles.text}>{title}</Text>
-            </Pressable>
+            </TouchableOpacity>
         
     )
 }
 
 export const GrayButton = ({ title, onPress, ...props}) => {
     return (
-            <Pressable 
+            <TouchableOpacity 
                 style={[styles.graybutton, styles.boxShadow]} 
                 onPress={onPress}
                 
                 >
 
                 <Text style={styles.blacktext}>{title}</Text>
-            </Pressable>
+            </TouchableOpacity>
     )
 }
 
@@ -44,8 +44,8 @@ const styles = StyleSheet.create ({
         justifyContent: 'center',
         borderRadius: 10,
         elevation: 3,
-        backgroundColor: '#0085ff',
-        height: '11%', 
+        backgroundColor: '#447F86',
+        height: 50, 
         width: '79%',
         margin: 10,
     },
@@ -55,7 +55,7 @@ const styles = StyleSheet.create ({
         borderRadius: 10,
         elevation: 3,
         backgroundColor: '#f5f4f4',
-        height: '11%', 
+        height: 50, 
         width: '79%',
         margin: 10, 
     },
