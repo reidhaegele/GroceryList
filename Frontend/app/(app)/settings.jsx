@@ -13,7 +13,7 @@ export default function Settings() {
 
     return (
         <SafeAreaView style={[styles.container, {backgroundColor: Colors[isDarkMode?"dark":"light"].background}]}>
-            <View style={styles.boxContainer}>
+            <View style={[styles.boxContainer, {backgroundColor: Colors[isDarkMode?"dark":"light"].tinttwo}]}>
                 <View style={styles.switchContainer}>
                     <Text style={styles.label}>Dark Mode</Text>
                     <Switch
@@ -25,7 +25,7 @@ export default function Settings() {
                     />
                 </View>
             </View>
-            <View style={styles.boxContainer}>
+            <View style={[styles.boxContainer, {backgroundColor: Colors[isDarkMode?"dark":"light"].tinttwo}]}>
                 <View style={styles.switchContainer}>
                     <Text style={styles.label}>Toggle</Text>
                     <Switch
@@ -35,7 +35,7 @@ export default function Settings() {
                     />
                 </View>
             </View>
-            <View style={styles.boxContainer}>
+            <View style={[styles.boxContainer, {backgroundColor: Colors[isDarkMode?"dark":"light"].tinttwo}]}>
                 <View style={styles.switchContainer}>
                     <Text style={styles.label}>Toggle</Text>
                     <Switch
@@ -45,7 +45,7 @@ export default function Settings() {
                     />
                 </View>
             </View>
-            <View style={styles.boxContainer}>
+            <View style={[styles.boxContainer, {backgroundColor: Colors[isDarkMode?"dark":"light"].tinttwo}]}>
                 <View style={styles.switchContainer}>
                     <Text style={styles.label}>Toggle</Text>
                     <Switch
@@ -55,7 +55,7 @@ export default function Settings() {
                     />
                 </View>
             </View>
-            <TouchableOpacity onPress={goToStores} style={styles.boxContainer}>
+            <TouchableOpacity onPress={goToStores} style={[styles.boxContainer, {backgroundColor: Colors[isDarkMode?"dark":"light"].tinttwo}]}>
                 <Text style={styles.label}>My Stores</Text>
                 <FontAwesome name="chevron-right" size={20} color="grey" />
             </TouchableOpacity>
@@ -66,23 +66,15 @@ export default function Settings() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white", // Default light background color
-    },
-    darkContainer: {
-        backgroundColor: "#353535", // Dark background color
     },
     sectionTitle: {
         fontSize: 30,
         fontWeight: "bold",
         marginBottom: 7,
         textAlign: "left",
-        color: "black", // Default text color
     },
     label: {
         fontSize: 20,
-    },
-    darkText: {
-        color: "white", // Dark text color
     },
     switchContainer: {
         flexDirection: "row",
@@ -94,9 +86,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: "#e0e0e0",
         padding: 20,
         borderRadius: 10,
-        marginTop: 10,
+        marginTop: "5%",
+        width: "90%",
+        marginRight: "auto",
+        marginLeft: "auto",
     },
 });

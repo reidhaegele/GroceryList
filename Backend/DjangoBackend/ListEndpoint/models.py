@@ -19,7 +19,7 @@ class List(models.Model):
     users = models.ManyToManyField(settings.AUTH_USER_MODEL)
     listId = models.AutoField(primary_key=True)
     listName = models.CharField(max_length=50)
-    items = models.ManyToManyField(Item)
+    items = models.ManyToManyField(Item, blank=True)
     
 
 

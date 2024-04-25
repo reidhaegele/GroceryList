@@ -3,7 +3,7 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from .models import List
+from .models import List, Item
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from django.shortcuts import render
@@ -20,10 +20,11 @@ def createList(request):
         user = request.user
         listName = request.data.get("listName")
 
-        if not user or not listName:
-            return Response({'error': 'User and listName are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if not listName:
+            return Response({'error': 'List name is required.'}, status=status.HTTP_400_BAD_REQUEST)
         
-        Userlist = List.objects.create(listName=listName,items=[])
+        Userlist = List.objects.create(listName=listName)
+        Userlist.items.set([])
         Userlist.users.add(user)
         Userlist.save()
         if Userlist:
@@ -88,10 +89,10 @@ def seeLists(request):
 def joinList(request):
     if request.method == 'POST':
         user = request.user
-        listId = request.data.get("listId")  # Assuming the key is "listId" in the request data
-        
+        listId = request.data.get("listID")  # Assuming the key is "listId" in the request data
+
         if not listId:
-            return Response({'error': 'List ID is required in the request data.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'List ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
             list_to_join = List.objects.get(pk=listId)

@@ -11,10 +11,6 @@ import { useAuth } from '@/components/AuthContext';
 // BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
 BASE_URL = "http://127.0.0.1:8000"
 
-
-
-
-
 export default function Login() {
     const [username, setUser] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -59,7 +55,7 @@ export default function Login() {
             </View>
         </Modal>
     )
-
+}
 
 const styles = StyleSheet.create ({
     container: {
