@@ -17,7 +17,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from ListEndpoint.views import addItem, createList, viewList, seeLists, joinList
+from EditAccEndpoint.views import updateUser
+from ListEndpoint.views import createList, viewList, seeLists, joinList, addItem
 from authentication.views import register, login, accountInfo
 
 urlpatterns = [
@@ -30,5 +31,6 @@ urlpatterns = [
     path('joinList/', joinList, name = 'joinList'),
     path('register/', register, name='register'),
     path('login/', login, name='login'),
-    path('accountInfo/',accountInfo,name='accountInfo')
+    path('accountInfo/',accountInfo,name='accountInfo'),
+    path('updateUser/',updateUser,name='updateUser')
 ]
