@@ -95,22 +95,38 @@ def createList(request):
 def viewList(request):
     if request.method == 'GET':
         user = request.user
-        listName = request.data.get('listName')  # listName is passed as json
-        if not listName:
+        listId = request.data.get('listId')  # Assuming 'listName' is passed as json
+
+        if not listId:
             return Response({'error': 'List name is required.'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
-            user_list = List.objects.get(users=user, listName=listName)
+            user_list = List.objects.get(users=user, listId=listId)
+            items_data = user_list.items.all()  # Retrieve all item objects related to the list
+
+            # Serialize each item into a dictionary
+            serialized_items = [
+                {
+                    'name': item.name,
+                    'category': item.category,
+                    'quantity': item.quantity,
+                    'price': item.price
+                }
+                for item in items_data
+            ]
+
+            # Prepare the serialized data for the list including items
             serialized_data = {
                 'listId': user_list.listId,
                 'listName': user_list.listName,
-                'items': user_list.items
+                'items': serialized_items  # Include serialized items
             }
             return Response(data=serialized_data, status=status.HTTP_200_OK)
         except List.DoesNotExist:
             return Response({'error': 'List does not exist.'}, status=status.HTTP_404_NOT_FOUND)
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
 
 
 @api_view(['GET'])
