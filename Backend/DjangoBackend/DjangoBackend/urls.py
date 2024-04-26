@@ -18,12 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from EditAccEndpoint.views import updateUser
-from ListEndpoint.views import createList, viewList, seeLists, joinList
+from ListEndpoint.views import createList, viewList, seeLists, joinList, addItem
 from authentication.views import register, login, accountInfo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('authentication.urls')),
+    path('addItem/', addItem, name='addItem'),
     path('createList/',createList,name='createList'),
     path('viewList/',viewList, name='viewList'),
     path('seeLists/', seeLists, name='seeLists'),

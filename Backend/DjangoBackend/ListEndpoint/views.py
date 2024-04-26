@@ -15,6 +15,56 @@ from rest_framework.permissions import IsAuthenticated
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
+def addItem(request):
+    if request.method == 'POST':
+        user = request.user
+        listId = request.data.get("listId")  
+
+        if not user or not listId:
+            return Response({'error': 'User and listId are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            userList = List.objects.get(listId=listId, users=user)
+        except List.DoesNotExist:
+            return Response({'error': 'List does not exist or user does not have access.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        itemName = request.data.get("itemName")  # Assumes "item_name" in POST data
+        itemCategory = request.data.get("itemCategory")
+        itemQuantity = int(request.data.get("itemQuantity"))  # Convert to integer, default is 1
+        itemPrice = float(request.data.get("itemPrice"))  # Convert to float, default is 0.0
+
+        if not itemName:
+            return Response({'error': 'Item name is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not itemCategory:
+            return Response({'error': 'Item category is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not itemQuantity:
+            return Response({'error': 'Item quantity is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not itemPrice:
+            return Response({'error': 'Item price is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        item = Item.objects.create(name=itemName, category=itemCategory, quantity=itemQuantity, price=itemPrice)
+        userList.items.add(item)
+        userList.save()
+
+        if item and userList:
+            return Response(
+                {"success": "Item successfully added to list."}, status=status.HTTP_201_CREATED
+            )
+        else:
+            return item(
+                {"error": "Failed to add item to list."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+    else:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def createList(request):
     if request.method == 'POST':
         user = request.user
