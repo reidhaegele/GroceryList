@@ -176,3 +176,25 @@ def joinList(request):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def removeItem(request):
+    user = request.user
+    list_id = request.data.get("listId")
+    item_name = request.data.get("itemName")
+
+    if not list_id or not item_name:
+        return Response({'error': 'Both listId and itemName are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user_list = List.objects.get(listId=list_id, users=user)
+    except List.DoesNotExist:
+        return Response({'error': 'List does not exist or you do not have access to this list.'}, status=status.HTTP_404_NOT_FOUND)
+
+    try:
+        item = Item.objects.get(name=item_name)
+        user_list.items.remove(item)
+        return Response({'success': 'Item removed successfully from the list.'}, status=status.HTTP_200_OK)
+    except Item.DoesNotExist:
+        return Response({'error': 'Item not found in the list.'}, status=status.HTTP_404_NOT_FOUND)
