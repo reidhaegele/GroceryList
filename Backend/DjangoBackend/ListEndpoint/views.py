@@ -95,12 +95,18 @@ def createList(request):
 def viewList(request):
     if request.method == 'GET':
         user = request.user
-        listName = request.data.get('listName')  # listName is passed as json
-        if not listName:
-            return Response({'error': 'List name is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        listId = request.data.get('listId')
+        if not listId:
+            print(request.data)
+            return Response({'error': 'List ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        # listName = request.data.get('listName')  # listName is passed as json
+        # if not listName:
+        #     return Response({'error': 'List name is required.'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
-            user_list = List.objects.get(users=user, listName=listName)
+            # user_list = List.objects.get(users=user, listName=listName)
+            user_list = List.objects.get(users=user, listId=listId)
             serialized_data = {
                 'listId': user_list.listId,
                 'listName': user_list.listName,
@@ -133,6 +139,8 @@ def seeLists(request):
 
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])

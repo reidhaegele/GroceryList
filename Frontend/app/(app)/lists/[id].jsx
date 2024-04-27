@@ -3,7 +3,8 @@ import { View, Text, Pressable, StyleSheet, FlatList, SectionList } from 'react-
 import { useState, useEffect } from 'react';
 import { useLocalSearchParams, Stack, useNavigation } from 'expo-router';
 import ItemCard from '@/components/ItemCard';
-
+import axios from 'axios';
+import { BASE_URL } from '../../../constants/Database';
 export default function EditList() {
   
   const [items, setItems] = useState([
@@ -59,6 +60,14 @@ export default function EditList() {
   const [total, setTotal] = useState(0);
   const navigation = useNavigation();
   const {id} = useLocalSearchParams();
+
+  const viewList = async () => {
+    const result = await axios.get(`${BASE_URL}/viewList`, {
+      params: {
+        listID: id
+      }
+    })
+  }
   useEffect(() => {
     navigation.setOptions({
       title: `List ${id}`, 
