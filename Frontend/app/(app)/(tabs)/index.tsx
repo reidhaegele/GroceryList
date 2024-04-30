@@ -1,46 +1,56 @@
-import { StyleSheet } from 'react-native';
-import { ScrollView, SafeAreaView } from 'react-native';
-import { View } from '@/components/Themed';
-import { useTheme } from '@/components/navigation/ThemeContext';
-import Colors from '@/constants/Colors';
-import PriceChangeNotification from "@/components/home/PriceChangeNotification";
-import ItemAddedNotification from "@/components/home/ItemAddedNotification";
+import { SafeAreaView, Text, StyleSheet } from "react-native";
+import { WebView } from "react-native-webview";
+import { View } from "@/components/Themed";
+import { useTheme } from "@/components/navigation/ThemeContext";
 export default function Home() {
-  const { isDarkMode } = useTheme();
+    const { isDarkMode } = useTheme();
 
-  return (
-      <SafeAreaView style={styles.container}>
-        <View style={[styles.container, {backgroundColor:  Colors[isDarkMode?"dark":"light"].background}]}>
-            <ScrollView contentContainerStyle={styles.notificationsContainer}>
-            </ScrollView>
-        </View>
-      </SafeAreaView>
-  );
+    let adSource = {
+        uri: "https://f.wishabi.net/flyers/42312235/1e69006e55cbc8f4.pdf",
+    };
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <View style={styles.header}>
+                <Text
+                    style={[
+                        styles.headerText,
+                        isDarkMode && styles.headerDarkText,
+                    ]}
+                >
+                    {`Welcome,\nCheck out this week's deals:`}
+                </Text>
+            </View>
+            <WebView source={adSource} />
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-  container: {
-    flex: 1,
-  },
-  sectionTitle: {
-    fontSize: 30, 
-    fontWeight: "bold", 
-    marginBottom: 10,
-    paddingLeft: 15, 
-    textAlign: "left",
-    borderBottomColor: 'black'
-  },
-  notificationsContainer: {
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  }, 
+    container: {
+        flex: 1,
+        justifyContent: "center",
+    },
+    header: {
+        justifyContent: "center",
+        height: 80,
+        shadowColor: "black",
+        borderBottomColor: "black",
+    },
+    headerText: {
+        textAlign: "left",
+        justifyContent: "space-between",
+        fontSize: 24,
+        color: "#447F86",
+        fontWeight: "bold",
+        marginLeft: 10,
+    },
+    headerDarkText: {
+        textAlign: "left",
+        justifyContent: "space-between",
+        fontSize: 24,
+        color: "#447F86",
+        fontWeight: "bold",
+        marginLeft: 10,
+    },
 });
