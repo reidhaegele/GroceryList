@@ -198,3 +198,27 @@ def removeItem(request):
         return Response({'success': 'Item removed successfully from the list.'}, status=status.HTTP_200_OK)
     except Item.DoesNotExist:
         return Response({'error': 'Item not found in the list.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def removeUserFromList(request):
+    if request.method == 'POST':
+        user = request.user
+        list_id = request.data.get("listId")
+
+        if not user or not listId:
+            return Response({'error': 'User and listId are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            user_list = List.objects.get(listId=list_id, users=user)
+        except List.DoesNotExist:
+            return Response({'error': 'List does not exist or you do not have access to this list.'}, status=status.HTTP_404_NOT_FOUND)
+
+        user_list.users.remove(user)
+        user_list.save()
+        return Response({'success': 'User removed successfully from the list.'}, status=status.HTTP_200_OK)
+    
+    else:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
