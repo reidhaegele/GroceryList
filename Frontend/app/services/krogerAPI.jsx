@@ -46,7 +46,7 @@ export const searchProducts = async (accessToken, query) => {
         }
       }
     );
-    // console.log(response.data.data)
+    console.log(response.data.data)
     // console.log(fetchStoresNearZip(accessToken, '65401'))
     return response.data.data;
   } catch (error) {

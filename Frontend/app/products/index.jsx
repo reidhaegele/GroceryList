@@ -54,9 +54,9 @@ const ProductSearch = ({ accessToken }) => {
       <ul>
         {searchResults.map(product => (
           <div key={product.productId}>
-            <img src={product.images[0].sizes[3].url}></img>
+            {product.images ? <img src={product.images[0].sizes.at(-1).url}></img> : null}
             <li>
-              {product.items[0].price ? <strong>{product.items[0].price['regular']}:</strong> : null} {product.brand} - {product.description}
+              {product.items[0].price ? <strong>${product.items[0].price['regular']}:</strong> : null} {product.brand} - {product.description}. {product.aisleLocations.length > 0 ? <p>Aisle: {product.aisleLocations[0].number}, Bay: {product.aisleLocations[0].bayNumber}, L/R: {product.aisleLocations[0].side == 'R' ? 'Right' : 'Left'}</p> : null}
             </li>
           </div>
         ))}
