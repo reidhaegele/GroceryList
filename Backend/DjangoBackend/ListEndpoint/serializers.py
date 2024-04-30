@@ -1,9 +1,15 @@
 from rest_framework import serializers
-from .models import List
+from .models import Item, List, User
+
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = ['name', 'category', 'quantity', 'price']
 
 class ListSerializer(serializers.ModelSerializer):
-    users = serializers.PrimaryKeyRelatedField(many=True, queryset=User.objects.all())  # Include users field
+    items = ItemSerializer(many=True, read_only=True)  # Nested serialization for items
+    users = serializers.PrimaryKeyRelatedField(many=True, queryset=User.objects.all())
 
     class Meta:
         model = List
-        fields = ["users", "listId", "listName", "items"]  # Include users field in fields attribute
+        fields = ["users", "listId", "listName", "items"]
