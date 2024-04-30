@@ -8,5 +8,5 @@ urlpatterns = [
     path('seeLists/', seeLists, name='seeLists'),
     path('joinList/', joinList, name = 'joinList'),
     path('removeItem/', removeItem, name = "removeItem"),
-    pathh'removeUserFromList', removeUserFromList, name='removeUserFromList'),
+    path('removeUserFromList', removeUserFromList, name='removeUserFromList'),
 ]

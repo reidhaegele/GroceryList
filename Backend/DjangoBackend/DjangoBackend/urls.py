@@ -26,7 +26,7 @@ urlpatterns = [
     path('api/', include('authentication.urls')),
     path('addItem/', addItem, name='addItem'),
     path('removeItem/', removeItem, name='removeItem'),
-    pathh'removeUserFromList', removeUserFromList, name='removeUserFromList'),
+    path('removeUserFromList', removeUserFromList, name='removeUserFromList'),
     path('createList/',createList,name='createList'),
     path('viewList/',viewList, name='viewList'),
     path('seeLists/', seeLists, name='seeLists'),
