@@ -3,7 +3,7 @@ import React from 'react';
 import { PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
 import Separator from '@/components/Separator';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useAuth } from '@/components/AuthContext';
 import { getItem, getItemAsync } from 'expo-secure-store';
 // TODO: Import correct base_url
@@ -25,18 +25,21 @@ export default function Login() {
     
     const login = async () => {
         console.log('login button pressed');
-        // const token = getItemAsync('token')
-        //     .then((token) => {
-        //         console.log(token)
-        //         router.navigate('/home')
-        //     })
-        //     .catch((error) => {
-        //         console.log('token not found')
-        //     })
         response = await onLogin(username, password)
         setError(response)
     };
 
+    // useFocusEffect(() => {
+    //     getItemAsync('token')
+    //         .then((token) => {
+    //             console.log(token)
+    //             router.replace('/')
+    //         })
+    //         .catch((error) => {
+    //             console.log('token not found')
+    //         })
+    
+    // })
 
     return (
         <Modal
