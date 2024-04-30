@@ -31,6 +31,7 @@ export default function AppLayout() {
         >
             <Stack.Screen name='(tabs)' options={{headerShown: false}}/>
             <Stack.Screen name='lists/add-list' options={{title: 'Add a new List', headerShown: true, presentation: 'modal'}}/>
+            <Stack.Screen name='lists/add-item' options={{title: 'Edit List', headerShown: true, presentation: 'modal'}}/>
             <Stack.Screen name='settings' options={{title: 'Settings', headerShown: true}}/>
         </Stack>
     )

@@ -95,8 +95,8 @@ def createList(request):
 def viewList(request):
     if request.method == 'GET':
         user = request.user
-        listId = request.data.get('listId')  # Assuming 'listName' is passed as json
-
+        listId = request.query_params['listId']  # Assuming 'listName' is passed as json
+        print(listId)
         if not listId:
             return Response({'error': 'List name is required.'}, status=status.HTTP_400_BAD_REQUEST)
         

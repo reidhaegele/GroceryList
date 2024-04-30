@@ -3,13 +3,14 @@ import React from 'react';
 import { PasswordField, InputField } from '@/components/InputField';
 import { GrayButton, BlueButton} from '@/components/MyButton';
 import Separator from '@/components/Separator';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useAuth } from '@/components/AuthContext';
+import { getItem, getItemAsync } from 'expo-secure-store';
 // TODO: Import correct base_url
 // TODO: Add pop up for successful registration
 // TODO: Direct user to home with authentication context
-// BASE_URL="https://be4e0267-8202-42e5-afbc-5b74fcbfbf9b.mock.pstmn.io"
-BASE_URL = "http://127.0.0.1:8000"
+
+import { BASE_URL } from '../../constants/Database'
 
 export default function Login() {
     const [username, setUser] = React.useState('');
@@ -28,6 +29,17 @@ export default function Login() {
         setError(response)
     };
 
+    // useFocusEffect(() => {
+    //     getItemAsync('token')
+    //         .then((token) => {
+    //             console.log(token)
+    //             router.replace('/')
+    //         })
+    //         .catch((error) => {
+    //             console.log('token not found')
+    //         })
+    
+    // })
 
     return (
         <Modal

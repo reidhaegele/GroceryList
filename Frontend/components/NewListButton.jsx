@@ -5,12 +5,8 @@ import axios from 'axios';
 BASE_URL = "http://127.0.0.1:8000"
 
 
-export default function NewListButton() {
+export default function NewListButton({onPress}) {
 
-    const onPress = async () => {
-        console.log("New List Button Pressed")
-        router.navigate('lists/1')
-    }
 
     return (
         <Pressable style={styles.button} onPress={onPress}>

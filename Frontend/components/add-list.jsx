@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, SafeAreaView, TouchableOpacity, View } from "react-native";
+import { StyleSheet, SafeAreaView, TouchableOpacity, View, Pressable, KeyboardAvoidingView } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 import { ExpoRequest, ExpoResponse } from 'expo-router/server';
 import Colors from "@/constants/Colors";
@@ -10,8 +10,7 @@ import { InputField } from "@/components/InputField";
 import { getItem, getItemAsync, setItemAsync } from "expo-secure-store";
 import axios from "axios";
 import { router } from "expo-router";
-
-import { BASE_URL } from '../../../constants/Database'
+import { BASE_URL } from '../constants/Database'
 
 export default function AddList ({navigation}) {
     const [joiningList, setJoiningList] = useState(false);
@@ -102,7 +101,8 @@ export default function AddList ({navigation}) {
 
     return (
         <SafeAreaView style={{backgroundColor: Colors[isDarkMode?"dark":"light"].background, flex: 1}}>
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container}>
+                
                 <Text style={[styles.sectionTitle, {color: Colors[isDarkMode?"dark":"light"].text}]}>{joiningList?"Join a List":"Create a List"}</Text>
                 <Text style={styles.error}>{error}</Text>
                 <InputField
@@ -111,18 +111,19 @@ export default function AddList ({navigation}) {
                     onChangeText={(val) => setListInput(val)}
                 />
                 <View style={styles.buttonField}>
-                    <Button
-                        title={joiningList?"Create List":"Join List"}
+                    <Pressable
                         style={styles.button}
-                        onPress={() => setJoiningList(!joiningList)}
-                    />
-                    <Button
-                        title={joiningList?"Join List":"Create List"}
+                        onPress={() => setJoiningList(!joiningList)}>
+                        <Text>{joiningList?"Create List":"Join List"}</Text>
+                    </Pressable>
+                    <Pressable
                         style={styles.button}
                         onPress={() => handleSubmit()}
-                    />
+                    >
+                        <Text>{joiningList?"Join List":"Create List"}</Text>
+                    </Pressable>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
@@ -132,7 +133,6 @@ const styles = StyleSheet.create({
         width: '80%',
         marginRight: 'auto',
         marginLeft: 'auto',
-        flex: 1
     },
     sectionTitle: {
         fontSize: 30,
@@ -151,11 +151,14 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginRight: "auto",
         marginLeft: "auto",
-        justifyContent: 'space-between',
     },
     button: {
-        backgroundColor: "red",
+        backgroundColor: "lightgray",
+        padding: 10,
+        borderRadius: 10,
+
     },
+
     error: {
         color: 'red',
         fontWeight: 'bold',

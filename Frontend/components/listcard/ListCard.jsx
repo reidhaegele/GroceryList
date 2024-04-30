@@ -1,21 +1,22 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import { themeColor, useTheme } from "react-native-rapi-ui";
 import { router } from "expo-router";
+import { BASE_URL } from "../../constants/Database";
 
-export default (props) => {
+export default ({onPress, title, listID}) => {
     const { isDarkMode } = useTheme();
-    const onPress = async () => {
-        console.log("Navigating to list")
-        router.navigate(`lists/${props.listID}`)
+    const onCardPress = () => {
+        console.log("Navigating to list with ID: ", listID)
+        router.push(`/lists/${listID}`)
     }
 
     return (
         <TouchableOpacity
-            onPress={onPress}
+            onPress={onCardPress}
             style={[styles.container, isDarkMode && styles.darkContianer]}
         >
-            <Text style={styles.title}>{props.title}</Text>
+            <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
     )
 }
