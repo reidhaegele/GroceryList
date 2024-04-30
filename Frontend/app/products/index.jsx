@@ -53,9 +53,12 @@ const ProductSearch = ({ accessToken }) => {
       {error && <div>Error: {error}</div>}
       <ul>
         {searchResults.map(product => (
-          <li key={product.productId}>
-            {product.brand} - {product.description}
-          </li>
+          <div key={product.productId}>
+            <img src={product.images[0].sizes[3].url}></img>
+            <li>
+              {product.items[0].price ? <strong>{product.items[0].price['regular']}:</strong> : null} {product.brand} - {product.description}
+            </li>
+          </div>
         ))}
       </ul>
     </div>
