@@ -216,9 +216,16 @@ def removeUserFromList(request):
         except List.DoesNotExist:
             return Response({'error': 'List does not exist or you do not have access to this list.'}, status=status.HTTP_404_NOT_FOUND)
 
+        # Remove the user from the list
         user_list.users.remove(user)
-        user_list.save()
-        return Response({'success': 'User removed successfully from the list.'}, status=status.HTTP_200_OK)
+        
+        # Check if the list of users is now empty, and delete the list if it is
+        if not user_list.users.exists():
+            user_list.delete()
+            return Response({'success': 'User removed and list deleted as it was empty.'}, status=status.HTTP_200_OK)
+        else:
+            user_list.save()
+            return Response({'success': 'User removed successfully from the list.'}, status=status.HTTP_200_OK)
     
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
