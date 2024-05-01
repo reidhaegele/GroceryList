@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, SafeAreaView, TouchableOpacity, View, Pressable, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, SafeAreaView, TouchableOpacity, View, Pressable, KeyboardAvoidingView, Platform } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 import { ExpoRequest, ExpoResponse } from 'expo-router/server';
 import Colors from "@/constants/Colors";
@@ -11,8 +11,9 @@ import { getItem, getItemAsync, setItemAsync } from "expo-secure-store";
 import axios from "axios";
 import { router } from "expo-router";
 import { BASE_URL } from '../constants/Database'
+import ToggleButton from "@/components/ToggleButton";
 
-export default function AddList ({navigation}) {
+export default function AddList ({onClose}) {
     const [joiningList, setJoiningList] = useState(false);
     const { isDarkMode } = useTheme();
     const [listInput, setListInput] = useState('')
@@ -87,7 +88,7 @@ export default function AddList ({navigation}) {
                         },
                     }).then( (res) => {
                     console.log(res.data.success)
-                    router.back()
+                    router.replace('/lists')
                 }).catch( (e) => {
                     console.log("error")
                     console.log(e.response.data.error)
@@ -97,11 +98,16 @@ export default function AddList ({navigation}) {
             }
             createList()
         }
+        router.navigate('/lists')
+    }
+
+    const onPress = () => {
+        setJoiningList(!joiningList)
     }
 
     return (
-        <SafeAreaView style={{backgroundColor: Colors[isDarkMode?"dark":"light"].background, flex: 1}}>
-            <KeyboardAvoidingView style={styles.container}>
+        <SafeAreaView style={{backgroundColor: Colors[isDarkMode?"dark":"light"].background, flex: 1, height: "auto"}}>
+            <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios"?"padding" : "height"}>
                 
                 <Text style={[styles.sectionTitle, {color: Colors[isDarkMode?"dark":"light"].text}]}>{joiningList?"Join a List":"Create a List"}</Text>
                 <Text style={styles.error}>{error}</Text>
@@ -110,19 +116,10 @@ export default function AddList ({navigation}) {
                     value={listInput}
                     onChangeText={(val) => setListInput(val)}
                 />
-                <View style={styles.buttonField}>
-                    <Pressable
-                        style={styles.button}
-                        onPress={() => setJoiningList(!joiningList)}>
-                        <Text>{joiningList?"Create List":"Join List"}</Text>
-                    </Pressable>
-                    <Pressable
-                        style={styles.button}
-                        onPress={() => handleSubmit()}
-                    >
-                        <Text>{joiningList?"Join List":"Create List"}</Text>
-                    </Pressable>
-                </View>
+                <ToggleButton left={"Join List"} right={"Create List"} onPress={onPress} isOn={joiningList}/>
+                <Pressable style={styles.button} onPress={handleSubmit}>
+                    <Text style={styles.text}>Submit</Text>
+                </Pressable>
             </KeyboardAvoidingView>
         </SafeAreaView>
     );
@@ -133,6 +130,7 @@ const styles = StyleSheet.create({
         width: '80%',
         marginRight: 'auto',
         marginLeft: 'auto',
+        zIndex: 1,
     },
     sectionTitle: {
         fontSize: 30,
@@ -153,10 +151,12 @@ const styles = StyleSheet.create({
         marginLeft: "auto",
     },
     button: {
-        backgroundColor: "lightgray",
+        backgroundColor: "#447F86",
         padding: 10,
         borderRadius: 10,
-
+        marginTop: 50,
+        width: 200,
+        alignSelf: 'center'
     },
 
     error: {
@@ -165,4 +165,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 15,
     },
+
+    text: {
+        color: 'white',
+        fontSize: 16,
+        textAlign: 'center',
+    }
   });

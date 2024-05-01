@@ -65,7 +65,8 @@ def register(request):
         if user_serializer_is_valid and profile_serializer_is_valid:
             user_instance = user_serializer.save()
             profile_instance = profile_serializer.save(user=user_instance)
-            return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
+            token, created = Token.objects.get_or_create(user=user_instance)
+            return Response({"message": "User created successfully", 'token': token.key}, status=status.HTTP_201_CREATED)
         else:
             errors = {}
             if not user_serializer_is_valid:

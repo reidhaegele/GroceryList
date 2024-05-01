@@ -2,7 +2,6 @@ import { Text, View, Pressable, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
 import axios from 'axios';
 
-BASE_URL = "http://127.0.0.1:8000"
 
 
 export default function NewListButton({onPress}) {

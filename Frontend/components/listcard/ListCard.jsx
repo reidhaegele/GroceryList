@@ -23,7 +23,7 @@ export default ({onPress, title, listID}) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#0085FF",
+        backgroundColor: "#447F86",
         borderRadius: 7,
         height: 63,
         width: "90%",

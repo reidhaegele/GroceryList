@@ -2,12 +2,12 @@ import { SafeAreaView, Text, StyleSheet } from "react-native";
 import { WebView } from "react-native-webview";
 import { View } from "@/components/Themed";
 import { useTheme } from "@/components/navigation/ThemeContext";
+
 export default function Home() {
     const { isDarkMode } = useTheme();
 
-    let adSource = {
-        uri: "https://f.wishabi.net/flyers/42312235/1e69006e55cbc8f4.pdf",
-    };
+    let adSource = "https://f.wishabi.net/flyers/42312235/1e69006e55cbc8f4.pdf";
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -21,7 +21,10 @@ export default function Home() {
                     {`Welcome,\nCheck out this week's deals:`}
                 </Text>
             </View>
-            <WebView source={adSource} />
+            <WebView 
+                source={{ uri: adSource}} 
+                originWhiteList={['*']}
+                />
         </SafeAreaView>
     );
 }
@@ -33,9 +36,10 @@ const styles = StyleSheet.create({
     },
     header: {
         justifyContent: "center",
-        height: 80,
+        height: 100,
         shadowColor: "black",
         borderBottomColor: "black",
+        paddingTop: 40,
     },
     headerText: {
         textAlign: "left",

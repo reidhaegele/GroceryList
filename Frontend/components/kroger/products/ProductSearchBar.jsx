@@ -1,26 +1,15 @@
 import React, { useState } from 'react';
 import { searchProducts, requestAccessToken } from '../services/krogerAPI';
-import { View, Text, Button, FlatList, TextInput, StyleSheet } from 'react-native';
-
-export default ProductSearch = ({ accessToken }) => {
+import { View, Text, Button, FlatList, TextInput, StyleSheet, Pressable } from 'react-native';
+import { BASE_URL } from '../../../constants/Database';
+export default ProductSearch = ({ accessToken}) => {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  // const [searchResults, setSearchResults] = useState([
-  //   {
-  //     brand: 'Kroger',
-  //     description: 'Milk',
-  //     productId: 1,
-  //   },
-  //   {
-  //     brand: 'Kroger',
-  //     description: 'Eggs',
-  //     productId: 2,
-  //   },
 
-
-  // ]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+
 
 
   const handleSearch = async () => {
@@ -42,6 +31,7 @@ export default ProductSearch = ({ accessToken }) => {
     {
       try {
         const products = await searchProducts(accessToken, query);
+        console.log(products);
         setSearchResults(products);
         setLoading(false);
       } catch (error) {
@@ -52,19 +42,48 @@ export default ProductSearch = ({ accessToken }) => {
     }
   };
 
+  const onAdd = async ({name, price, category, quantity}) => {
+    let token = getItem('token')
+    console.log(token)
+    const result = await axios.post(`${BASE_URL}/addItem/`, 
+        {
+            listId: 7,
+            itemName: name,
+            itemPrice: price,
+            itemCategory: category,
+            itemQuantity: quantity
+        }, {
+        headers: {
+            'Authorization': `Token ${token}`
+        },
 
-  const groupedItems = searchResults.reduce((acc, current) => {
-    const { category, ...data} = current;
-    if (!acc[category]) {
-      acc[category] = {title: category, data:[data]}
+    }).then((res) => {
+        console.log(res.data)
+
     }
-    else { 
-      acc[category].data.push(data);
-    }
-    return acc;
-  }, {});
-  const result = Object.values(groupedItems).map((item) => item);
-  console.log(result);
+    ).catch((error) => {
+        console.log(error.response)
+    })
+  }
+  
+
+  // const groupedItems = searchResults.reduce((acc, current) => {
+  //   const { category, ...data} = current;
+  //   if (!acc[category]) {
+  //     acc[category] = {title: category, data:[data]}
+  //   }
+  //   else { 
+  //     acc[category].data.push(data);
+  //   }
+  //   return acc;
+  // }, {});
+  // const result = Object.values(groupedItems).map((item) => item);
+  // console.log(result);
+  const renderItem = ({ item }) => {
+    <Pressable style={styles.itemContainer}>
+      <Text>{item.productName}</Text>
+    </Pressable>
+  }
 
   return (
     <View style={styles.container}>
@@ -73,20 +92,21 @@ export default ProductSearch = ({ accessToken }) => {
         value={query}
         onChangeText={setQuery}
         placeholder="Enter product name..."
+        style={styles.input}
       />
       <Button
         title={loading ? 'Searching...' : 'Search'}
         onPress={handleSearch}
         disabled={loading}
       />
-
+      <Text style={styles.result}>Results:</Text>
       {/* {error && <Text>Error: {error}</Text>} */}
       <FlatList
-        keyExtractor={(item) => item.productId}
-        data={result}
-        renderItem={({item}) => <Text>{item.brand} - {item.description}</Text>}
+        keyExtractor={item => item.productId.toString()}
+        data={searchResults}
+        renderItem={({item}) => <Pressable onPress={() => onAdd({name: item.brand, price: "3.99", category: "Produce", quantity: "1" })} style={styles.itemContainer}><Text>{item.brand} - {item.description}</Text></Pressable>}
       />
-      
+
     </View>
 
   );
@@ -98,6 +118,35 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10,
+    padding: 10,
+  },
+  
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  
+  result: {
+    fontSize: 18, 
+    fontWeight: 'bold',
+    marginTop: 20,
+  }, 
+
+  itemContainer: {
+    width: '70%',
+    flexDirection: 'row',
+    alignSelf: 'center',
+    flex: 1,
+    backgroundColor: 'lightgray',
+
+}, 
 
 });
 
@@ -115,13 +164,7 @@ const styles = StyleSheet.create({
   </button>
 </div>
 {error && <div>Error: {error}</div>}
-<ul>
-  {searchResults.map(product => (
-    <li key={product.productId}>
-      {product.brand} - {product.description}
-    </li>
-  ))}
-</ul>
+
 </div> */}
 
 

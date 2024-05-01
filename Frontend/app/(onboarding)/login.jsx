@@ -6,9 +6,7 @@ import Separator from '@/components/Separator';
 import { router, useFocusEffect } from 'expo-router';
 import { useAuth } from '@/components/AuthContext';
 import { getItem, getItemAsync } from 'expo-secure-store';
-// TODO: Import correct base_url
-// TODO: Add pop up for successful registration
-// TODO: Direct user to home with authentication context
+
 
 import { BASE_URL } from '../../constants/Database'
 

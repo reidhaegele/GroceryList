@@ -56,6 +56,7 @@ export default function TabLayout() {
             options={{
               title: 'Home',
               tabBarIcon: ({ color }) => <Ionicons name={'home'} size={30} style={{marginBottom: -10}} color={color}/>,
+              headerShown: false,
             }}
           />
 
@@ -64,16 +65,6 @@ export default function TabLayout() {
               options={{
                 title: 'My Lists',
                 tabBarIcon: ({ color }) => <Ionicons name={'list'} size={30} style={{marginBottom: -10}} color={color}/>,
-                headerRight: () => (
-                  <HeaderButtons 
-                      buttons={[
-                          {
-                              icon: <Ionicons name="add-circle-outline" size={40} color={Colors[isDarkMode?"dark":"light"].tint}/>,
-                              onpress: () => router.navigate('lists/add-list'),
-                          },
-                      ]}
-                  />
-                ),
               }}
           />
 

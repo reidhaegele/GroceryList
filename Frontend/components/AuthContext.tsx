@@ -72,6 +72,7 @@ export const AuthProvider = ({children} : any) => {
       })
         .then(res => {
             console.log(res.data.message)
+            setItemAsync('token', res.data.token)
             router.replace('/')
             return res.data
         })
@@ -83,8 +84,13 @@ export const AuthProvider = ({children} : any) => {
   };
 
   const logout = async () => {
-    await deleteItemAsync('token');
+    console.log('logout');
+    const result = await deleteItemAsync('token').then(() => {
+      setAuthState(false);
+      router.navigate('/')
+    })
     setAuthState(false);
+    router.navigate('/')
   };
 
   const value = {

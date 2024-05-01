@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Kroger from '@/constants/Kroger';
+import {decode as atob, encode as btoa } from 'base-64';
 
 const CLIENT_ID = Kroger.CLIENT_ID;
 const CLIENT_SECRET = Kroger.CLIENT_SECRET;

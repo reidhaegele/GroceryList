@@ -4,12 +4,18 @@ import { FontAwesome } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import imageone from '@/assets/images/shoppers1.png';
 import imagetwo from '@/assets/images/shoppers2.png';
-
+import { useLayoutEffect } from 'react';
+import { getItemAsync } from 'expo-secure-store';
 // TODO: Fix image render issues
 // TODO: Fix error handling issue
 export default function Welcome() {
     const [isPageOne, setIsPageOne] = useState(true);
 
+    // useLayoutEffect(() => {
+    //     if (getItemAsync('token')) {
+    //         router.replace('/lists')
+    //     }
+    // })
     const page_one = (
         <View>
             <Text style={styles.text}>GrocerEz helps you create and manage your grocery lists anytime, anywhere. {'\n\n'}This App uses Kroger’s extensive database of products allowing you to shop for in-stock items at a Kroger near you.</Text>            

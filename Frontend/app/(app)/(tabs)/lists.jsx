@@ -1,18 +1,17 @@
 import React, { useState, useCallback } from "react";
-import { SafeAreaView, FlatList, StyleSheet, Text, Pressable, View, Modal} from "react-native";
+import { SafeAreaView, FlatList, StyleSheet, Text, Pressable, View, Modal, KeyboardAvoidingView, Platform } from "react-native";
 import ListCard from "@/components/listcard/ListCard";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HeaderButtons from "@/components/header_buttons/HeaderButtons";
 import Colors from '@/constants/Colors';
 import { useTheme } from "@/components/navigation/ThemeContext";
 import axios from "axios";
 import  NewListButton  from "@/components/NewListButton";
-import { getItemAsync, setItemAsync } from "expo-secure-store";
+import { getItemAsync, setItemAsync, getItem } from "expo-secure-store";
 import { useFocusEffect } from '@react-navigation/native';
-import  CreateListModal  from "@/components/CreateListModal";
-// const Stack = createNativeStackNavigator();
 import { BASE_URL } from '../../../constants/Database'
 import AddList from "@/components/add-list";
+import { router, Stack } from "expo-router";
+import { Ionicons } from '@expo/vector-icons';
+import { HeaderButtons } from '@/components/header_buttons/HeaderButtons';
 
 
 export const List = () => {
@@ -55,10 +54,7 @@ export const List = () => {
         setModalVisible(false);
     }
 
-    const onCardPress = (id) => {
-        console.log("Navigating to list with ID: ", props.listID)
-        router.navigate(`${BASE_URL}/lists/${id}`)
-    }
+
 
     const seeLists = async () => {
         // Fetch lists from database
@@ -92,25 +88,40 @@ export const List = () => {
     const colorOption = "#0085FF";
     return (
         <SafeAreaView style={[styles.container, {backgroundColor: Colors[isDarkMode?"dark":"light"].background}]}>
+            <Stack.Screen
+                options={{
+                    headerRight: () => (
+                        // <HeaderButtons 
+                        //     buttons={[
+                        //         {
+                        //             icon: <Ionicons name="add-circle-outline" size={40} color={Colors[isDarkMode?"dark":"light"].tint}/>,
+                        //             onPress: onPress,
+                        //         },
+                        //     ]}
+                        // />
+                        <Pressable style={{marginRight: 20}} onPress={onPress}><Ionicons name='add-circle-outline' size={40} color='gray' /></Pressable>
+                      ),
+                }}
+            />
             <FlatList
                 data={lists}
                 key={(item) => item.listId}
                 refreshing={refreshing}
                 onRefresh={onRefresh}
                 renderItem={({item}) => (
-                    <ListCard title={item.listName} listID={item.listId} color={colorOption} />
+                    <ListCard title={item.listName} listID={item.listId} color={colorOption} onPress={() => router.navigate({pathname: `${BASE_URL}/lists/${id}`, params: { listName: listName}})}/>
                 )}
-                ListFooterComponent={<NewListButton onPress={() => onPress}/>}
+                ListFooterComponent={<NewListButton onPress={onPress}/>}
                 ListFooterComponentStyle={{marginTop: 25, alignItems: 'center'}}
             />
             <Modal animationType='slide' transparent={true} visible={modalVisible}>
                 <View style={[styles.modalContainer, {backgroundColor:  Colors[isDarkMode?"dark":"light"].background}]}>
-                    <View style={[styles.modal, {backgroundColor:  Colors[isDarkMode?"dark":"light"].background}]}>
-                        <AddList/>
+                    <KeyboardAvoidingView behvaior={Platform.OS === "ios" ? "padding" : "height"} style={[styles.modal, {backgroundColor:  Colors[isDarkMode?"dark":"light"].background}]}>
                         <Pressable style={styles.button} onPress={onClose}>
-                            <Text style={styles.buttonText}>Close</Text>
+                            <Text style={styles.buttonText}>X</Text>
                         </Pressable>
-                    </View>
+                        <AddList onClose={onClose}/>
+                    </KeyboardAvoidingView>
                 </View>
             </Modal>
         </SafeAreaView>
@@ -121,7 +132,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 10,
-
     },
     container2: {
         flex: 1,
@@ -130,7 +140,8 @@ const styles = StyleSheet.create({
     },
 
     modalContainer: {
-        height: '40%',
+        flex: 1,
+        height: 'auto',
     },
     modal: {
         margin: 20,
@@ -146,6 +157,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
         flex: 1,
+        zIndex: 1,
     },
     
     text: {
@@ -154,15 +166,22 @@ const styles = StyleSheet.create({
     }, 
     
     button: {
-        backgroundColor: 'gray',
-        padding: 10,
-        borderRadius: 10,
+        backgroundColor: 'red',
+        borderRadius: 100,
         marginTop: 10,
+        alignSelf: 'flex-end',
+        marginRight: 20,
+        width: 40,
+        height: 40,
+        alignContent: 'center',
+        justifyContent: 'center',
+    
     }, 
 
     buttonText: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 20,
+        textAlign: 'center',
     }
   });
 
